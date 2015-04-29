@@ -16,7 +16,7 @@ class Posts extends Model {
 		$this->belongsTo('App\Model\User', 'userId');
 	}
 
-	public static function getAllHome(User $user=null)
+	public static function getAllHome(User $user)
 	{
 		//Get homepage posts. 
 		//This will get all of the users posts and all 
