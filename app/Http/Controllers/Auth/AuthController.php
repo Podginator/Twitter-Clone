@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth;
+use Illuminate\Http\Request ;
 
 class AuthController extends Controller {
 
@@ -35,7 +37,6 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
-	//@Overide postLogin.
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
@@ -55,4 +56,7 @@ class AuthController extends Controller {
 						'username' => $this->getFailedLoginMessage(),
 					]);
 	}
+
+
+	
 }
