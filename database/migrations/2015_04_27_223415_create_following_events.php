@@ -19,9 +19,9 @@ class CreateFollowingEvents extends Migration {
 	        $table->string('hashtag');
 	    });
 	    
-	    Schema::table('storypost', function($table)
+	    Schema::table('followingevent', function($table)
 	    {
-	        $table->foreign('user')->references('id')->on('users');
+	        $table->foreign('userid')->references('id')->on('users');
 	    });
 	}
 

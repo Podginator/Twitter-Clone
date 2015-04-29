@@ -37,6 +37,9 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+	//Post login now uses Username rather than email address to validate,
+	//This is an override from \assignment-3\vendor\laravel\framework\src\Illuminate\Foundation\Auth
+	//If we need to change anything in the future base functions are located there.
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
@@ -55,6 +58,18 @@ class AuthController extends Controller {
 					->withErrors([
 						'username' => $this->getFailedLoginMessage(),
 					]);
+	}
+
+
+	//Override Redirect Path, redirect to / rather than /home.
+	public function redirectPath()
+	{
+		if (property_exists($this, 'redirectPath'))
+		{
+			return $this->redirectPath;
+		}
+
+		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
 	}
 
 
