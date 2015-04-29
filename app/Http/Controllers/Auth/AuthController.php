@@ -35,6 +35,24 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
 
+	//@Overide postLogin.
+	public function postLogin(Request $request)
+	{
+		$this->validate($request, [
+			'username' => 'required', 'password' => 'required',
+		]);
 
+		$credentials = $request->only('username', 'password');
 
+		if ($this->auth->attempt($credentials, $request->has('remember')))
+		{
+			return redirect()->intended($this->redirectPath());
+		}
+
+		return redirect($this->loginPath())
+					->withInput($request->only('username', 'remember'))
+					->withErrors([
+						'username' => $this->getFailedLoginMessage(),
+					]);
+	}
 }
