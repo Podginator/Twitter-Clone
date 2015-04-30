@@ -17,7 +17,7 @@ Route::get('/login' ,'UserController@LoginPage');
 Route::post('/login', 'UserController@LoginUser');
 Route::get('/register', 'UserController@RegisterPage');
 Route::post('/register', 'UserController@RegisterUser');
-Route::get('posts/', 'PostsController@homepage');
+Route::get('/posts', 'PostsController@homepage');
 
 //Group the API stuff
 //Current just do Posts. 
