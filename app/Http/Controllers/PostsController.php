@@ -9,16 +9,6 @@ use Auth, View, Response, Input;
 
 class PostsController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function homepage()
-	{
-		$posts = Auth::user() ? Posts::getAllHome(Auth::user()) : Posts::all();
-		return View::make("posts.index");
-	}
 
 	/**
 	 * Display a listing of the resource.
@@ -39,7 +29,8 @@ class PostsController extends Controller {
 		//First we need to check if the user is logged in, if so, he can post.
 		$success =  Response::json(array('success' => true));
 		$fail =  Response::json(array('success' => false));
-		if(Auth::user())
+		//We also need to check whether a user has posted less than 140 characters. 
+		if(Auth::user() && count(Input::get('text')) <= 140 )
 		{
 			$newPost = Posts::create(array(
 						"text"=>Input::get('text'),
