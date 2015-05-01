@@ -1,10 +1,10 @@
 <?php namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class Posts extends Model {
 
-	protected $fillable = [];
+	protected $fillable = ['userId', 'text', 'imgId'];
 	protected $table = "posts";
 
 	public static $rules = [
@@ -22,7 +22,6 @@ class Posts extends Model {
 		//This will get all of the users posts and all 
 		//of the events they're following.
 		$followingEv = $user->getFollowingEvents();
-
 		return Posts::where('userId', $user->id)
 			->orWhere(function($query) use ($followingEv){
 				foreach($followingEv as $follow)
@@ -38,6 +37,7 @@ class Posts extends Model {
 			->select(array(
 					'posts.*',
 					'users.username',
+					DB::raw('CASE WHEN '.$user->id.' = posts.userId THEN 1 ELSE 0 END AS editable'),
 					))
 			->get();
 	}

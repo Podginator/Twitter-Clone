@@ -5,9 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Model\Posts;
-use Auth;
-use View;
-use Response;
+use Auth, View, Response, Input;
+
 class PostsController extends Controller {
 
 	/**
@@ -18,7 +17,7 @@ class PostsController extends Controller {
 	public function homepage()
 	{
 		$posts = Auth::user() ? Posts::getAllHome(Auth::user()) : Posts::all();
-		return View::make("home.testposts")->with('posts', $posts);
+		return View::make("posts.index");
 	}
 
 	/**
@@ -35,21 +34,6 @@ class PostsController extends Controller {
 		return Response::json(Posts::all());
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * PUT request.
-	 * @return Response
-	 */
 	public function store()
 	{
 		//First we need to check if the user is logged in, if so, he can post.
@@ -81,55 +65,15 @@ class PostsController extends Controller {
 	{
 		$post = Posts::where('id', $id)->first();
 
+		echo print_r($post);
 		//For later:: Auth::user()->admin
-		if(Auth::user() == $post->user)
+		if(Auth::user()->id == $post->userId)
 		{
+			
 			Posts::destroy($id);	
 			return Response::json(array('success'=>true));
 		}
 		
 		return Response::json(array('success'=>false));
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	
-
+	}	
 }
