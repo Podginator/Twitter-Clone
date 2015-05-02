@@ -42,6 +42,7 @@ angular.module('postService', [])
 	  var tags = this.getTags();
 	  
 	  var text = this.text;
+	  this.adText = $sce.trustAsHtml(text);
 	  for(var tag in tags){
 		  var str = tags[tag];
 		  text = text.replace(str, "<a href='/tag/"+str.substring(1, str.length)+"'>" + tags[tag] + "</a>");
