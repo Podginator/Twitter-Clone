@@ -29,6 +29,7 @@ angular.module('postCtrl', [])
 						$scope.getAndObjectify(data);
 						$scope.animation = false;
 					});
+				$('.postInput').val('');
 			});
 	};
 	
@@ -36,11 +37,8 @@ angular.module('postCtrl', [])
 		$scope.animation = true;
 		 Post.destroy(id)
             .success(function(data) {
-              Post.get()
-				.success(function(data){
-					$scope.getAndObjectify(data);
-					$scope.animation = false;
-				});
+               $scope.getAndObjectify(data);
+
             });
     };
 	
