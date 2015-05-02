@@ -1,11 +1,15 @@
 angular.module('postCtrl', [])
-.controller('PostController', function($scope,$http, Post){
+.controller('PostController', function($scope,$http, Post, PostObject){
 	$scope.postData = {}; 
 	$scope.animation = true;
+	$scope.posts = [];
 	
 	Post.get()
 		.success(function(data){
-			$scope.posts = data;
+			for (var i in data) {
+				$scope.posts[i] = angular.extend(new PostObject, data[i]);
+				$scope.posts[i].createLinks();
+			};
 			$scope.animation = false;
 		});
 		
