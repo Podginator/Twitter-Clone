@@ -16,17 +16,28 @@
 				<div class="panel-heading">Twitterings or whatever</div>
 
 				@if (Auth::user())
-					<form ng-submit="submitPost()">
-				   	
+					<form name="postForm" ng-submit="submitPost()">
 				        <div class="form-group">
-				            <input type="text" class="form-control input-lg postInput" name="text" maxlength="140" ng-maxlength="140" ng-model="postData.text" placeholder="Post to shitter.">
+				            <input type="text" class="form-control input-lg postInput" name="text" 
+								maxlength="140"
+								ng-maxlength="140"
+								ng-model="postData.text" 
+								ng-pattern="/\S*#(?:\[[^\]]+\]|\S+)/"
+								placeholder="Post to shitter.">
 				       		<p><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
 						</div>
 				    
 				        <div class="form-group text-right">   
-				            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+				            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="postData.text.length == undefined || postData.text.length == 0 || postForm.$invalid">Submit</button>
 				        </div>
 				    </form>
+					
+					 <div class="error-container" 
+					         ng-show="postForm.text.$dirty && postForm.text.$invalid">
+					    	
+							<p class="text-center" style="color:red">Sheets need a HashTag! </p>
+							
+					</div>
 				@endif
 					 <p class="text-center" ng-if="custom" ng-click="GetDefault()">Custom HashTag showing. Click Text to default</p>
 				    <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
