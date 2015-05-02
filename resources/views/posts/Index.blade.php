@@ -19,7 +19,7 @@
 					<form ng-submit="submitPost()">
 				   	
 				        <div class="form-group">
-				            <input type="text" class="form-control input-lg" name="text" ng-maxlength="140" ng-model="postData.text" placeholder="Post to shitter.">
+				            <input type="text" class="form-control input-lg postInput" name="text" maxlength="140" ng-maxlength="140" ng-model="postData.text" placeholder="Post to shitter.">
 				       		<p><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
 						</div>
 				    
