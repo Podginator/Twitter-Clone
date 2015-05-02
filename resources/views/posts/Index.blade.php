@@ -15,7 +15,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Twitterings or whatever</div>
 
-
+				@if (Auth::user())
 					<form ng-submit="submitPost()">
 				   	
 				        <div class="form-group">
@@ -27,6 +27,7 @@
 				            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
 				        </div>
 				    </form>
+				@endif
 
 				    <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 				    
