@@ -2,10 +2,12 @@ angular.module('postCtrl', [])
 .controller('PostController', function($scope,$http, Post, PostObject){
 	$scope.postData = {}; 
 	$scope.animation = true;
+	$scope.custom = false;
 	$scope.posts = [];
 	
 	$scope.getAndObjectify = function(data)
 	{
+		$scope.posts = [];
 		for (var i in data) {
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
 			$scope.posts[i].createLinks();
@@ -14,12 +16,15 @@ angular.module('postCtrl', [])
 	
 	$scope.GetDefault = function()
 	{
+		$scope.animation = true;
 		Post.get()
 			.success(function(data){
 				$scope.getAndObjectify(data);
 				$scope.animation = false;
+				$scope.custom = false;
 			});
 	}
+	
 	$scope.submitPost = function(){
 		$scope.animation = true;
 		Post.save($scope.postData)
@@ -45,14 +50,18 @@ angular.module('postCtrl', [])
             });
     };
 	
-	$scope.GetTags = function(){
+	$scope.GetTags = function(id){
 		$scope.animation = true;
-		Post.GetTags($('.container').data('tag'))
+		
+		console.log(id);
+		
+		id = id ? id.substr(1,id.length) : $('.container').data('tag');
+		
+		Post.GetTags(id)
 			.success(function(data){
-				console.log("Hey");
+				$scope.custom = true;
 				$scope.getAndObjectify(data);
 				$scope.animation = false;
 			});
-		return $scope.posts;
 	};
 });
