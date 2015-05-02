@@ -26,7 +26,7 @@ class FollowingEventSeeder extends Seeder {
         ));
         
         FollowingEvent::create(array(
-            'userid' => 2,
+            'userid' => 1,
             'hashtag' => "Nepal",
         ));
 	}

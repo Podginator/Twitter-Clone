@@ -33,7 +33,7 @@ class PostSeeder extends Seeder {
         ));
 		
 		 Posts::create(array(
-            'text' => 'test post5',
+            'text' => '#Nepal testing if Nepal hashtag works',
             'userId' => 2,
 			'imgId' =>  null,
         ));
