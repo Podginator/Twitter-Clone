@@ -37,8 +37,11 @@ angular.module('postCtrl', [])
 		$scope.animation = true;
 		 Post.destroy(id)
             .success(function(data) {
-               $scope.getAndObjectify(data);
-
+               Post.get()
+					.success(function(data){
+						$scope.getAndObjectify(data);
+						$scope.animation = false;
+					});
             });
     };
 	

@@ -31,8 +31,8 @@
 
 				    <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 				    <div class="panel panel-default"  ng-repeat="post in posts">
-					    <div class="post" ng-hide="loading">
-				        <div class="panel-heading"><% post.username %></div>
+					    <div class="post" ng-hide="animation">
+					        <div class="panel-heading"><% post.username %></div>
 					        <p ng-bind-html="post.adText"></p>
 					        <p ng-if="post.editable"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
 							<div class ="tags" >
