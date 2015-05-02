@@ -16,6 +16,10 @@ angular.module('postService', [])
 		},
 		destroy: function(id){
 			return $http.delete('/api/posts/' + id);
+		},
+		GetTags: function(tag){
+			console.log(tag);
+			return $http.get('/api/posts/'+tag);
 		}
 	}
 })

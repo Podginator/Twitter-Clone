@@ -20,11 +20,10 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->
-	<script src="js/mustache.js"></script> <!-- Load Mustache -->
-	<script src="js/controllers/controller.js"></script> <!-- load our controller -->
-    <script src="js/services/postService.js"></script> <!-- load our service -->
-    <script src="js/app.js"></script> <!-- load our application -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->
+	<script src="{{ asset('/js/controllers/controller.js') }} "></script> <!-- load our controller -->
+    <script src="{{ asset('/js/services/postService.js') }}"></script> <!-- load our service -->
+    <script src="{{ asset('/js/app.js') }}"></script> <!-- load our application -->
     
 </head>
 	@yield('angularApp')

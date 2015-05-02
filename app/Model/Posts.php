@@ -61,7 +61,22 @@ class Posts extends Model {
 	public static function getUserPosts(User $user)
 	{
 		//Just get all posts from a user
-		return Post::where('userId', $user->id)
+		return Posts::where('userId', $user->id)
+			->join('users', function($join){
+				$join->on('users.id', '=', 'posts.userId');
+			})
+			->groupBy('posts.id')
+			->orderBy('posts.created_at', 'desc')
+			->select(array(
+					'posts.*',
+					'users.username',
+					))
+			->get();
+	}
+	
+	public static function GetTagged($id)
+	{
+		return Posts::where('text', 'LIKE', '%'.'#'.$id.'%')
 			->join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
 			})

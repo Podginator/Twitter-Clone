@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="container" ng-controller="PostController">
+<div class="container" ng-controller="PostController" ng-init="GetDefault()">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">

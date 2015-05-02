@@ -20,6 +20,11 @@ Route::post('/register', 'UserController@RegisterUser');
 Route::get('/posts', function(){
 	return View::make("posts.index");
 });
+
+Route::get('/tag/{tags}', function($tag){
+	return View::make('posts.Tags')->with('tag', $tag);
+});
+
 Route::get('/api/user/current', 'UserController@GetCurrentUser');
 
 //Group the API stuff
@@ -29,6 +34,8 @@ Route::group(array('prefix' => 'api'), function(){
     Route::resource('posts', 'PostsController',
             array('only'=> array('index', 'get', 'store', 'destroy')));
 });
+
+Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

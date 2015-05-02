@@ -56,7 +56,6 @@ class PostsController extends Controller {
 	{
 		$post = Posts::where('id', $id)->first();
 
-		echo print_r($post);
 		//For later:: Auth::user()->admin
 		if(Auth::user()->id == $post->userId)
 		{
@@ -66,5 +65,10 @@ class PostsController extends Controller {
 		}
 		
 		return Response::json(array('success'=>false));
-	}	
+	}
+	
+	public function GetTag($id)
+	{
+		return Response::json(Posts::GetTagged($id));
+	}
 }
