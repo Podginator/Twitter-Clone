@@ -15,7 +15,23 @@ class Posts extends Model {
 	{
 		$this->belongsTo('App\Model\User', 'userId');
 	}
-
+	
+	//Override of All.
+	public static function all($columns = array('*'))
+	{
+		return Posts::join('users', function($join){
+				$join->on('users.id', '=', 'posts.userId');
+			})
+			->groupBy('posts.id')
+			->orderBy('posts.created_at', 'desc')
+			->select(array(
+					'posts.*',
+					'users.username',
+					))
+			->get();
+	}
+	
+	
 	public static function getAllHome(User $user)
 	{
 		//Get homepage posts. 
