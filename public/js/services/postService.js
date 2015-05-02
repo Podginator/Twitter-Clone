@@ -39,7 +39,7 @@ angular.module('postService', [])
   }
 
   Post.prototype.getTags = function() {
-      return (this.text.match(/\S*#(?:\[[^\]]+\]|\S+)/g)) ? this.text.match(/\S*#(?:\[[^\]]+\]|\S+)/g) : [];
+      return (this.text.match(/#(\[[\w\s]+\])|#(\w+)/g)) ? this.text.match(/#(\[[\w\s]+\])|#(\w+)/g) : [];
   };
   
   Post.prototype.createLinks = function(){
