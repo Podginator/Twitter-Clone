@@ -18,14 +18,19 @@
 				@if (Auth::user())
 					<form name="postForm" ng-submit="submitPost()">
 				        <div class="form-group">
-				            <input type="text" class="form-control input-lg postInput" name="text" 
+				            <input 
+								type="text" 
+								class="form-control input-lg postInput"
+							 	name="text" 
 								maxlength="140"
 								ng-maxlength="140"
 								ng-model="postData.text" 
 								ng-pattern="/\S*#(?:\[[^\]]+\]|\S+)/"
-								placeholder="Post to shitter.">
+								placeholder="Post to shitter."
+							>
+							
 				       		<p ng-show="!postForm.text.$invalid"><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
-							<p class="text-center" ng-show="postForm.text.$dirty && postForm.text.$invalid" style="color:red;">Sheets need a HashTag! </p>
+							<p class="text-center" ng-show="postForm.text.$dirty && postForm.text.$invalid" style="color:red;">Sheets need a HashTag!</p>
 						</div>
 				    
 				        <div class="form-group text-right">   
@@ -34,7 +39,8 @@
 				    </form>
 	
 				@endif
-					 <p class="text-center" ng-if="custom" ng-click="GetDefault()">Posts with Tag: <b> <% custom %> </b> showing. Click Text to default</p>
+				
+					<p class="text-center" ng-if="custom" ng-click="GetDefault()">Posts with Tag: <b> <% custom %> </b> showing. Click to go back</p>
 				    <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 				    
 					<div class="panel panel-default"  ng-repeat="post in posts" ng-hide="animation">
@@ -47,12 +53,6 @@
 							</div>
 						</div>
 				    </div>
-
-
-
-				<div class="panel-body">
-					
-				</div>
 			</div>
 		</div>
 	</div>

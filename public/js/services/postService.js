@@ -68,14 +68,13 @@ angular.module('postService', [])
   
   Post.prototype.createLinks = function(){
 	  var tags = this.getTags();
-	  
-	  var text = this.text;
+	
 	  //We need to escape the HTML, because we are trusting this as html. 
-	  text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+	  var text = this.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 	  this.adText = text;
 	  for(var tag in tags){
 		  var str = tags[tag];
-		  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + tags[tag] + "</a>");
+		  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
 		  this.adText = text;
 	  }
   }

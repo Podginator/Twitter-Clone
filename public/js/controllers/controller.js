@@ -6,7 +6,7 @@ angular.module('postCtrl', [])
 	$scope.posts = [];
 	
 	$scope.getAndObjectify = function(data)
-	{
+{
 		$scope.posts = [];
 		for (var i in data) {
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
@@ -14,8 +14,7 @@ angular.module('postCtrl', [])
 		};
 	}
 	
-	$scope.GetDefault = function()
-	{
+	$scope.GetDefault = function(){
 		$scope.animation = true;
 		Post.get()
 			.success(function(data){
@@ -31,11 +30,22 @@ angular.module('postCtrl', [])
 			.success(function (datum){
 				Post.get()
 					.success(function(data){
-						$scope.getAndObjectify(data);
-						$scope.animation = false;
+						if(datum.success)
+						{
+							$scope.getAndObjectify(data);
+							$scope.animation = false;
+						}
+						else
+						{
+							alert("Error with formatting, did you have a hashtag? Does your message have >0 characters?");
+							$scope.animation = false;
+						}
 					});
 				$('.postInput').val('');
-			});
+			})
+			.error(function(data){
+						alert("Error!");
+					});
 	};
 	
 	$scope.deletePost = function(id) {
@@ -46,17 +56,16 @@ angular.module('postCtrl', [])
 					.success(function(data){
 						$scope.getAndObjectify(data);
 						$scope.animation = false;
+					})
+					.error(function(data){
+						alert("Error!");
 					});
             });
     };
 	
 	$scope.GetTags = function(id){
 		$scope.animation = true;
-		
-		console.log(id);
-		
-		id = id ? id.substr(1,id.length) : $('.container').data('tag');
-		
+		id = id ? id.replace("#", "") : $('.container').data('tag');
 		Post.GetTags(id)
 			.success(function(data){
 				$scope.custom = id;
