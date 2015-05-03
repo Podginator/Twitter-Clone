@@ -28,27 +28,20 @@ angular.module('postCtrl', [])
 	//We should extrapalote this to avoid code reuse.
 	var PostToServer = function(postData){
 		Post.save(postData)
-			.success(function (datum){
-				Post.get()
-					.success(function(data){
-						if(datum.success)
-						{
-							$scope.getAndObjectify(data);
-							$scope.animation = false;
-						}
-						else
-						{
-							alert("Error with formatting, did you have a hashtag? Does your message have >0 characters?");
-							$scope.animation = false;
-						}
-					});
+			.success(function (data){	
+				if(data.success){
+					$scope.GetDefault();
+				}else{
+					alert("Unsuccessful Post.");
+				}
+				
 				$('.postInput').val('');
+				$("#imageUploaded").val('');
 			})
 			.error(function(data){
 						alert("Error!");
 					});
 	}
-	
 	
 	$scope.submitPost = function(){
 		$scope.animation = true;
@@ -58,38 +51,30 @@ angular.module('postCtrl', [])
 		
 		if($scope.imageData.image)
 		{
+			//Since these functions run asynchrnously we need to 
+			//Make sure that we only run PostToServer after we have a success
+			//Message to ensure that we have the correct ID after upload.
 			Images.save(image)
 				.success(function(data){
 					if(data.success)
 					{
+						//Add imgID to the FormData we are sending to the server.
 						$scope.postData.imgID = data.id;
 						PostToServer($scope.postData);
 					}
 				});
 		}
 		else{
+			//If there's no image then we post the normal PostToServer
 			PostToServer($scope.postData);
 		}
-
-		
-		console.log($scope.postData, "Hey");
-		
-		//We then try to save the Post.
-		
 	};
 	
 	$scope.deletePost = function(id) {
 		$scope.animation = true;
 		 Post.destroy(id)
             .success(function(data) {
-               Post.get()
-					.success(function(data){
-						$scope.getAndObjectify(data);
-						$scope.animation = false;
-					})
-					.error(function(data){
-						alert("Error!");
-					});
+               	$scope.GetDefault();
             });
     };
 	

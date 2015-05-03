@@ -24,8 +24,9 @@ class ImageController extends Controller {
 			if( File::exists($dir) or File::makeDirectory($dir) )
 			{
 				$fi = new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS);
-				$extension = Input::file('image')->getClientOriginalExtension(); // getting image extension
-      			$filename = rand(11111,99999).'.'.$extension;
+				$extension = Input::file('image')->getClientOriginalExtension();
+				//Get Random Generated Number + Amount of File to avoid users being able to go /userimages/img/whatever
+      			$filename = rand(11111,99999).iterator_count($fi).'.'.$extension;
 			    $path = $dir."/".$filename;
 				Input::file('image')->move($dir,$filename);
 				$newImage = Images::create(array(
@@ -36,7 +37,7 @@ class ImageController extends Controller {
 		}
 		
 		//Otherwise, we'll return a fail response. 
-		return Response::json(array('success' => true, 'id' =>null));
+		return Response::json(array('success' => false, 'id' =>null));
 	}
 
 }

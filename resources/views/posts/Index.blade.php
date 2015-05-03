@@ -31,7 +31,7 @@
 							<p ng-show="!postForm.text.$invalid"><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
 							<p class="text-center" ng-show="postForm.text.$dirty && postForm.text.$invalid" style="color:red;">Sheets need a HashTag!</p>
 					        <label for="image">Image:</label>
-							<input type="file" ng-model="imageData.image" name="image"/>
+							<input type="file" ng-model="imageData.image" name="image"/ id="imageUploaded">
 							
 				       		
 						</div>
