@@ -22,11 +22,15 @@ class Posts extends Model {
 		return Posts::join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
 			})
+			->leftJoin('images', function($join){
+				$join->on('images.id', '=', 'posts.imgId');
+			})
 			->groupBy('posts.id')
 			->orderBy('posts.created_at', 'desc')
 			->select(array(
 					'posts.*',
 					'users.username',
+					'images.url'
 					))
 			->get();
 	}
@@ -48,11 +52,15 @@ class Posts extends Model {
 			->join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
 			})
+			->leftJoin('images', function($join){
+				$join->on('images.id', '=', 'posts.imgId');
+			})
 			->groupBy('posts.id')
 			->orderBy('posts.created_at', 'desc')
 			->select(array(
 					'posts.*',
 					'users.username',
+					'images.url',
 					DB::raw('CASE WHEN '.$user->id.' = posts.userId THEN 1 ELSE 0 END AS editable'),
 					))
 			->get();

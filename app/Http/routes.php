@@ -33,6 +33,9 @@ Route::get('/api/user/current', 'UserController@GetCurrentUser');
 Route::group(array('prefix' => 'api'), function(){
     Route::resource('posts', 'PostsController',
             array('only'=> array('index', 'get', 'store', 'destroy')));
+	Route::resource('images', 'ImageController',
+		array('only'=>array('store'))
+	);
 });
 
 Route::get('/api/posts/{tag}', 'PostsController@GetTag');

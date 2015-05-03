@@ -1,9 +1,9 @@
-<?php namespace App;
+<?php namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class images extends Model {
-
-	//
-
+class Images extends Model {
+	public $timestamps = false; 
+	protected $fillable = ['url'];
+	protected $table = "images";
 }

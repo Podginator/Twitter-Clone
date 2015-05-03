@@ -30,12 +30,15 @@ class PostsController extends Controller {
 		$success =  Response::json(array('success' => true));
 		$fail =  Response::json(array('success' => false));
 		//We also need to check whether a user has posted less than 140 characters. 
+		
+		
+		
 		if(Auth::user() && count(Input::get('text')) <= 140 &&  preg_match('/\S*#(?:\[[^\]]+\]|\S+)/', Input::get('text')))
 		{
 			$newPost = Posts::create(array(
 						"text"=>Input::get('text'),
 						"userId"=>Auth::user()->id,
-						"imgId"=>null,
+						"imgId"=>Input::get('imgID'),
 					));
  
  			//here we check if the newpost entered the db, if it did then the newPost will have an id, otherwise it will not.

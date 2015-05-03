@@ -1,12 +1,13 @@
 angular.module('postCtrl', [])
-.controller('PostController', function($scope,$http, Post, PostObject){
-	$scope.postData = {}; 
+.controller('PostController', function($scope,$http, Post, PostObject, Images){
+	$scope.postData = {};
+	$scope.imageData = {}; 
 	$scope.animation = true;
 	$scope.custom = false;
 	$scope.posts = [];
 	
 	$scope.getAndObjectify = function(data)
-{
+	{
 		$scope.posts = [];
 		for (var i in data) {
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
@@ -24,9 +25,9 @@ angular.module('postCtrl', [])
 			});
 	}
 	
-	$scope.submitPost = function(){
-		$scope.animation = true;
-		Post.save($scope.postData)
+	//We should extrapalote this to avoid code reuse.
+	var PostToServer = function(postData){
+		Post.save(postData)
 			.success(function (datum){
 				Post.get()
 					.success(function(data){
@@ -46,6 +47,35 @@ angular.module('postCtrl', [])
 			.error(function(data){
 						alert("Error!");
 					});
+	}
+	
+	
+	$scope.submitPost = function(){
+		$scope.animation = true;
+		
+		var image = new FormData();
+		image.append("image", postForm.image.files[0]);
+		
+		if($scope.imageData.image)
+		{
+			Images.save(image)
+				.success(function(data){
+					if(data.success)
+					{
+						$scope.postData.imgID = data.id;
+						PostToServer($scope.postData);
+					}
+				});
+		}
+		else{
+			PostToServer($scope.postData);
+		}
+
+		
+		console.log($scope.postData, "Hey");
+		
+		//We then try to save the Post.
+		
 	};
 	
 	$scope.deletePost = function(id) {

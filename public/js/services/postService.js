@@ -48,17 +48,28 @@ angular.module('postService', [])
 	}
 })
 
+.factory('Images', function($http){
+	return{
+		save: function(image){
+			return $http.post('/api/images', image, {
+		        withCredentials: true,
+		        headers: {'Content-Type': undefined },
+		        transformRequest: angular.identity
+		    });
+		}
+	}
+})
+
 .factory('PostObject', function($sce){
-	function Post(text, created_at, username, id, editable, imgId, updated_at) {
+	function Post(text, created_at, username, id, editable, url, updated_at) {
 	    this.text = text;
 		this.adText = "";
 	    this.created_at = created_at;
 	    this.username = username;
 	    this.editable = editable;
-	    this.imgId = imgId;
 	    this.updated_at = updated_at;
 	    this.id = id;
-		
+		this.url = url;
 		//this.createLinks();
   }
 

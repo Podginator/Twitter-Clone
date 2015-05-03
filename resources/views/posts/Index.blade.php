@@ -16,7 +16,7 @@
 				<div class="panel-heading">Twitterings or whatever</div>
 
 				@if (Auth::user())
-					<form name="postForm" ng-submit="submitPost()">
+					<form name="postForm" ng-submit="submitPost()" enctype="multipart/form-data">
 				        <div class="form-group">
 				            <input 
 								type="text" 
@@ -28,9 +28,12 @@
 								ng-pattern="/\S*#(?:\[[^\]]+\]|\S+)/"
 								placeholder="Post to shitter."
 							>
-							
-				       		<p ng-show="!postForm.text.$invalid"><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
+							<p ng-show="!postForm.text.$invalid"><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
 							<p class="text-center" ng-show="postForm.text.$dirty && postForm.text.$invalid" style="color:red;">Sheets need a HashTag!</p>
+					        <label for="image">Image:</label>
+							<input type="file" ng-model="imageData.image" name="image"/>
+							
+				       		
 						</div>
 				    
 				        <div class="form-group text-right">   
@@ -47,6 +50,7 @@
 					    <div class="post">
 					        <div class="panel-heading"><% post.username %></div>
 					        <p compile="post.adText"><% posts.adText %></p>
+							<div class="postimg" ng-if="post.url"> <img style="width:100%;" src="{{asset('<% post.url %>')}}"> </div>
 					        <p ng-if="post.editable"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
 							<div class ="tags" >
 								<p><small> Tags <span ng-repeat= "tags in post.getTags()"><a href="#" ng-click="GetTags(tags)" > <% tags %> </a> </span></small></p>
