@@ -24,8 +24,8 @@
 								ng-model="postData.text" 
 								ng-pattern="/\S*#(?:\[[^\]]+\]|\S+)/"
 								placeholder="Post to shitter.">
-				       		<p><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
-							<p class="text-center" ng-show="postForm.text.$dirty && postForm.text.$invalid" style="color:red;">Sheets need a HashTag! </p>
+				       		<p><% postData.text.length != undefined ? postData.text.length : 0 %> of 140  <span style="color:red; margin-left:5em;" ng-show="postForm.text.$dirty && postForm.text.$invalid"> Events need a HashTag! </span> </p>
+
 						</div>
 				    
 				        <div class="form-group text-right">   
