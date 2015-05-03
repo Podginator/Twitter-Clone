@@ -24,14 +24,15 @@
 								ng-model="postData.text" 
 								ng-pattern="/\S*#(?:\[[^\]]+\]|\S+)/"
 								placeholder="Post to shitter.">
-				       		<p><% postData.text.length != undefined ? postData.text.length : 0 %> of 140  <span style="color:red; margin-left:5em;" ng-show="postForm.text.$dirty && postForm.text.$invalid"> Events need a HashTag! </span> </p>
-
+				       		<p ng-show="!postForm.text.$invalid"><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
+							<p class="text-center" ng-show="postForm.text.$dirty && postForm.text.$invalid" style="color:red;">Sheets need a HashTag! </p>
 						</div>
 				    
 				        <div class="form-group text-right">   
-				            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="postData.text.length == undefined || postData.text.length == 0 ">Submit</button>
+				            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="postData.text.length == undefined || postData.text.length == 0 || postForm.$invalid">Submit</button>
 				        </div>
-				    </form>	
+				    </form>
+	
 				@endif
 					 <p class="text-center" ng-if="custom" ng-click="GetDefault()">Custom HashTag showing. Click Text to default</p>
 				    <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
