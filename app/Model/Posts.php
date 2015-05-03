@@ -88,11 +88,15 @@ class Posts extends Model {
 			->join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
 			})
+			->leftJoin('images', function($join){
+				$join->on('images.id', '=', 'posts.imgId');
+			})
 			->groupBy('posts.id')
 			->orderBy('posts.created_at', 'desc')
 			->select(array(
 					'posts.*',
 					'users.username',
+					'images.url'
 					))
 			->get();
 	}
