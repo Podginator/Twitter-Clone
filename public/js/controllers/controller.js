@@ -59,7 +59,7 @@ angular.module('postCtrl', [])
 		
 		Post.GetTags(id)
 			.success(function(data){
-				$scope.custom = true;
+				$scope.custom = id;
 				$scope.getAndObjectify(data);
 				$scope.animation = false;
 			});

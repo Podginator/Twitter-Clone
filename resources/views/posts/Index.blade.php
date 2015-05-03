@@ -34,7 +34,7 @@
 				    </form>
 	
 				@endif
-					 <p class="text-center" ng-if="custom" ng-click="GetDefault()">Custom HashTag showing. Click Text to default</p>
+					 <p class="text-center" ng-if="custom" ng-click="GetDefault()">Posts with Tag: <b> <% custom %> </b> showing. Click Text to default</p>
 				    <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 				    
 					<div class="panel panel-default"  ng-repeat="post in posts" ng-hide="animation">
