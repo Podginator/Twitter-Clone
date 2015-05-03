@@ -36,8 +36,9 @@
 				@endif
 					 <p class="text-center" ng-if="custom" ng-click="GetDefault()">Custom HashTag showing. Click Text to default</p>
 				    <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
-				    <div class="panel panel-default"  ng-repeat="post in posts">
-					    <div class="post" ng-hide="animation">
+				    
+					<div class="panel panel-default"  ng-repeat="post in posts" ng-hide="animation">
+					    <div class="post">
 					        <div class="panel-heading"><% post.username %></div>
 					        <p compile="post.adText"><% posts.adText %></p>
 					        <p ng-if="post.editable"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
@@ -46,6 +47,7 @@
 							</div>
 						</div>
 				    </div>
+
 
 
 				<div class="panel-body">
