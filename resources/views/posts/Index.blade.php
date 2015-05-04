@@ -13,12 +13,7 @@
 	<div class="row">
 		@if(Auth::user())
 			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">{{Auth::user()->username}}</div>
-					Blah Blah User
-					Blah
-					Blah
-				</div>
+				@include('users.profile')
 			</div>
 			<div class="col-md-8 ">
 		@else
