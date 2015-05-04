@@ -18,7 +18,7 @@ class ImageController extends Controller {
 
 		if(Auth::user())
 		{
-			$serverDir =  "uploaded_images\\".Auth::user()->username;
+			$serverDir =  "uploaded_images/".Auth::user()->username;
 			$dir = public_path($serverDir);
 			
 			if( File::exists($dir) or File::makeDirectory($dir) )
