@@ -11,7 +11,20 @@
 @section('content')
 <div class="container" ng-controller="PostController"  ng-init="GetDefault()">
 	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+		@if(Auth::user())
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">{{Auth::user()->username}}</div>
+					Blah Blah User
+					Blah
+					Blah
+				</div>
+			</div>
+			<div class="col-md-8 ">
+		@else
+			<div class="col-md-10 col-md-offset-1">
+		@endif
+				
 			<div class="panel panel-default">
 				<div class="panel-heading">Your Posts</div>
 				

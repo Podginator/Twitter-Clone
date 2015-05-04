@@ -30,7 +30,7 @@ class ImageController extends Controller {
 			    $path = $dir."/".$filename;
 				Input::file('image')->move($dir,$filename);
 				$newImage = Images::create(array(
-						"url"=> '\\'.$serverDir.'\\'.$filename
+						"url"=> ''.$serverDir.'/'.$filename
 					));
 				return Response::json(array('success' => true, 'id' =>$newImage->id));
 			}
