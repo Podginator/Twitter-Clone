@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
-
-use Auth; 
+ 
+use Auth, View, Response, Input;
 
 class UserController extends Controller {
 
@@ -22,7 +22,7 @@ class UserController extends Controller {
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth');
+		//$this->middleware('auth');
 	}
 
 	/**
@@ -48,5 +48,10 @@ class UserController extends Controller {
             return view('login.loginform');
         }
     }
+	
+	public function GetCurrentUser()
+	{
+		 return Response::json(Auth::user());
+	}
 
 }

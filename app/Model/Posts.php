@@ -1,10 +1,10 @@
 <?php namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class Posts extends Model {
 
-	protected $fillable = [];
+	protected $fillable = ['userId', 'text', 'imgId'];
 	protected $table = "posts";
 
 	public static $rules = [
@@ -15,29 +15,54 @@ class Posts extends Model {
 	{
 		$this->belongsTo('App\Model\User', 'userId');
 	}
-
-	public static function getAllHome(User $user)
+	
+	//Override of All.
+	public static function all($columns = array('*'))
 	{
-		//Get homepage posts. 
-		//This will get all of the users posts and all 
-		//of the events they're following.
-		$followingEv = $user->getFollowingEvents();
-
-		return Posts::where('userId', $user->id)
-			->orWhere(function($query) use ($followingEv){
-				foreach($followingEv as $follow)
-				{
-					$query->orWhere('text', 'LIKE', '%'.'#'.$follow.'%');
-				};
-			})
-			->join('users', function($join){
+		return Posts::join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
+			})
+			->leftJoin('images', function($join){
+				$join->on('images.id', '=', 'posts.imgId');
 			})
 			->groupBy('posts.id')
 			->orderBy('posts.created_at', 'desc')
 			->select(array(
 					'posts.*',
 					'users.username',
+					'images.url'
+					))
+			->get();
+	}
+	
+	
+	public static function getAllHome(User $user)
+	{
+		//Get homepage posts. 
+		//This will get all of the users posts and all 
+		//of the events they're following.
+		$followingEv = $user->getFollowingEvents();
+		return Posts::where('userId', $user->id)
+			->orWhere(function($query) use ($followingEv){
+				foreach($followingEv as $follow)
+				{
+					$query->orWhere('text', 'RLIKE', '(#'.$follow.')[[:>:]]');
+
+				};
+			})
+			->join('users', function($join){
+				$join->on('users.id', '=', 'posts.userId');
+			})
+			->leftJoin('images', function($join){
+				$join->on('images.id', '=', 'posts.imgId');
+			})
+			->groupBy('posts.id')
+			->orderBy('posts.created_at', 'desc')
+			->select(array(
+					'posts.*',
+					'users.username',
+					'images.url',
+					DB::raw('CASE WHEN '.$user->id.' = posts.userId THEN 1 ELSE 0 END AS editable'),
 					))
 			->get();
 	}
@@ -54,6 +79,25 @@ class Posts extends Model {
 			->select(array(
 					'posts.*',
 					'users.username',
+					))
+			->get();
+	}
+	
+	public static function GetTagged($id)
+	{
+		return Posts::where('text', 'RLIKE', '(#'.$id.')[[:>:]]')
+			->join('users', function($join){
+				$join->on('users.id', '=', 'posts.userId');
+			})
+			->leftJoin('images', function($join){
+				$join->on('images.id', '=', 'posts.imgId');
+			})
+			->groupBy('posts.id')
+			->orderBy('posts.created_at', 'desc')
+			->select(array(
+					'posts.*',
+					'users.username',
+					'images.url'
 					))
 			->get();
 	}
