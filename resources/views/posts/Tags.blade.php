@@ -14,23 +14,7 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">All posts with Tag: #{{$tag}}</div>
-
-				    <p class="text-center" ng-if="animation"><img src="{{asset('imgs/loader.gif')}}" height="50" width="50" ></p>
-				    
-					<div class="panel panel-default"  ng-repeat="post in posts" ng-hide="animation">
-					    <div class="post">
-					        <div class="panel-heading"><% post.username %></div>
-					        <p compile="post.adText"><% posts.adText %></p>
-					        <p ng-if="post.editable"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
-							<div class ="tags" >
-								<p><small> Tags <span ng-repeat= "tags in post.getTags()"><a href="#" ng-click="GetTags(tags)" > <% tags %> </a> </span></small></p>
-							</div>
-						</div>
-				    </div>
-
-				<div class="panel-body">
-					
-				</div>
+			    @include('posts.post');
 			</div>
 		</div>
 	</div>
