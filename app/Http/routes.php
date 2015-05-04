@@ -17,9 +17,9 @@ Route::get('/login' ,'UserController@LoginPage');
 Route::post('/login', 'UserController@LoginUser');
 Route::get('/register', 'UserController@RegisterPage');
 Route::post('/register', 'UserController@RegisterUser');
-<<<<<<< HEAD
+
 Route::get('/posts', 'PostsController@homepage');
-=======
+
 Route::get('/posts', function(){
 	return View::make("posts.index");
 });
@@ -29,7 +29,7 @@ Route::get('/tag/{tags}', function($tag){
 });
 
 Route::get('/api/user/current', 'UserController@GetCurrentUser');
->>>>>>> e07e5ff226f24c0ce9255fac92ec8ff4f57f0d08
+
 
 //Group the API stuff
 //Current just do Posts. 
