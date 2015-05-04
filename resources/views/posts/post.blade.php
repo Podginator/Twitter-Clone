@@ -5,7 +5,7 @@
 
         <div class="panel-heading"><% post.username %></div>
         <p compile="post.adText" class = "panel-body"><% posts.adText %></p>
-		<div class="img-responsive" ng-if="post.url"> <img class="img-responsive center-block" src="{{asset('<% post.url %>')}}"> </div>
+		<div class="img-responsive" style="padding-bottom:15px" ng-if="post.url"> <img class="img-responsive center-block" src="{{asset('<% post.url %>')}}"> </div>
         <p ng-if="post.editable" style="float:right; margin-right:10px;"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
 		<div class ="tags" >
 			<p style="padding-left:15px"> <small> Tags <span ng-repeat= "tags in post.getTags()"><a href="#" ng-click="GetTags(tags)" > <% tags %> </a> </span></small></p>

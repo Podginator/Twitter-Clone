@@ -46,7 +46,8 @@ class Posts extends Model {
 			->orWhere(function($query) use ($followingEv){
 				foreach($followingEv as $follow)
 				{
-					$query->orWhere('text', 'LIKE', '%'.'#'.$follow.'%');
+					$query->orWhere('text', 'RLIKE', '(#'.$follow.')[[:>:]]');
+
 				};
 			})
 			->join('users', function($join){
@@ -84,7 +85,7 @@ class Posts extends Model {
 	
 	public static function GetTagged($id)
 	{
-		return Posts::where('text', 'LIKE', '%'.'#'.$id.'%')
+		return Posts::where('text', 'RLIKE', '(#'.$id.')[[:>:]]')
 			->join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
 			})
