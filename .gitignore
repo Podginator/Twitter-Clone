@@ -3,3 +3,4 @@
 /.phpintel
 .DS_Store
 /public/uploaded_images
+resources/views/home/home.blade.php~
