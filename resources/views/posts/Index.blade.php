@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+
 <div class="container" ng-controller="PostController"  ng-init="GetDefault()">
 	<div class="row">
 		@if(Auth::user())
@@ -19,7 +20,7 @@
 		@else
 			<div class="col-md-10 col-md-offset-1">
 		@endif
-				
+
 			<div class="panel panel-default">
 				<div class="panel-heading">Your Posts</div>
 				
@@ -27,6 +28,8 @@
 					@include('posts.form')
 				@endif
 				
+				
+				<div class="panel panel-default" ng-controller="PostCountCtrl" ng-click="GetDefault(); ResetCounter()" ng-show="postCounter > 0"> New Posts <% postCounter %> </div>
 				@include('posts.post')
 					
 			</div>

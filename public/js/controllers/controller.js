@@ -1,4 +1,31 @@
 angular.module('postCtrl', [])
+.controller('PostCountCtrl', function($scope, Post, PostCounter){
+	$scope.postCounter = 0;
+	$scope.prevCounter = 0;
+	var checkFirst = true;
+	PostCounter.then(
+		function(val){
+			console.log(val);
+		},
+		function(err){
+			console.log(err);
+		},
+		function(notify){
+			if(!checkFirst){
+				$scope.postCounter = notify.data.length - $scope.prevCounter;
+			}else{
+				$scope.prevCounter = notify.data.length;
+				checkFirst = false;
+			}
+		}
+	)
+	
+	$scope.ResetCounter = function(){
+		$scope.postCounter = 0;
+		checkFirst = true;
+	}
+})
+
 .controller('PostController', function($scope,$http, Post, PostObject, Images){
 	$scope.postData = {};
 	$scope.imageData = {}; 

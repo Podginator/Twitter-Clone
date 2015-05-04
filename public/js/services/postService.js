@@ -48,6 +48,26 @@ angular.module('postService', [])
 	}
 })
 
+//A simple factory that sends a request every 15seconds to inform the client
+//as to whether there are any new posts.
+.factory('PostCounter', function($http, $interval, $q, Post){
+	var posts = {};
+	var deferred = $q.defer();
+	
+	
+	$interval(function(){
+		Post.get()
+			.then(function(data){
+				deferred.notify(data);
+			});
+	}, 15000);
+	
+	console.log(deferred);
+	return deferred.promise;
+		
+	
+})
+
 .factory('Images', function($http){
 	return{
 		save: function(image){
@@ -70,24 +90,23 @@ angular.module('postService', [])
 	    this.updated_at = updated_at;
 	    this.id = id;
 		this.url = url;
-		//this.createLinks();
-  }
+  	}
 
-  Post.prototype.getTags = function() {
-      return (this.text.match(/#(\[[\w\s]+\])|#(\w+)/g)) ? this.text.match(/#(\[[\w\s]+\])|#(\w+)/g) : [];
-  };
-  
-  Post.prototype.createLinks = function(){
-	  var tags = this.getTags();
-	
-	  //We need to escape the HTML, because we are trusting this as html. 
-	  var text = this.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-	  this.adText = text;
-	  for(var tag in tags){
-		  var str = tags[tag];
-		  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
+	  Post.prototype.getTags = function() {
+	      return (this.text.match(/#(\[[\w\s]+\])|#(\w+)/g)) ? this.text.match(/#(\[[\w\s]+\])|#(\w+)/g) : [];
+	  };
+	  
+	  Post.prototype.createLinks = function(){
+		  var tags = this.getTags();
+		
+		  //We need to escape the HTML, because we are trusting this as html. 
+		  var text = this.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 		  this.adText = text;
-	  }
+		  for(var tag in tags){
+			  var str = tags[tag];
+			  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
+			  this.adText = text;
+		  }
   }
   
   return Post;
