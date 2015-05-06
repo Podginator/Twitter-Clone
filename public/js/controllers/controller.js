@@ -1,20 +1,26 @@
 angular.module('postCtrl', [])
+
 .controller('PostCountCtrl', function($scope, Post, PostCounter){
 	$scope.postCounter = 0;
-	$scope.prevCounter = 0;
+	var prevCounter = 0;
 	var checkFirst = true;
+	
 	PostCounter.then(
+		//Success(Or Finish)
 		function(val){
 			console.log(val);
 		},
+
 		function(err){
 			console.log(err);
 		},
 		function(notify){
+			console.log("Tick");
 			if(!checkFirst){
-				$scope.postCounter = notify.data.length - $scope.prevCounter;
+				$scope.postCounter = notify.data.length - prevCounter;
+				console.log($scope.postCounter);
 			}else{
-				$scope.prevCounter = notify.data.length;
+				prevCounter = notify.data.length;
 				checkFirst = false;
 			}
 		}
