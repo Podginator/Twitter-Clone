@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
+//TODO Change these to Auth 
 Route::get('/logout', "UserController@LogOut");
 Route::get('/login' ,'UserController@LoginPage');
 Route::post('/login', 'UserController@LoginUser');
@@ -20,24 +21,27 @@ Route::post('/register', 'UserController@RegisterUser');
 
 Route::get('/posts', 'PostsController@homepage');
 
+//We just make the View inside the routes, no logic needs to be done as that is handled in angular
 Route::get('/posts', function(){
 	return View::make("posts.index");
 });
 
+//Similar to before, except we get the tag.
 Route::get('/tag/{tags}', function($tag){
 	return View::make('posts.Tags')->with('tag', $tag);
 });
 
+//Unused, delete? 
 Route::get('/api/user/current', 'UserController@GetCurrentUser');
 
-
-//Group the API stuff
-//Current just do Posts. 
-
+//This is where the API stuff happens
 Route::group(array('prefix' => 'api'), function(){
     Route::resource('posts', 'PostsController',
-            array('only'=> array('index', 'get', 'store', 'destroy')));
+           //We use index, get, store and destroy only. 
+		    //Laravel produces these routes.
+			array('only'=> array('index', 'get', 'store', 'destroy')));
 	Route::resource('images', 'ImageController',
+		
 		array('only'=>array('store'))
 	);
 });

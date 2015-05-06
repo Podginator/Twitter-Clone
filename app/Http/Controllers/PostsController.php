@@ -31,8 +31,6 @@ class PostsController extends Controller {
 		$fail =  Response::json(array('success' => false));
 		//We also need to check whether a user has posted less than 140 characters. 
 		
-		
-		
 		if(Auth::user() && count(Input::get('text')) <= 140 &&  preg_match('/\S*#(?:\[[^\]]+\]|\S+)/', Input::get('text')))
 		{
 			$newPost = Posts::create(array(

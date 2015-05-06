@@ -15,23 +15,31 @@ class ImageController extends Controller {
 	public function store()
 	{
 		//To upload an image a user needs to be logged in.
-
 		if(Auth::user())
 		{
+			//We get where the post is on the server ( to store in an image object.)
 			$serverDir =  "uploaded_images/".Auth::user()->username;
 			$dir = public_path($serverDir);
 			
 			if( File::exists($dir) or File::makeDirectory($dir) )
 			{
+				//FileSystemIterator is just to get the count of objects.
 				$fi = new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS);
+				//We get the extensions (ie:.ping)
+				//TODO: Add check to make sure object is image, both client and server side.
 				$extension = Input::file('image')->getClientOriginalExtension();
 				//Get Random Generated Number + Amount of File to avoid users being able to go /userimages/img/whatever
       			$filename = rand(11111,99999).iterator_count($fi).'.'.$extension;
+				  //Get Path.
 			    $path = $dir."/".$filename;
+				//Get Move the file to the directory.
 				Input::file('image')->move($dir,$filename);
+				//Create an image with a url
 				$newImage = Images::create(array(
 						"url"=> ''.$serverDir.'/'.$filename
 					));
+					
+				//REturn the ID to use on the post.
 				return Response::json(array('success' => true, 'id' =>$newImage->id));
 			}
 		}

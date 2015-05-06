@@ -1,10 +1,10 @@
 angular.module('postCtrl', [])
-
+//This is the counter for new posts
 .controller('PostCountCtrl', function($scope, Post, PostCounter){
 	$scope.postCounter = 0;
 	var prevCounter = 0;
 	var checkFirst = true;
-	
+	//We use the PostCounter object, which fires an $interval every 15 seconds
 	PostCounter.then(
 		//Success(Or Finish)
 		function(val){
@@ -14,6 +14,7 @@ angular.module('postCtrl', [])
 		function(err){
 			console.log(err);
 		},
+		//Every 'tick' it sends a notify request which we then use to update the post counter.
 		function(notify){
 			console.log("Tick");
 			if(!checkFirst){
@@ -26,19 +27,25 @@ angular.module('postCtrl', [])
 		}
 	)
 	
+	//This FN resets the post counter.
 	$scope.ResetCounter = function(){
 		$scope.postCounter = 0;
 		checkFirst = true;
 	}
 })
 
+//Here is the logic for the Post Controller
 .controller('PostController', function($scope,$http, Post, PostObject, Images){
+	//We have Form Objects in the form of Post and Image Data
 	$scope.postData = {};
 	$scope.imageData = {}; 
+	//This is where angular decides to show animations and custom hashtags names
 	$scope.animation = true;
 	$scope.custom = false;
+	//Where all the posts are formed
 	$scope.posts = [];
 	
+	//This creates Post Objects from the data we get
 	$scope.getAndObjectify = function(data)
 	{
 		$scope.posts = [];
@@ -48,10 +55,13 @@ angular.module('postCtrl', [])
 		};
 	}
 	
+	//This is where we get the default 
 	$scope.GetDefault = function(){
 		$scope.animation = true;
+		//We do a Post.Get() (Check postService.js)
 		Post.get()
 			.success(function(data){
+				//objectifies the success data that returns and finishes animations.
 				$scope.getAndObjectify(data);
 				$scope.animation = false;
 				$scope.custom = false;
@@ -59,15 +69,17 @@ angular.module('postCtrl', [])
 	}
 	
 	//We should extrapalote this to avoid code reuse.
+	//This is where we save a post to the server.
 	var PostToServer = function(postData){
 		Post.save(postData)
 			.success(function (data){	
 				if(data.success){
+					//On success we return the default state
 					$scope.GetDefault();
 				}else{
 					alert("Unsuccessful Post.");
 				}
-				
+				//We then reset the postInputs
 				$('.postInput').val('');
 				$("#imageUploaded").val('');
 			})
@@ -78,10 +90,11 @@ angular.module('postCtrl', [])
 	
 	$scope.submitPost = function(){
 		$scope.animation = true;
-		
+		//When we submit the post we get an image FormData
 		var image = new FormData();
 		image.append("image", postForm.image.files[0]);
 		
+		//Check if it's saved
 		if($scope.imageData.image)
 		{
 			//Since these functions run asynchrnously we need to 
@@ -93,6 +106,7 @@ angular.module('postCtrl', [])
 					{
 						//Add imgID to the FormData we are sending to the server.
 						$scope.postData.imgID = data.id;
+						//Then post to server with img id
 						PostToServer($scope.postData);
 					}
 				});
@@ -111,8 +125,10 @@ angular.module('postCtrl', [])
             });
     };
 	
+	//We get posts with the specific tag
 	$scope.GetTags = function(id){
 		$scope.animation = true;
+		//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
 		id = id ? id.replace("#", "") : $('.container').data('tag');
 		Post.GetTags(id)
 			.success(function(data){
