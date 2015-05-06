@@ -24,11 +24,14 @@ angular.module('postService', [])
    )};
   }])
   
+  //This is the Post Factor, where the http and ajax requests happen
 .factory('Post', function($http){
 	return {
+		//We get the posts from /api/posts, which fires the index() item in PostController
 		get: function(){
 			return $http.get('/api/posts');
 		},
+		//Save grabs some data, and POSTs it to the server. This fires the store() event
 		save: function(data){
 			console.log(data);
 			return $http({
@@ -38,9 +41,11 @@ angular.module('postService', [])
 					data: $.param(data)
 			});
 		},
+		//Fires the destroy even and gets post id.
 		destroy: function(id){
 			return $http.delete('/api/posts/' + id);
 		},
+		//We get the tag from the api at PostController@getTags
 		GetTags: function(tag){
 			console.log(tag);
 			return $http.get('/api/posts/'+tag);
@@ -54,7 +59,8 @@ angular.module('postService', [])
 	var posts = {};
 	var deferred = $q.defer();
 	
-	
+	//Set an interval every 5 minutes. 
+	//Defer this (so that it's not Asynchronous data anymore.)
 	$interval(function(){
 		Post.get()
 			.then(function(data){
@@ -62,13 +68,13 @@ angular.module('postService', [])
 			});
 	}, 15000);
 	
-	console.log(deferred);
+	//Return the promise each time.
 	return deferred.promise;
-		
 	
 })
 
 .factory('Images', function($http){
+	//Where we post the image.
 	return{
 		save: function(image){
 			return $http.post('/api/images', image, {
@@ -80,6 +86,7 @@ angular.module('postService', [])
 	}
 })
 
+//This is where we define the post object for use in scope with Angular
 .factory('PostObject', function($sce){
 	function Post(text, created_at, username, id, editable, url, updated_at) {
 	    this.text = text;
@@ -92,16 +99,20 @@ angular.module('postService', [])
 		this.url = url;
   	}
 
+	//We get the tags here, by matching the tags against a regex statement.
 	  Post.prototype.getTags = function() {
 	      return (this.text.match(/#(\[[\w\s]+\])|#(\w+)/g)) ? this.text.match(/#(\[[\w\s]+\])|#(\w+)/g) : [];
 	  };
 	  
+	  //We create a tag out of these statements
 	  Post.prototype.createLinks = function(){
 		  var tags = this.getTags();
 		
 		  //We need to escape the HTML, because we are trusting this as html. 
 		  var text = this.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+		  //this is that Adjusted Text, we do this so that we don't modify the original object (If it needs to be used elsewhere.) 
 		  this.adText = text;
+		  //We then go through tags and replace things with lings.
 		  for(var tag in tags){
 			  var str = tags[tag];
 			  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
