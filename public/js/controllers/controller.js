@@ -125,6 +125,24 @@ angular.module('postCtrl', [])
             });
     };
 	
+	/*-------------------*/
+	
+	$scope.getPost = function(id)
+	{
+		$scope.animation = true;
+		Post.GetPost(id)
+            .success(function(data)
+			{
+				//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
+				id = id ? id.replace("#", '/' + id) : $('.container').data('posts');
+				$scope.custom = id;
+				$scope.getAndObjectify(data);
+				$scope.animation = false;
+            });
+	};
+	
+	/*-------------------*/
+	
 	//We get posts with the specific tag
 	$scope.GetTags = function(id){
 		$scope.animation = true;
@@ -137,5 +155,11 @@ angular.module('postCtrl', [])
 				$scope.animation = false;
 			});
 	};
+<<<<<<< HEAD
 });
 
+=======
+	
+	
+});
+>>>>>>> origin/master

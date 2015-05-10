@@ -83,6 +83,12 @@ class Posts extends Model {
 			->get();
 	}
 	
+	public static function getUserPost()
+	{
+		echo "clicked on get user post!";
+		
+	}
+	
 	public static function GetTagged($id)
 	{
 		return Posts::where('text', 'RLIKE', '(#'.$id.')[[:>:]]')

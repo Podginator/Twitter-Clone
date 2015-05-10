@@ -49,7 +49,13 @@ angular.module('postService', [])
 		GetTags: function(tag){
 			console.log(tag);
 			return $http.get('/api/posts/'+tag);
+		},
+		// Get the post id from the API at PostController@getPost
+		 GetPost: function(id) 	
+		{
+			return $http.get('/api/posts/' + id);
 		}
+		
 	}
 })
 
