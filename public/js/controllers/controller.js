@@ -155,11 +155,5 @@ angular.module('postCtrl', [])
 				$scope.animation = false;
 			});
 	};
-<<<<<<< HEAD
 });
 
-=======
-	
-	
-});
->>>>>>> origin/master
