@@ -41,8 +41,10 @@ Route::group(array('prefix' => 'api'), function(){
 		    //Laravel produces these routes.
 			array('only'=> array('index', 'get', 'store', 'destroy')));
 	Route::resource('images', 'ImageController',
-		
 		array('only'=>array('store'))
+	);
+	Route::resource('user/follow', 'UserController',
+		array('only'=>array('store'))	
 	);
 });
 

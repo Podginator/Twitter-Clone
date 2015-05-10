@@ -14,7 +14,7 @@
 	<div class="row">
 		@if(Auth::user())
 			<div class="col-md-4">
-				@include('users.profile')
+				@include('users.profile', array("user"=>Auth::user()))
 			</div>
 			<div class="col-md-8 ">
 		@else

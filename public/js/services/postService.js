@@ -56,7 +56,6 @@ angular.module('postService', [])
 //A simple factory that sends a request every 15seconds to inform the client
 //as to whether there are any new posts.
 .factory('PostCounter', function($http, $interval, $q, Post){
-	var posts = {};
 	var deferred = $q.defer();
 	
 	//Set an interval every 5 minutes. 

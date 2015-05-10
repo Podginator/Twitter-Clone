@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
  
 use Auth, View, Response, Input;
-
+use App\Model\FollowingEvent;
 class UserController extends Controller {
 
 	/*
@@ -34,6 +34,29 @@ class UserController extends Controller {
 	{
         //STUB
 		//return view("home.home");
+	}
+	
+	public function store()
+	{
+		//First we need to check if the user is logged in, if so, he can post.
+		$success =  Response::json(array('success' => true));
+		$fail =  Response::json(array('success' => false));
+		//We also need to check whether a user has posted less than 140 characters. 
+		
+		if(Auth::user() && count(Input::get('text')) > 0 &&  preg_match('/^[a-zA-Z ]*$/', Input::get('text')))
+		{
+			$newFollowingEvent = FollowingEvent::create(array(
+						"userid"=>Auth::user()->id,
+						"hashtag"=>Input::get('text'),
+					));
+					
+ 
+ 			//here we check if the newpost entered the db, if it did then the newPost will have an id, otherwise it will not.
+			return $newFollowingEvent->id ? $success : $fail;
+		}
+		
+		//Otherwise, we'll return a fail response. 
+		return $fail;
 	}
     
     public function LoginPage()
