@@ -48,6 +48,17 @@ Route::group(array('prefix' => 'api'), function(){
 
 Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 
+/*---------------------------------------------------------------------------*/
+
+// Route to specific post:
+Route::get('/api/posts/{postID}', 'PostsController@GetPost');
+
+Route::get('/posts/{id}', function($postID){
+	return View::make('posts.post')->with('postID', $postID);
+});
+
+/*---------------------------------------------------------------------------*/
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

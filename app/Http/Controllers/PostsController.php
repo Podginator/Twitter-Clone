@@ -72,4 +72,9 @@ class PostsController extends Controller {
 	{
 		return Response::json(Posts::GetTagged($id));
 	}
+	
+	public function GetPost($id) 		// Get specific post.
+	{
+		return Response::json(Posts::getUserPost($id));
+	}
 }
