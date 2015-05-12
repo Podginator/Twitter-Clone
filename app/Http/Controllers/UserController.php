@@ -3,6 +3,7 @@
 use Auth, View, Response, Input;
 use App\Model\FollowingEvent;
 use App\Model\User;
+
 class UserController extends Controller {
 
 	/*
@@ -75,7 +76,12 @@ class UserController extends Controller {
 	
 	public function profilePage(User $user)
 	{
+		if($user->id == null)
+		{
+ 			return View::make("errors.user");
+		}
 		$data['user'] = $user;
+
 		return View::make('users.page', $data);
 	}
 	

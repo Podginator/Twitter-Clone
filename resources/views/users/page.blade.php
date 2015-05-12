@@ -1,7 +1,7 @@
 @extends('template.nav')
 
 @section('title') 
-	Stories: Posts 
+	{{$user->username}}
 @endsection
 
 @section('angularApp')
