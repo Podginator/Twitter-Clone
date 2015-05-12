@@ -48,6 +48,7 @@ angular.module('postCtrl', [])
 	//This creates Post Objects from the data we get
 	$scope.getAndObjectify = function(data)
 	{
+		$scope.custom=false;
 		$scope.posts = [];
 		for (var i in data) {
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
@@ -149,16 +150,31 @@ angular.module('postCtrl', [])
 	
 	/*-------------------*/
 	
+	$scope.GetUserPost = function(user)
+	{
+		$scope.ActiveFunction = user ? $scope.ActiveFunction : $scope.GetUserPost;		
+		user = user ? user : $('.container').data('user');
+		$scope.animation = true;
+		Post.GetUserPost(user)
+            .success(function(data)
+			{
+
+				$scope.getAndObjectify(data);
+				$scope.animation = false;
+            });
+	}
+	
+	
 	//We get posts with the specific tag
 	$scope.GetTags = function(id){
-		$scope.ActiveFunction = id ? $scope.ActiveFunction : $scope.GetTags;
 		$scope.animation = true;
 		//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
+		$scope.ActiveFunction = id ? $scope.ActiveFunction : $scope.GetTags;		
 		id = id ? id.replace("#", "") : $('.container').data('tag');
 		Post.GetTags(id)
 			.success(function(data){
-				$scope.custom = id;
 				$scope.getAndObjectify(data);
+				$scope.custom = id;
 				$scope.animation = false;
 			});
 	};

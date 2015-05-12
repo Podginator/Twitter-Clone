@@ -53,6 +53,11 @@ angular.module('postService', [])
 		 GetPost: function(id) 	
 		{
 			return $http.get('/api/posts/' + id);
+		},
+		
+		GetUserPost: function(user)
+		{
+			return $http.get('/api/posts/user/' + user);
 		}
 		
 	}

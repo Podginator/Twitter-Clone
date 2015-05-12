@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Model\User;
 
 Route::get('/', 'HomeController@index');
 //TODO Change these to Auth 
@@ -18,8 +19,6 @@ Route::get('/login' ,'UserController@LoginPage');
 Route::post('/login', 'UserController@LoginUser');
 Route::get('/register', 'UserController@RegisterPage');
 Route::post('/register', 'UserController@RegisterUser');
-
-Route::get('/posts', 'PostsController@homepage');
 
 //We just make the View inside the routes, no logic needs to be done as that is handled in angular
 Route::get('/posts', function(){
@@ -31,8 +30,12 @@ Route::get('/tag/{tags}', function($tag){
 	return View::make('posts.Tags')->with('tag', $tag);
 });
 
-//Unused, delete? 
-Route::get('/api/user/current', 'UserController@GetCurrentUser');
+
+Route::bind('user', function($value, $route){
+	return User::where('username', $value)->first();
+});
+
+Route::get('/{user}', 'UserController@profilePage');
 
 //This is where the API stuff happens
 Route::group(array('prefix' => 'api'), function(){
@@ -55,7 +58,6 @@ Route::get('/api/posts/user/{username}', 'PostsController@GetUserPosts');
 
 // Route to specific post:
 Route::get('/api/posts/{postID}', 'PostsController@GetPost');
-
 Route::get('/posts/{id}', function($postID){
 	return View::make('posts.post')->with('postID', $postID);
 });

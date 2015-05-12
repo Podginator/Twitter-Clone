@@ -2,6 +2,7 @@
  
 use Auth, View, Response, Input;
 use App\Model\FollowingEvent;
+use App\Model\User;
 class UserController extends Controller {
 
 	/*
@@ -71,6 +72,12 @@ class UserController extends Controller {
             return view('login.loginform');
         }
     }
+	
+	public function profilePage(User $user)
+	{
+		$data['user'] = $user;
+		return View::make('users.page', $data);
+	}
 	
 	public function GetCurrentUser()
 	{

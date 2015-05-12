@@ -8,9 +8,12 @@
 			<p> User Bio </p>
 	</div>
 	
-	<div class="panel-body">
-		@include('users.forms')
-	</div>
+	@if(Auth::user() == $user)
+	
+		<div class="panel-body">
+			@include('users.forms')
+		</div>
+	@endif
 		
 </div>
 
