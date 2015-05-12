@@ -55,6 +55,8 @@ angular.module('postCtrl', [])
 		};
 	}
 	
+	$scope.ActiveFunction = null;
+	
 	//This is where we get the default 
 	$scope.GetDefault = function(){
 		$scope.animation = true;
@@ -66,6 +68,8 @@ angular.module('postCtrl', [])
 				$scope.animation = false;
 				$scope.custom = false;
 			});
+		
+		$scope.ActiveFunction = $scope.GetDefault;
 	}
 	
 	//We should extrapalote this to avoid code reuse.
@@ -147,6 +151,7 @@ angular.module('postCtrl', [])
 	
 	//We get posts with the specific tag
 	$scope.GetTags = function(id){
+		$scope.ActiveFunction = id ? $scope.ActiveFunction : $scope.GetTags;
 		$scope.animation = true;
 		//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
 		id = id ? id.replace("#", "") : $('.container').data('tag');

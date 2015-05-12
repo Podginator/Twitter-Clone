@@ -23,6 +23,10 @@
     display: block;
 }
 
+.btn-file:hover{
+  background-color: #286090 !important;
+}
+
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;

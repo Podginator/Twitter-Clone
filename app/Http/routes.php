@@ -49,6 +49,7 @@ Route::group(array('prefix' => 'api'), function(){
 });
 
 Route::get('/api/posts/{tag}', 'PostsController@GetTag');
+Route::get('/api/posts/user/{username}', 'PostsController@GetUserPosts');
 
 /*---------------------------------------------------------------------------*/
 
