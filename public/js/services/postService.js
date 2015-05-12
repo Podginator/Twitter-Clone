@@ -33,7 +33,6 @@ angular.module('postService', [])
 		},
 		//Save grabs some data, and POSTs it to the server. This fires the store() event
 		save: function(data){
-			console.log(data);
 			return $http({
 					method: 'POST',
 					url: '/api/posts',

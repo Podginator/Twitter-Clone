@@ -82,6 +82,8 @@ angular.module('postCtrl', [])
 				//We then reset the postInputs
 				$('.postInput').val('');
 				$("#imageUploaded").val('');
+				$("#preview").hide();
+				document.getElementById("preview").src = '';
 			})
 			.error(function(data){
 						alert("Error!");
