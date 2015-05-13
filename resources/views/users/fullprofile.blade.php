@@ -76,7 +76,7 @@
     		<div id="followEvents" class="panel-collapse collapse">
       			<div class="panel-body">
      				@foreach (Auth::user()->followingEvent as $event)
-						<p><a href="{{url('/tag/'.$event->hashtag)}}"> {{$event->hashtag}} </a> <span style="float:right;"> Delete! </span></p>
+						<p><a href="{{url('/tag/'.$event->hashtag)}}"> {{$event->hashtag}} </a> <span style="float:right;"> <a href="{{url('/user/tag/delete/'.$event->id)}}"> Delete! </a> </span></p>
 					@endforeach
       		</div>
     </div>

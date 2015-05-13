@@ -32,7 +32,7 @@ Route::get('/tag/{tags}', function($tag){
 	return View::make('posts.Tags')->with('tag', $tag);
 });
 Route::get('/{user}', 'UserController@userPage');
-Route::get('/api/posts/{postID}', 'PostsController@GetPost');
+Route::get('/api/post/{postID}', 'PostsController@GetPost');
 Route::get('/posts/{id}', function($postID){
 	return View::make('posts.post')->with('postID', $postID);
 });

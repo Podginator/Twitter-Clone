@@ -51,6 +51,7 @@ angular.module('postCtrl', [])
 		$scope.custom=false;
 		$scope.posts = [];
 		for (var i in data) {
+			console.log(data[i]);
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
 			$scope.posts[i].createLinks();
 		};
@@ -173,6 +174,7 @@ angular.module('postCtrl', [])
 		id = id ? id.replace("#", "") : $('.container').data('tag');
 		Post.GetTags(id)
 			.success(function(data){
+				console.log(data);
 				$scope.getAndObjectify(data);
 				$scope.custom = id;
 				$scope.animation = false;

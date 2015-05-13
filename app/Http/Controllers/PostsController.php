@@ -81,6 +81,7 @@ class PostsController extends Controller {
 	//Get Specific Post
 	public function GetPost($id) 
 	{
+		echo "Srsly";
 		return Response::json(Posts::getPost($id));
 	}
 }
