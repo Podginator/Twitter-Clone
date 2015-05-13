@@ -16,10 +16,8 @@ angular.module('postCtrl', [])
 		},
 		//Every 'tick' it sends a notify request which we then use to update the post counter.
 		function(notify){
-			console.log("Tick");
 			if(!checkFirst){
 				$scope.postCounter = notify.data.length - prevCounter;
-				console.log($scope.postCounter);
 			}else{
 				prevCounter = notify.data.length;
 				checkFirst = false;
@@ -51,7 +49,6 @@ angular.module('postCtrl', [])
 		$scope.custom=false;
 		$scope.posts = [];
 		for (var i in data) {
-			console.log(data[i]);
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
 			$scope.posts[i].initialize();
 		};
@@ -87,9 +84,15 @@ angular.module('postCtrl', [])
 				}
 				//We then reset the postInputs
 				$('.postInput').val('');
-				$("#imageUploaded").val('');
+				//This is ridiculous. Workaround for Firefox.
+				var control = document.getElementById("imageUploaded");
+				control.value = null;
+				control = $("#imageUploaded");
+				control.replaceWith(control = control.clone( true ));
 				$("#preview").hide();
 				document.getElementById("preview").src = '';
+				$scope.imageData = {};
+				$scope.postData.imgID = null;
 			})
 			.error(function(data){
 						alert("Error!");
@@ -120,7 +123,7 @@ angular.module('postCtrl', [])
 				});
 		}
 		else{
-			//If there's no image then we post the normal PostToServer
+			$scope.postData.imgID = null;
 			PostToServer($scope.postData);
 		}
 	};
@@ -174,7 +177,6 @@ angular.module('postCtrl', [])
 		id = id ? id.replace("#", "") : $('.container').data('tag');
 		Post.GetTags(id)
 			.success(function(data){
-				console.log(data);
 				$scope.getAndObjectify(data);
 				$scope.custom = id;
 				$scope.animation = false;
