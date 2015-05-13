@@ -51,10 +51,11 @@ Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 /*---------------------------------------------------------------------------*/
 
 // Route to specific post:
-Route::get('/api/posts/{postID}', 'PostsController@GetPost');
+Route::get('/api/posts/{id}', 'PostsController@GetPost');
 
-Route::get('/posts/{id}', function($postID){
-	return View::make('posts.post')->with('postID', $postID);
+Route::get('/posts/{id}', function($id)
+{
+	return View::make('posts.thisPost')->with('id', $id);
 });
 
 /*---------------------------------------------------------------------------*/

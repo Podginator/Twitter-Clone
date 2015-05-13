@@ -83,15 +83,20 @@ class Posts extends Model {
 			->get();
 	}
 	
-	public static function getUserPost()
+	public static function GetPost($id)
 	{
-		echo "clicked on get user post!";
+		// Get this posts from a user (id):
+		/*  return Post::where('id', $id)
+			->from('posts')
+			->select('id')
+			->get(); */
+		return DB::raw('SELECT id FROM posts WHERE id = $id');
 		
 	}
 	
 	public static function GetTagged($id)
 	{
-		return Posts::where('text', 'RLIKE', '(#'.$id.')[[:>:]]')
+		return  Posts::where('text', 'RLIKE', '(#'.$id.')[[:>:]]')
 			->join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
 			})

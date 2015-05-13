@@ -43,7 +43,7 @@ angular.module('postService', [])
 		},
 		//Fires the destroy even and gets post id.
 		destroy: function(id){
-			return $http.delete('/api/posts/' + id);
+			return $http.delete('/api/posts/'+id);
 		},
 		//We get the tag from the api at PostController@getTags
 		GetTags: function(tag){
@@ -51,8 +51,9 @@ angular.module('postService', [])
 			return $http.get('/api/posts/'+tag);
 		},
 		// Get the post id from the API at PostController@getPost
-		 GetPost: function(id) 	
+		GetPost: function(id) 	
 		{
+			console.log('postService, GetPost, ID: ' + id);
 			return $http.get('/api/posts/' + id);
 		}
 		

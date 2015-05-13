@@ -7,9 +7,12 @@
         <p compile="post.adText" class = "panel-body"><% posts.adText %></p>
 		<div class="img-responsive" style="padding-bottom:15px" ng-if="post.url"> <img class="img-responsive center-block" src="{{asset('<% post.url %>')}}"> </div>
         <p ng-if="post.editable" style="float:right; margin-right:10px;"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
-		<p><a href = "#" ng-click = "getPost(post.id)" class = "text-muted">Display post</a></p>
+		
+		<div><a href = "#" ng-click = "GetPost(post.id)" style = "float: right; padding-right: 10px;" class = "text-muted">Display post</a></div>
        
 		<div class ="tags" >
 			<p style="padding-left:15px"> <small> Tags <span ng-repeat= "tags in post.getTags()"><a href="#" ng-click="GetTags(tags)" > <% tags %> </a> </span></small></p>
 		</div>
+		
+		
 </div>
