@@ -2,7 +2,7 @@
 <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 
 <div class="panel panel-default" ng-repeat="post in posts" ng-hide="animation">
-        <div class="panel-heading"><% post.username %></div>
+        <div class="panel-heading text-muted"><a class="text-muted" href="{{url('/<% post.username %>') }}"><% post.username %></a></div>
         <p compile="post.adText" class = "panel-body"><% posts.adText %></p>
 		<div class="img-responsive" style="padding-bottom:15px" ng-if="post.url"> <img class="img-responsive center-block" src="{{asset('<% post.url %>')}}"> </div>
         <p ng-if="post.editable" style="float:right; margin-right:10px;"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>

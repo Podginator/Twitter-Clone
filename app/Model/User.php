@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['username', 'email', 'password'];
+	protected $fillable = ['username', 'email', 'password', 'profileId', 'biography'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -38,14 +38,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function following()
 	{
-		return $this->hasMany('following', 'userid');
+		return $this->hasMany('App\Model\Following', 'userid');
 	}
 
 	public function posts()
 	{
-		return $this->hasMany('posts', 'userId');
+		return $this->hasMany('App\Model\Posts', 'userId');
 	}
 
+	public function images()
+	{
+		return $this->hasOne('App\Model\Images', 'id', 'profileId');
+	}
 
 	//Get the following events we have.
 	public function getFollowingEvents()

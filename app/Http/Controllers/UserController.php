@@ -1,21 +1,13 @@
 <?php namespace App\Http\Controllers;
  
-use Auth, View, Response, Input;
+use Auth, View, Response, Input, File;
 use App\Model\FollowingEvent;
 use App\Model\User;
+use App\Model\Images;
+use App\Http\Requests\ProfileRequest;
+use ValidationService;
 
 class UserController extends Controller {
-
-	/*
-	|--------------------------------------------------------------------------
-	| Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders your application's "dashboard" for users that
-	| are authenticated. Of course, you are free to change or remove the
-	| controller as you wish. It is just here to get your app started!
-	|
-	*/
 
 	/**
 	 * Create a new controller instance.
@@ -60,21 +52,8 @@ class UserController extends Controller {
 		//Otherwise, we'll return a fail response. 
 		return $fail;
 	}
-    
-    public function LoginPage()
-    {
-        //Currently just stubs.
-        if(Auth::user())
-        {
-            return view('login.loggedin');
-        }
-        else
-        {
-            return view('login.loginform');
-        }
-    }
 	
-	public function profilePage(User $user)
+	public function userPage(User $user)
 	{
 		if($user->id == null)
 		{
@@ -85,9 +64,51 @@ class UserController extends Controller {
 		return View::make('users.page', $data);
 	}
 	
+	public function profilePage()
+	{
+		return View::make('users.fullprofile');
+	}
+	
 	public function GetCurrentUser()
 	{
 		 return Response::json(Auth::user());
 	}
-
+	
+	public function updateProfile(ProfileRequest $response)
+	{
+		$user = Auth::user();
+		if($user)
+		{
+			$id = Input::file('Image') ?  $this->uploadImage(Input::file('Image')) : $user->images->id;
+			$user->fill(array(
+				"profileId" => $id,
+				"biography" => Input::get('bio')
+			));
+			$user->save();
+		}
+		
+		return redirect('/profile');
+	}
+	
+	private function uploadImage($file)
+	{
+		$serverDir =  "uploaded_images/".Auth::user()->username;
+		$dir = public_path($serverDir);
+		if( File::exists($dir) or File::makeDirectory($dir) )
+		{
+			$extension = $file->getClientOriginalExtension();
+  			$filename = 'profile.'.$extension;
+		    $path = $dir."/".$filename;
+			//Get Move the file to the directory.
+			$file->move($dir,$filename);
+			//Create an image with a url
+			$newImage = Images::create(array(
+					"url"=> ''.$serverDir.'/'.$filename
+			));
+			
+			return $newImage->id;
+		}
+		
+		return null;
+	}
 }
