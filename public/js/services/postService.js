@@ -142,7 +142,7 @@ angular.module('postService', [])
 		
 		if(yt && yt[0].length > 0)
 		{
-			this.ytEmbed  = '<iframe style="width:100%; height:420px;" src="http://www.youtube.com/embed/' + yt[1] + '" frameborder="0" allowfullscreen>';
+			this.ytEmbed  = '<iframe class="video" src="http://www.youtube.com/embed/' + yt[1] + '" frameborder="0" allowfullscreen>';
 		}
 	}
 	Post.prototype.initialize = function(){
