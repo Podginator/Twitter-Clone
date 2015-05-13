@@ -53,7 +53,7 @@ angular.module('postCtrl', [])
 		for (var i in data) {
 			console.log(data[i]);
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
-			$scope.posts[i].createLinks();
+			$scope.posts[i].initialize();
 		};
 	}
 	
