@@ -71,14 +71,21 @@
   border-radius:0px;
 }
 
-.panel-heading .accordion-toggle:after {
+a > .panel-heading .accordion-toggle:after {
     /* symbol for "opening" panels */
     font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
     content: "\e114";    /* adjust as needed, taken from bootstrap.css */
     float: right;        /* adjust as needed */
     color: grey;         /* adjust as needed */
 }
-.panel-heading .accordion-toggle.collapsed:after {
+a > .panel-heading .accordion-toggle.collapsed:after {
     /* symbol for "collapsed" panels */
     content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 }
+
+ a > .panel-heading
+ {
+  color: #000;
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+ }

@@ -68,15 +68,15 @@
 	<div class="row" id="accordian">
 		<div class="col-md-8 col-md-offset-2">
 			<div class="panel panel-default">
-		    <div class="panel-heading">
-		        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#followEvents">
-		          Following Events
-        		</a>
-    		</div>
+	        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" class="panel-heading" href="#followEvents">
+			    <div class="panel-heading">
+			          Following Events
+	    		</div>
+			</a>
     		<div id="followEvents" class="panel-collapse collapse">
       			<div class="panel-body">
      				@foreach (Auth::user()->followingEvent as $event)
-						<p><a href="{{url('/tag/'.$event->hashtag)}}"> {{$event->hashtag}} </a> <span style="float:right;"> <a href="{{url('/user/tag/delete/'.$event->id)}}"> Delete! </a> </span></p>
+						<p><a href="{{url('/tag/'.$event->hashtag)}}"> {{$event->hashtag}} </a> <span style="float:right;"> <a href="{{url('/api/tag/delete/'.$event->id)}}"> Delete! </a> </span></p>
 					@endforeach
       		</div>
     </div>

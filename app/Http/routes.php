@@ -36,6 +36,7 @@ Route::get('/api/post/{postID}', 'PostsController@GetPost');
 Route::get('/posts/{id}', function($postID){
 	return View::make('posts.post')->with('postID', $postID);
 });
+Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
 
 
 

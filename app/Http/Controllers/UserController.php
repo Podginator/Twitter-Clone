@@ -111,4 +111,21 @@ class UserController extends Controller {
 		
 		return null;
 	}
+	
+	public function removeUserTag($id)
+	{
+		$tag = FollowingEvent::where('id', '=', $id)->first();
+		
+		//Do we have permission to do so?
+		if($tag->userid == Auth::user()->id)
+		{
+			$tag->delete();
+			return redirect('/profile');
+		}
+		
+		abort(404);
+		return false;
+		
+	}
+	
 }
