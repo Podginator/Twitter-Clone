@@ -112,12 +112,12 @@ a > .panel-heading .accordion-toggle.collapsed:after {
 
 .wide {
   width:100%;
-  height:600px;
-  min-height: 100%;
-
+  height:100%;
+  top:0px;
+  position: absolute;
+  z-index:-10;
   background-image:url('../imgs/bg.jpg');
   background-size:cover;
-  margin-top:-20px;
 }
 
 .wide img {
@@ -125,6 +125,7 @@ a > .panel-heading .accordion-toggle.collapsed:after {
 }
 
 .title {
+  margin-top:40px;
   color:#fff;
   font-weight:400;
   font-size:25pt;
@@ -137,6 +138,7 @@ a > .panel-heading .accordion-toggle.collapsed:after {
 {
   width:100%;
   height:600px;
+  height:100%;
       background-color:rgba(0,0,0,0.45);
 }
 
