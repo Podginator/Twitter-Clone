@@ -1,17 +1,24 @@
 @extends('template.nav')
 
-@section('content')
-<div class="container">
-	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default">
-				<div class="panel-heading"></div>
 
-				<div class="panel-body">
-					
+
+@section('content')
+
+	<div class="wide">
+		<div class="home">
+			<div class="row">
+			  	<div class="col-xs-5"></div>
+			    <div class="col-xs-2 title">Stories!</div>
+			    <div class="col-xs-5"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-3 col-xs-offset-7 homelogin">
+			  		@include('auth.loginform')
 				</div>
 			</div>
+			
 		</div>
 	</div>
-</div>
+	
 @endsection
