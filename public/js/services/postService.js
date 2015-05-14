@@ -33,7 +33,6 @@ angular.module('postService', [])
 		},
 		//Save grabs some data, and POSTs it to the server. This fires the store() event
 		save: function(data){
-			console.log(data);
 			return $http({
 					method: 'POST',
 					url: '/api/posts',
@@ -47,7 +46,6 @@ angular.module('postService', [])
 		},
 		//We get the tag from the api at PostController@getTags
 		GetTags: function(tag){
-			console.log(tag);
 			return $http.get('/api/posts/'+tag);
 		},
 		// Get the post id from the API at PostController@getPost
@@ -55,6 +53,11 @@ angular.module('postService', [])
 		{
 			console.log('postService, GetPost, ID: ' + id);
 			return $http.get('/api/posts/' + id);
+		},
+		
+		GetUserPost: function(user)
+		{
+			return $http.get('/api/posts/user/' + user);
 		}
 		
 	}
@@ -63,7 +66,6 @@ angular.module('postService', [])
 //A simple factory that sends a request every 15seconds to inform the client
 //as to whether there are any new posts.
 .factory('PostCounter', function($http, $interval, $q, Post){
-	var posts = {};
 	var deferred = $q.defer();
 	
 	//Set an interval every 5 minutes. 
@@ -104,28 +106,52 @@ angular.module('postService', [])
 	    this.updated_at = updated_at;
 	    this.id = id;
 		this.url = url;
+		this.ytEmbed = null;
   	}
 
 	//We get the tags here, by matching the tags against a regex statement.
-	  Post.prototype.getTags = function() {
-	      return (this.text.match(/#(\[[\w\s]+\])|#(\w+)/g)) ? this.text.match(/#(\[[\w\s]+\])|#(\w+)/g) : [];
-	  };
-	  
-	  //We create a tag out of these statements
-	  Post.prototype.createLinks = function(){
-		  var tags = this.getTags();
-		
-		  //We need to escape the HTML, because we are trusting this as html. 
-		  var text = this.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-		  //this is that Adjusted Text, we do this so that we don't modify the original object (If it needs to be used elsewhere.) 
+	Post.prototype.getTags = function() {
+	  return (this.text.match(/#(\[[\w\s]+\])|#(\w+)/g)) ? this.text.match(/#(\[[\w\s]+\])|#(\w+)/g) : [];
+	};
+	
+	//We create a tag out of these statements
+	Post.prototype.createLinks = function(){
+	  var tags = this.getTags();
+	
+	  //We need to escape the HTML, because we are trusting this as html. 
+	  var text = this.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+	  //this is that Adjusted Text, we do this so that we don't modify the original object (If it needs to be used elsewhere.) 
+	  this.adText = text;
+	  //We then go through tags and replace things with lings.
+	  for(var tag in tags){
+		  var str = tags[tag];
+		  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
 		  this.adText = text;
-		  //We then go through tags and replace things with lings.
-		  for(var tag in tags){
-			  var str = tags[tag];
-			  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
-			  this.adText = text;
-		  }
-  }
-  
-  return Post;
+	  }
+	}
+	
+	Post.prototype.hasYouTube = function(){
+		if(this.url != null || this.url != undefined)
+		{
+			//We already have some media in this post and we therefore don't need more.
+			return;
+		}
+		
+		//Next we detect if there's an applicable youtube link.
+		var regex = /\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i;
+		var yt = regex.exec(this.text);
+		
+		if(yt && yt[0].length > 0)
+		{
+			this.ytEmbed  = '<iframe class="video" src="http://www.youtube.com/embed/' + yt[1] + '" frameborder="0" allowfullscreen>';
+		}
+	}
+	Post.prototype.initialize = function(){
+		this.createLinks();
+		this.hasYouTube();
+	}
+
+
+		
+ 	return Post;
 });

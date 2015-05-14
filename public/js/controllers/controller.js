@@ -16,10 +16,8 @@ angular.module('postCtrl', [])
 		},
 		//Every 'tick' it sends a notify request which we then use to update the post counter.
 		function(notify){
-			console.log("Tick");
 			if(!checkFirst){
 				$scope.postCounter = notify.data.length - prevCounter;
-				console.log($scope.postCounter);
 			}else{
 				prevCounter = notify.data.length;
 				checkFirst = false;
@@ -48,12 +46,15 @@ angular.module('postCtrl', [])
 	//This creates Post Objects from the data we get
 	$scope.getAndObjectify = function(data)
 	{
+		$scope.custom=false;
 		$scope.posts = [];
 		for (var i in data) {
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
-			$scope.posts[i].createLinks();
+			$scope.posts[i].initialize();
 		};
 	}
+	
+	$scope.ActiveFunction = null;
 	
 	//This is where we get the default 
 	$scope.GetDefault = function(){
@@ -66,6 +67,8 @@ angular.module('postCtrl', [])
 				$scope.animation = false;
 				$scope.custom = false;
 			});
+		
+		$scope.ActiveFunction = $scope.GetDefault;
 	}
 	
 	//We should extrapalote this to avoid code reuse.
@@ -81,7 +84,15 @@ angular.module('postCtrl', [])
 				}
 				//We then reset the postInputs
 				$('.postInput').val('');
-				$("#imageUploaded").val('');
+				//This is ridiculous. Workaround for Firefox.
+				var control = document.getElementById("imageUploaded");
+				control.value = null;
+				control = $("#imageUploaded");
+				control.replaceWith(control = control.clone( true ));
+				$("#preview").hide();
+				document.getElementById("preview").src = '';
+				$scope.imageData = {};
+				$scope.postData.imgID = null;
 			})
 			.error(function(data){
 						alert("Error!");
@@ -112,7 +123,7 @@ angular.module('postCtrl', [])
 				});
 		}
 		else{
-			//If there's no image then we post the normal PostToServer
+			$scope.postData.imgID = null;
 			PostToServer($scope.postData);
 		}
 	};
@@ -140,18 +151,33 @@ angular.module('postCtrl', [])
 	
 	/*-------------------*/
 	
+	$scope.GetUserPost = function(user)
+	{
+		$scope.ActiveFunction = user ? $scope.ActiveFunction : $scope.GetUserPost;		
+		user = user ? user : $('.container').data('user');
+		$scope.animation = true;
+		Post.GetUserPost(user)
+            .success(function(data)
+			{
+
+				$scope.getAndObjectify(data);
+				$scope.animation = false;
+            });
+	}
+	
+	
 	//We get posts with the specific tag
 	$scope.GetTags = function(id){
 		$scope.animation = true;
 		//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
+		$scope.ActiveFunction = id ? $scope.ActiveFunction : $scope.GetTags;		
 		id = id ? id.replace("#", "") : $('.container').data('tag');
 		Post.GetTags(id)
 			.success(function(data){
-				$scope.custom = id;
 				$scope.getAndObjectify(data);
+				$scope.custom = id;
 				$scope.animation = false;
 			});
 	};
-	
-	
 });
+

@@ -18,9 +18,18 @@ class CreateUsersTable extends Migration {
 			$table->string('email')->unique();
 			$table->string('username')->unique();
 			$table->string('password', 60);
+			$table->string('biography', 255);
+			$table->integer('profileId')->unsigned()->nullable();
 			$table->rememberToken();
 			$table->timestamps();
 		});
+		
+		Schema::table('users', function(Blueprint $table)
+	    {
+	        $table->foreign('profileId')->references('id')->on('images');
+	    });
+		
+		
 	}
 
 	/**

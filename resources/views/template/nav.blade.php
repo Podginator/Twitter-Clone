@@ -7,6 +7,7 @@
 	<title>@yield('title')</title>
 
 	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	<link href="{{ asset('/css/main.css') }}" rel="stylesheet">
 
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
@@ -21,8 +22,11 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->
+	<script src="{{ asset('/js/main.js') }} "></script> <!-- load our controller -->
 	<script src="{{ asset('/js/controllers/controller.js') }} "></script> <!-- load our controller -->
+	<script src="{{ asset('/js/controllers/userController.js') }} "></script> <!-- load our controller -->
     <script src="{{ asset('/js/services/postService.js') }}"></script> <!-- load our service -->
+	<script src="{{ asset('/js/services/userService.js') }}"></script> <!-- load our service -->
     <script src="{{ asset('/js/app.js') }}"></script> <!-- load our application -->
     
 </head>
@@ -54,6 +58,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->username }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{{ url('/'.Auth::user()->username) }}">My Page</a></li>
+								<li><a href="{{ url('/profile') }}">Edit Profile</a></li>
 								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
 							</ul>
 						</li>

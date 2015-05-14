@@ -1,7 +1,7 @@
 @extends('template.nav')
 
 @section('title') 
-	Stories: Posts 
+	{{$user->username}}
 @endsection
 
 @section('angularApp')
@@ -10,11 +10,11 @@
 
 @section('content')
 
-<div class="container" ng-controller="PostController"  ng-init="GetDefault()">
+<div class="container" ng-controller="PostController"  data-user="{{ $user->username }}"  ng-init="GetUserPost()">
 	<div class="row">
-		@if(Auth::user())
+		@if($user)
 			<div class="col-md-4">
-				@include('users.profile', array("user"=>Auth::user()))
+				@include('users.profile', array("user"=>$user))
 			</div>
 			<div class="col-md-8 ">
 		@else
@@ -22,11 +22,7 @@
 		@endif
 
 			<div class="panel panel-default postcontainer">
-				<div class="panel-heading">Your Posts</div>
-				
-				@if (Auth::user())
-					@include('posts.form')
-				@endif
+				<div class="panel-heading">{{$user->username}}s Posts</div>
 				
 				
 				<div class="panel panel-default" ng-controller="PostCountCtrl" ng-click="GetDefault(); ResetCounter()" ng-show="postCounter > 0"> New Posts <% postCounter %> </div>
