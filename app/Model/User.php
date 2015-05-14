@@ -63,8 +63,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function getFollowing()
 	{
-		return array_map(function($follower){
-			return $follower->followingid;
-		}, $this->following);
+		$following = array();
+        foreach ($this->following as $followObject) {
+            $following[] = $followObject->followingid;
+        }
+        return $following;
 	}
 }

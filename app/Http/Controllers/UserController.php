@@ -2,6 +2,7 @@
  
 use Auth, View, Response, Input, File;
 use App\Model\FollowingEvent;
+use App\Model\Following;
 use App\Model\User;
 use App\Model\Images;
 use App\Http\Requests\ProfileRequest;
@@ -110,6 +111,19 @@ class UserController extends Controller {
 		}
 		
 		return null;
+	}
+	
+	public function SubscribePerson(User $user)
+	{
+		$success =  Response::json(array('success' => true));
+		$fail =  Response::json(array('success' => false));
+		
+		$follow = Following::create(array(
+			"userid" => Auth::user()->id,
+			"followingid" => $user->id
+		));
+		
+		return $follow->id ? $success : $fail;
 	}
 	
 	public function removeUserTag($id)

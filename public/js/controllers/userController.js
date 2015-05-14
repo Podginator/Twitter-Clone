@@ -3,7 +3,6 @@ angular.module('userCtrl', [])
 .controller('UserController', function($scope,$http,User,Images){
 	$scope.followData = {};
 	$scope.submitFollow = function(){
-		console.log("TurnDownForWhat");
 		User.save($scope.followData)
 			.success(function(data){
 				console.log("Err");
@@ -17,5 +16,17 @@ angular.module('userCtrl', [])
 				}
 			})
 	};
+	
+	$scope.submitUser = function(id){
+		console.log(id);
+		User.saveUser(id)
+			.success(function(data){
+				if(data.success){
+					//Then we can unhide all the stuff.
+					$('.'+id+'-nf').addClass('ng-hide');
+					$('.'+id+'-f').removeClass( "ng-hide" );
+				}
+			});
+	}
 
 });

@@ -60,7 +60,8 @@ Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 /*---------------------------------------------------------------------------*/
 
 // Route to specific post:
-Route::get('/api/posts/{id}', 'PostsController@GetPost');
+Route::get('/api/post/{id}', 'PostsController@GetPost');
+Route::get('/api/user/follow/{user}', 'UserController@SubscribePerson');
 
 Route::get('/posts/{id}', function($id)
 {

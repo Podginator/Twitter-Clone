@@ -1,9 +1,21 @@
 <p class="text-center" ng-if="custom" ng-click="ActiveFunction()">Posts with Tag: <b> <% custom %> </b> showing. Click to go back</p>
 <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 
-<div class="panel panel-default" ng-repeat="post in posts" ng-hide="animation">
-        <div class="panel-heading text-muted"><a class="text-muted" href="{{url('/<% post.username %>') }}"><% post.username %></a></div>
-        <p compile="post.adText" class = "panel-body"><% posts.adText %></p>
+<div class="panel panel-default" ng-repeat="post in posts" ng-hide="animation" ng-controller="UserController">
+        <div class="panel-heading text-muted" >
+			<a class="text-muted" href="{{url('/<% post.username %>') }}">
+				<% post.username %>
+			</a> 
+			@if (Auth::user())
+				<span ng-show="<% post.following %> == 0 && <% post.editable %> == 0" class="<% post.username %>-nf addIndicator" ng-click="submitUser(post.username)">
+					<img height='16' width="16" src="{{asset('/imgs/add.png')}}"> 
+				</span>
+				<span class="<% post.username %>-f addIndicator" ng-show="<% post.following %> && <% post.editable %> == 0">
+					<img height='16' width="16" src="{{asset('/imgs/added.png')}}">  
+				</span>
+			@endif
+		</div>
+        <p compile="post.adText" class = "panel-body"><% post.adText %></p>
 			
 		<div class="img-responsive" style="padding-bottom:15px" ng-if="post.url"> 
 			<img class="img-responsive center-block" src="{{asset('<% post.url %>')}}"> 

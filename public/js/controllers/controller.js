@@ -49,12 +49,14 @@ angular.module('postCtrl', [])
 		$scope.custom=false;
 		$scope.posts = [];
 		for (var i in data) {
+			console.log(data[i])
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
 			$scope.posts[i].initialize();
 		};
 	}
 	
 	$scope.ActiveFunction = null;
+	
 	
 	//This is where we get the default 
 	$scope.GetDefault = function(){

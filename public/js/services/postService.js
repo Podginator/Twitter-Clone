@@ -106,6 +106,7 @@ angular.module('postService', [])
 	    this.updated_at = updated_at;
 	    this.id = id;
 		this.url = url;
+		this.following = null;
 		this.ytEmbed = null;
   	}
 

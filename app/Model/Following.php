@@ -1,9 +1,9 @@
-<?php namespace App;
+<?php namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Following extends Model {
-
+	public $timestamps = false; 
 	protected $table = "following";
-
+	protected $fillable = array('userid', 'followingid');
 }
