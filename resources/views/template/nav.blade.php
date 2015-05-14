@@ -27,7 +27,9 @@
 	<script src="{{ asset('/js/controllers/userController.js') }} "></script> <!-- load our controller -->
     <script src="{{ asset('/js/services/postService.js') }}"></script> <!-- load our service -->
 	<script src="{{ asset('/js/services/userService.js') }}"></script> <!-- load our service -->
+			<script src="{{ asset('/js/dirPagination.js') }}"></script> <!-- load our application -->
     <script src="{{ asset('/js/app.js') }}"></script> <!-- load our application -->
+
     
 </head>
 	@yield('angularApp')
