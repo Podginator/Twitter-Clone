@@ -67,12 +67,6 @@ class Posts extends Model {
 			->get();
 	}
 	
-	public static function getPost()
-	{
-		echo "clicked on get user post!";
-		
-	}
-	
 	public static function getUserPosts($user)
 	{	
 		return Posts::select(array(
@@ -88,7 +82,7 @@ class Posts extends Model {
 			->get();
 	}
 	
-	public static function getTagged($id)
+	public static function getPost($id)
 	{
 		// Get this posts from a user (id):
 		/*  return Post::where('id', $id)
