@@ -62,7 +62,6 @@
             }
             var itemsPerPageFilterRemoved = match[2].replace(filterPattern, '');
             var collectionGetter = $parse(itemsPerPageFilterRemoved);
-
             addNoCompileAttributes(tElement);
 
             // If any value is specified for paginationId, we register the un-evaluated expression at this stage for the benefit of any
@@ -79,7 +78,6 @@
 
                 var repeatExpression = getRepeatExpression(expression, paginationId);
                 addNgRepeatToElement(element, attrs, repeatExpression);
-
                 removeTemporaryAttributes(element);
                 var compiled =  $compile(element);
 
@@ -170,6 +168,7 @@
                     angular.element(el).removeAttr('dir-paginate-no-compile');
                 }
             });
+            
             element.eq(0).removeAttr('dir-paginate-start').removeAttr('dir-paginate').removeAttr('data-dir-paginate-start').removeAttr('data-dir-paginate');
             element.eq(element.length - 1).removeAttr('dir-paginate-end').removeAttr('data-dir-paginate-end');
         }
@@ -430,8 +429,8 @@
                 }
                 end = start + itemsPerPage;
                 paginationService.setItemsPerPage(paginationId, itemsPerPage);
-
                 return collection.slice(start, end);
+
             } else {
                 return collection;
             }
