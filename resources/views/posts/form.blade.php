@@ -10,7 +10,7 @@
 <form name="postForm" ng-submit="submitPost()" enctype="multipart/form-data">
 	<div class="input-group panel-body">
 	   <span class="input-group-btn btn btn-default btn-file">
-			<input type="file" ng-model="imageData.image"  multiple accept='image/*|audio/*|video/*' name="image"/ onchange="PreviewImage()"  id="imageUploaded" style="padding-right:50px">
+			<input type="file"  ng-Change="FileChange()"" ng-model="imageData.image"  multiple accept='image/*|audio/*|video/*' name="image"/ onchange="PreviewImage()"  id="imageUploaded" style="padding-right:50px">
 		</span>
 	    <input 
 			type="text" 

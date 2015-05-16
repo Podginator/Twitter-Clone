@@ -44,6 +44,17 @@ angular.module('postCtrl', [])
 	$scope.posts = [];
 	$scope.errors = [];
 	
+	$scope.FileChange = function()
+	{
+		$scope.errors = [];
+		var file =  postForm.image.files[0]
+		
+		if(['mp4', 'jpg', 'png','gif'].indexOf(file.name.split('.').pop()) == -1 )
+		{
+			$scope.errors.push("The file you've chosen doesn't have the right extension");
+		}
+	}
+	
 	//This creates Post Objects from the data we get
 	$scope.getAndObjectify = function(data)
 	{
