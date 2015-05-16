@@ -21,8 +21,8 @@
 			
 		</div>
 		<p ng-if="post.editable" style="float:right; margin-right:10px;"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
-		
-		<div><a href = "#" ng-click = "GetPost(post.id)" style = "float: right; padding-right: 10px;" class = "text-muted">Display post</a></div>
+
+		<div><a href = "{{ url( 'posts/<% post.id %>') }}" style = "float: right; padding-right: 10px;" class = "text-muted">Display post</a></div>
        
 		<div class ="tags" >
 			<p style="padding-left:15px"> <small> Tags <span ng-repeat= "tags in post.getTags()"><a href="#" ng-click="GetTags(tags)" > <% tags %> </a></span></small></p>

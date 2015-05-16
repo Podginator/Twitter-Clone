@@ -98,7 +98,7 @@ class Posts extends Model {
 			->from('posts')
 			->select('id')
 			->get(); */
-		return DB::raw('SELECT id FROM posts WHERE id = $id');
+		return DB::raw('SELECT * FROM posts WHERE id = $id');
 		
 	}
 	
