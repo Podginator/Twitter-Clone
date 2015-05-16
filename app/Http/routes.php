@@ -60,15 +60,13 @@ Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 /*---------------------------------------------------------------------------*/
 
 // Route to specific post:
-/*Route::get('/api/post/{id}', 'PostsController@GetPost');
+Route::get('/api/post/{id}', 'PostsController@GetPost');
 Route::get('/api/user/follow/{user}', 'UserController@SubscribePerson');
 
-Route::get('/posts/{id}', function($id, $username)
+Route::get('/posts/{id}', function($id)
 {
-	return View::make('posts.thisPost')
-	->with('id', $id)
-	->with('username', $username);
-}); */
+	return View::make('posts.thisPost')->with('id', $id);
+});
 
 /*---------------------------------------------------------------------------*/
 

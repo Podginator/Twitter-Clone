@@ -1,3 +1,7 @@
+<h4>This post, ID: {{ $id }} </h4>
+<h3><a href = "/posts" class = "text-muted">Go back</a></h3>
+<hr>
+
 <p class="text-center" ng-if="custom" ng-click="ActiveFunction()">Posts with Tag: <b> <% custom %> </b> showing. Click to go back</p>
 <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 
