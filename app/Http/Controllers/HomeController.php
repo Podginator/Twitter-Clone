@@ -32,6 +32,11 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
+		if(Auth::user())
+		{
+			return redirect('/posts');
+		}
+		
 		return view("home.home");
 	}
 

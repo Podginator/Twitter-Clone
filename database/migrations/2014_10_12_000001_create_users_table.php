@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration {
 		
 		Schema::table('users', function(Blueprint $table)
 	    {
-	        $table->foreign('profileId')->references('id')->on('images');
+	        $table->foreign('profileId')->references('id')->on('files');
 	    });
 		
 		

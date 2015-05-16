@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Model\Posts;
+use App\Http\Requests\PostRequest;
 use Auth, View, Response, Input;
 
 class PostsController extends Controller {
@@ -24,7 +25,7 @@ class PostsController extends Controller {
 		return Response::json(Posts::all());
 	}
 
-	public function store()
+	public function store(PostRequest $req)
 	{
 		//First we need to check if the user is logged in, if so, he can post.
 		$success =  Response::json(array('success' => true));

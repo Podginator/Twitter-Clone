@@ -46,9 +46,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('App\Model\Posts', 'userId');
 	}
 
-	public function images()
+	public function files()
 	{
-		return $this->hasOne('App\Model\Images', 'id', 'profileId');
+		return $this->hasOne('App\Model\Files', 'id', 'profileId');
 	}
 
 	//Get the following events we have.
@@ -63,8 +63,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function getFollowing()
 	{
-		return array_map(function($follower){
-			return $follower->followingid;
-		}, $this->following);
+		$following = array();
+        foreach ($this->following as $followObject) {
+            $following[] = $followObject->followingid;
+        }
+        return $following;
 	}
 }

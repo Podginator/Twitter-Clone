@@ -48,7 +48,7 @@ Route::group(array('prefix' => 'api'), function(){
            //We use index, get, store and destroy only. 
 		    //Laravel produces these routes.
 			array('only'=> array('index', 'get', 'store', 'destroy')));
-	Route::resource('images', 'ImageController',
+	Route::resource('images', 'FileController',
 		array('only'=>array('store'))
 	);
 	Route::resource('user/follow', 'UserController',
@@ -60,7 +60,8 @@ Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 /*---------------------------------------------------------------------------*/
 
 // Route to specific post:
-Route::get('/api/posts/{id}', 'PostsController@GetPost');
+Route::get('/api/post/{id}', 'PostsController@GetPost');
+Route::get('/api/user/follow/{user}', 'UserController@SubscribePerson');
 
 Route::get('/posts/{id}', function($id)
 {

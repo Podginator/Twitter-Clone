@@ -10,6 +10,10 @@ angular.module('userService', [])
 					headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
 					data: $.param(data)
 			});
+		},
+		saveUser: function(id){
+			console.log(id);
+			return $http.get('/api/user/follow/'+id);
 		}
 	}
 });

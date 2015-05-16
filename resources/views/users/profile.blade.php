@@ -2,8 +2,8 @@
 	<div class="panel-heading">{{$user->username}}</div>
 	
 	<div class="row text-center panel-body">
-			@if ($user->images)
-				<img alt="Profile Image" width="140" height="140" src="{{asset($user->images->url)}}">
+			@if ($user->files)
+				<img alt="Profile Image" width="140" height="140" src="{{asset($user->files->url)}}">
 			@else
 				<img alt="Profile Image" width="140" height="140" src="{{asset('/imgs/default-avatar.png')}}">
 			@endif

@@ -25,7 +25,7 @@ class CreatePostsTable extends Migration {
 		Schema::table('posts', function(Blueprint $table)
 	    {
 	        $table->foreign('userId')->references('id')->on('users');
-	        $table->foreign('imgId')->references('id')->on('images');
+	        $table->foreign('imgId')->references('id')->on('files');
 	    });
 	}
 

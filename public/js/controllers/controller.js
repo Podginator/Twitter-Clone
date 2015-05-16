@@ -42,6 +42,19 @@ angular.module('postCtrl', [])
 	$scope.custom = false;
 	//Where all the posts are formed
 	$scope.posts = [];
+	$scope.errors = [];
+	
+	$scope.FileChange = function()
+	{
+		$scope.errors = [];
+		var file =  postForm.image.files[0]
+		var valid = ['mp4', 'jpg', 'png','gif'];
+		var extension = file.name.split('.').pop();
+		if(valid.indexOf(extension) == -1 )
+		{
+			$scope.errors.push("The file you've chosen ("+file.name+") doesn't have the right extension (" + valid.join(" ") + ")");
+		}
+	}
 	
 	//This creates Post Objects from the data we get
 	$scope.getAndObjectify = function(data)
@@ -55,6 +68,7 @@ angular.module('postCtrl', [])
 	}
 	
 	$scope.ActiveFunction = null;
+	
 	
 	//This is where we get the default 
 	$scope.GetDefault = function(){
@@ -71,9 +85,27 @@ angular.module('postCtrl', [])
 		$scope.ActiveFunction = $scope.GetDefault;
 	}
 	
+	
+	var ResetControls = function()
+	{
+		//We then reset the postInputs
+		$('.postInput').val('');
+		//This is ridiculous. Workaround for Firefox.
+		var control = document.getElementById("imageUploaded");
+		control.value = null;
+		//control = $("#imageUploaded");
+		//control.replaceWith(control = control.clone( true ));
+		$("#preview").hide();
+		document.getElementById("preview").src = '';
+		$scope.imageData.image = '';
+		$scope.postData.imgID = null;
+	}
 	//We should extrapalote this to avoid code reuse.
 	//This is where we save a post to the server.
 	var PostToServer = function(postData){
+
+		$scope.errors = [];
+		
 		Post.save(postData)
 			.success(function (data){	
 				if(data.success){
@@ -82,21 +114,17 @@ angular.module('postCtrl', [])
 				}else{
 					alert("Unsuccessful Post.");
 				}
-				//We then reset the postInputs
-				$('.postInput').val('');
-				//This is ridiculous. Workaround for Firefox.
-				var control = document.getElementById("imageUploaded");
-				control.value = null;
-				control = $("#imageUploaded");
-				control.replaceWith(control = control.clone( true ));
-				$("#preview").hide();
-				document.getElementById("preview").src = '';
-				$scope.imageData = {};
-				$scope.postData.imgID = null;
+				ResetControls();
 			})
 			.error(function(data){
-						alert("Error!");
-					});
+				for(var key in data){
+				   $scope.errors.push(data[key][0]);
+			    }
+				
+				$scope.animation = false;
+				ResetControls();
+				
+			});
 	}
 	
 	$scope.submitPost = function(){
@@ -120,6 +148,14 @@ angular.module('postCtrl', [])
 						//Then post to server with img id
 						PostToServer($scope.postData);
 					}
+				})
+				.error(function(data){
+				for(var key in data){
+				   $scope.errors.push(data[key][0]);
+			    }
+				ResetControls();
+				$scope.animation = false;
+				return;
 				});
 		}
 		else{

@@ -106,6 +106,7 @@ angular.module('postService', [])
 	    this.updated_at = updated_at;
 	    this.id = id;
 		this.url = url;
+		this.following = null;
 		this.ytEmbed = null;
   	}
 
@@ -130,6 +131,26 @@ angular.module('postService', [])
 	  }
 	}
 	
+	Post.prototype.GetMediaHTML = function(){
+			
+			if(this.url == null)
+			{
+				return;
+			}
+			var url = this.url;
+			var extension = url.split('.').pop();
+			
+			if(extension == "mp4" || extension == "ogg")
+			{
+				this.url='<video width="100%" controls>\
+							  <source src="'+this.url+'" type="video/'+ extension +'">\
+							Your browser does not support the video tag.\
+							</video>'
+			} else {
+				this.url = "<img class='img-responsive center-block' src='"+this.url+"')}}'>";
+			}
+	}
+	
 	Post.prototype.hasYouTube = function(){
 		if(this.url != null || this.url != undefined)
 		{
@@ -143,11 +164,12 @@ angular.module('postService', [])
 		
 		if(yt && yt[0].length > 0)
 		{
-			this.ytEmbed  = '<iframe class="video" src="http://www.youtube.com/embed/' + yt[1] + '" frameborder="0" allowfullscreen>';
+			this.url  = '<div class="videoContainer"><iframe class="video" src="http://www.youtube.com/embed/' + yt[1] + '" frameborder="0" allowfullscreen></div>';
 		}
 	}
 	Post.prototype.initialize = function(){
 		this.createLinks();
+		this.GetMediaHTML();
 		this.hasYouTube();
 	}
 
