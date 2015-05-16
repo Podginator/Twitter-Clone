@@ -48,10 +48,11 @@ angular.module('postCtrl', [])
 	{
 		$scope.errors = [];
 		var file =  postForm.image.files[0]
-		
-		if(['mp4', 'jpg', 'png','gif'].indexOf(file.name.split('.').pop()) == -1 )
+		var valid = ['mp4', 'jpg', 'png','gif'];
+		var extension = file.name.split('.').pop();
+		if(valid.indexOf(extension) == -1 )
 		{
-			$scope.errors.push("The file you've chosen doesn't have the right extension");
+			$scope.errors.push("The file you've chosen ("+file.name+") doesn't have the right extension (" + valid.join(" ") + ")");
 		}
 	}
 	
@@ -132,8 +133,6 @@ angular.module('postCtrl', [])
 		var image = new FormData();
 		image.append("image", postForm.image.files[0]);
 		
-		
-		console.log(image, $scope.imageData.image);
 		//Check if it's saved
 		if($scope.imageData.image)
 		{
