@@ -23,7 +23,7 @@
 			placeholder="Add a Post."
 		>
 		<span class="input-group-btn">
-			<button type="submit" class="btn btn-primary btn-lg" ng-disabled="followForm.$invalid">Submit</button>
+			<button type="submit" class="btn btn-primary btn-lg" ng-disabled="postForm.$invalid">Submit</button>
 		</span>
 		
 	</div>
