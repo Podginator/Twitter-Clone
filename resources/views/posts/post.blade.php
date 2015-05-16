@@ -17,13 +17,10 @@
 		</div>
         <p compile="post.adText" class = "panel-body"><% post.adText %></p>
 			
-		<div class="img-responsive" style="padding-bottom:15px" ng-if="post.url"> 
-			<img class="img-responsive center-block" src="{{asset('<% post.url %>')}}"> 
-		</div>
-		
-        <div class="videoContainer" ng-if="post.ytEmbed" compile="post.ytEmbed"></div>
+		<div style="padding-bottom:15px" ng-if="post.url" compile="post.url"> 
 			
-
+		</div>
+			
         <p ng-if="post.editable" style="float:right; margin-right:10px;"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
 		
 		<div><a href = "#" ng-click = "GetPost(post.id)" style = "float: right; padding-right: 10px;" class = "text-muted">Display post</a></div>

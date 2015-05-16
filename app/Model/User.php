@@ -46,9 +46,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('App\Model\Posts', 'userId');
 	}
 
-	public function images()
+	public function files()
 	{
-		return $this->hasOne('App\Model\Images', 'id', 'profileId');
+		return $this->hasOne('App\Model\Files', 'id', 'profileId');
 	}
 
 	//Get the following events we have.

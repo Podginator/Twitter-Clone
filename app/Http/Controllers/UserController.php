@@ -4,7 +4,7 @@ use Auth, View, Response, Input, File;
 use App\Model\FollowingEvent;
 use App\Model\Following;
 use App\Model\User;
-use App\Model\Images;
+use App\Model\Files;
 use App\Http\Requests\ProfileRequest;
 use ValidationService;
 
@@ -80,7 +80,7 @@ class UserController extends Controller {
 		$user = Auth::user();
 		if($user)
 		{
-			$id = Input::file('Image') ?  $this->uploadImage(Input::file('Image')) : $user->images->id;
+			$id = Input::file('Image') ?  $this->uploadImage(Input::file('Image')) : $user->files->id;
 			$user->fill(array(
 				"profileId" => $id,
 				"biography" => Input::get('bio')
@@ -103,7 +103,7 @@ class UserController extends Controller {
 			//Get Move the file to the directory.
 			$file->move($dir,$filename);
 			//Create an image with a url
-			$newImage = Images::create(array(
+			$newImage = Files::create(array(
 					"url"=> ''.$serverDir.'/'.$filename
 			));
 			

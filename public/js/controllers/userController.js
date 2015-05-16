@@ -18,7 +18,6 @@ angular.module('userCtrl', [])
 	};
 	
 	$scope.submitUser = function(id){
-		console.log(id);
 		User.saveUser(id)
 			.success(function(data){
 				if(data.success){

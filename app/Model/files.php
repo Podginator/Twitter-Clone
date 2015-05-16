@@ -2,15 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Images extends Model {
+class Files extends Model {
 	public $timestamps = false; 
 	protected $fillable = ['url'];
-	protected $table = "images";
+	protected $table = "files";
 	
 	 public function user()
     {
         return $this->belongsTo('App\Model\User', 'profileId');
     }
-
-	
 }
+

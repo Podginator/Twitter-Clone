@@ -48,7 +48,7 @@ Route::group(array('prefix' => 'api'), function(){
            //We use index, get, store and destroy only. 
 		    //Laravel produces these routes.
 			array('only'=> array('index', 'get', 'store', 'destroy')));
-	Route::resource('images', 'ImageController',
+	Route::resource('images', 'FileController',
 		array('only'=>array('store'))
 	);
 	Route::resource('user/follow', 'UserController',

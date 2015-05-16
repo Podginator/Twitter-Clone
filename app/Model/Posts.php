@@ -15,8 +15,8 @@ class Posts extends Model {
 		return Posts::join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
 			})
-			->leftJoin('images', function($join){
-				$join->on('images.id', '=', 'posts.imgId');
+			->leftJoin('files', function($join){
+				$join->on('files.id', '=', 'posts.imgId');
 			})
 			->leftJoin('following', function($join){
 				$join->on('following.followingid', '=', 'posts.userId');
@@ -29,7 +29,7 @@ class Posts extends Model {
 	{
 		$arr = array('posts.*',
 						'users.username',
-						'images.url',
+						'files.url',
 						DB::raw('CASE WHEN posts.userId = following.followingid THEN 1 ELSE 0 END AS following'));
 		if(Auth::user())
 		{
@@ -51,7 +51,7 @@ class Posts extends Model {
 			->select(array(
 					'posts.*',
 					'users.username',
-					'images.url'
+					'files.url'
 					))
 			->get();
 	}

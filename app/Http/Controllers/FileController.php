@@ -4,16 +4,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Model\Images;
+use App\Http\Requests\ImageRequest;
+use App\Model\Files;
 use Auth, View, Response, Input, Image, File, FilesystemIterator;
 
-class ImageController extends Controller {
+class FileController extends Controller {
 
 
     // now save your image to your $path
 	//All we need. This will return an id for an Image Item when uploaded. 
-	public function store()
+	public function store(ImageRequest $request)
 	{
+		
 		//To upload an image a user needs to be logged in.
 		if(Auth::user())
 		{
@@ -35,7 +37,7 @@ class ImageController extends Controller {
 				//Get Move the file to the directory.
 				Input::file('image')->move($dir,$filename);
 				//Create an image with a url
-				$newImage = Images::create(array(
+				$newImage = Files::create(array(
 						"url"=> ''.$serverDir.'/'.$filename
 					));
 					
