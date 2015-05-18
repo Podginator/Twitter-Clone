@@ -22,12 +22,15 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->
+	<!-- AngularJS Loading (Production builds we'd probably .min this and put it in one file) !-->
 	<script src="{{ asset('/js/main.js') }} "></script> <!-- load our controller -->
 	<script src="{{ asset('/js/controllers/controller.js') }} "></script> <!-- load our controller -->
 	<script src="{{ asset('/js/controllers/userController.js') }} "></script> <!-- load our controller -->
+	<script src="{{ asset('/js/controllers/storyController.js') }} "></script> <!-- load our controller -->
     <script src="{{ asset('/js/services/postService.js') }}"></script> <!-- load our service -->
+    <script src="{{ asset('/js/services/storyService.js') }}"></script> <!-- load our service -->
 	<script src="{{ asset('/js/services/userService.js') }}"></script> <!-- load our service -->
-			<script src="{{ asset('/js/dirPagination.js') }}"></script> <!-- load our application -->
+	<script src="{{ asset('/js/dirPagination.js') }}"></script> <!-- load our application -->
     <script src="{{ asset('/js/app.js') }}"></script> <!-- load our application -->
 
     
@@ -49,6 +52,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
 					<li><a href="{{ url('/posts') }}">Posts</a></li>
+					<li><a href="{{ url('/story') }}">Stories</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

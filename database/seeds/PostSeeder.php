@@ -11,23 +11,23 @@ class PostSeeder extends Seeder {
 	    DB::table('posts')->delete();
     
         Posts::create(array(
-            'text' => 'test post',
+            'text' => '#test post',
             'userId' => 1,
 			'imgId' =>  null,
         ));
 		
 		Posts::create(array(
-            'text' => 'test post2',
+            'text' => '#test post2',
             'userId' => 1,
 			'imgId' =>  null,
         ));
 		Posts::create(array(
-            'text' => 'test post3',
+            'text' => '#test post3',
             'userId' => 2,
 			'imgId' =>  null,
         ));
 		Posts::create(array(
-            'text' => 'test post4',
+            'text' => '#test post4',
             'userId' => 2,
 			'imgId' =>  null,
         ));

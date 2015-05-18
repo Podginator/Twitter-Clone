@@ -36,6 +36,9 @@ Route::get('/api/post/{postID}', 'PostsController@GetPost');
 Route::get('/posts/{id}', function($postID){
 	return View::make('posts.post')->with('postID', $postID);
 });
+Route::get('/story', function(){
+	Return View::make('story.index');
+});
 Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
 
 
@@ -50,6 +53,9 @@ Route::group(array('prefix' => 'api'), function(){
 			array('only'=> array('index', 'get', 'store', 'destroy')));
 	Route::resource('images', 'FileController',
 		array('only'=>array('store'))
+	);
+	Route::resource('story', 'StoryController',
+		array('only'=>array('index', 'get', 'store', 'destroy'));
 	);
 	Route::resource('user/follow', 'UserController',
 		array('only'=>array('store'))	
