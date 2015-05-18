@@ -105,14 +105,13 @@ class Posts extends Model {
 	
 	public static function getPost($id)
 	{
-		// Get this posts from a user (id):
-		/*  return Post::where('id', $id)
-			->from('posts')
-			->select('id')
-			->get(); */
-		return DB::raw('SELECT id FROM posts WHERE id = $id');
-		
-	}
+
+		$posts = self::DefaultQuery() 
+				->where('posts.id', $id);
+					
+		return $posts->select(self::GetSelect())->get();
+
+	} 
 	
 	public static function GetTagged($id)
 	{

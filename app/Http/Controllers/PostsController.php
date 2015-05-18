@@ -80,9 +80,17 @@ class PostsController extends Controller {
 		return Response::json(Posts::getUserPosts($user));
 	}
 	
-	//Get Specific Post
-	public function GetPost($id) 
+	
+	public function ViewPost($id) 						// Get Specific Post:
 	{
-		return Response::json(Posts::getPost($id));
-	}
+		$jsonData = Response::json(Posts::getPost($id)); 	// Get this post data from json.
+		$jsonData = substr($jsonData, 123); 				// Remove header data. 
+																// (!) Change this to regex, seriously..
+		
+		$data = json_decode( $jsonData, true );				// Decode json data to assoc array.
+		$data = $data[0];									// Remove outer array.		
+		print_r($data);	
+		
+		return View::make('posts.thisPost')->with($data);	// Return the data to the view.
+	} 
 }

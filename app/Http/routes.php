@@ -19,7 +19,9 @@ Route::bind('storyid', function($value, $route){
 	return App\Model\Story::where('id', $value)->first();
 });
 
- /* Route::bind('postid', function($value, $route){
+
+/*
+Route::bind('postid', function($value, $route){
 	return App\Model\Post::where('id', $value)->first();
 }); */
 
@@ -42,10 +44,11 @@ Route::get('/tag/{tags}', function($tag){
 	return View::make('posts.Tags')->with('tag', $tag);
 });
 Route::get('/{user}', 'UserController@userPage');
+/*
 Route::get('/api/post/{postID}', 'PostsController@GetPost');
 Route::get('/posts/{id}', function($postID){
 	return View::make('posts.post')->with('postID', $postID);
-});
+}); */
 
 Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
 Route::get('/api/story/posts/{id}', "StoryController@GetStoryPosts");
@@ -71,18 +74,10 @@ Route::group(array('prefix' => 'api'), function(){
 });
 Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 
-/*---------------------------------------------------------------------------*/
-
-// Route to specific post:
-Route::get('/api/post/{id}', 'PostsController@GetPost');
 Route::get('/api/user/follow/{user}', 'UserController@SubscribePerson');
 
-Route::get('/posts/{id}', function($id)
-{
-	return View::make('posts.thisPost')->with('id', $id);
-});
+Route::get('/posts/{id}', 'PostsController@ViewPost');	// Route to specific post:
 
-/*---------------------------------------------------------------------------*/
 
 Route::get('/api/posts/user/{username}', 'PostsController@GetUserPosts');Route::controllers([
 	'auth' => 'Auth\AuthController',

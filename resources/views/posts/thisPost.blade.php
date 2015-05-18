@@ -9,53 +9,66 @@
 @endsection
 
 @section('content')
-<h4>This post, ID: {{ $id }} </h4>
-<h3><a href = "/posts" class = "text-muted">Go back</a></h3>
-<hr>
+	
+	<?php
 
-<!--@extends('template.nav')
+	function getPostedTime($created)
+	{
+		$createdDate = date_create(date('Y-m-d', strtotime($created)) );
+		$currentDate = date_create(date('Y-m-d'));
+		
+		$diff=date_diff($createdDate,$currentDate);
 
+		$d = $diff->format('%a');	// nr of days.
+		$m = $diff->format('%m');	// nr of months.
 
+		if ($d <= 31)
+		{
+			switch($d)
+			{
+				case 0:		     			return 'Today'; 		break;
+				case 1:		     			return 'Yesterday'; 	break;
+				case ($d < 7):   		    return $d ." days ago"; break;
+				case ($d >= 7 && $d < 14):  return '1 week ago'; 	break;
+				case ($d >= 14 && $d < 21): return '2 weeks ago'; 	break;
+				case ($d >= 21 && $d < 28): return '3 weeks ago'; 	break;
+				case ($d >= 28):  			return '4 weeks ago'; 	break;
+			}
+		}
+		else if( $m > 0 )
+			return "$m months, $d day(s) ago";
+	}
 
-@section('angularApp')
-	<body ng-app="postApp" >
-@endsection
+	?>
+	<div class = "col-md-2 col-md-offset-2">
 
-@section('content')
-	<h1>
-		Hellu this is the content section.
-	</h1>
-@endsection -->
+		<h4 style = "display: inline-block;">{{ $username }}</h4>
 
-<p class="text-center" ng-if="custom" ng-click="ActiveFunction()">Posts with Tag: <b> <% custom %> </b> showing. Click to go back</p>
-<p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
-
-<div class="panel panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation" ng-controller="UserController">
-        <div class="panel-heading text-muted" >
-			<a class="text-muted" href="{{url('/<% post.username %>') }}">
-				<% post.username %>
-			</a> 
-			@if (Auth::user())
-				<span ng-show="<% post.following %> == 0 && <% post.editable %> == 0" class="<% post.username %>-nf addIndicator" ng-click="submitUser(post.username)">
-					<img height='16' width="16" src="{{asset('/imgs/add.png')}}"> 
-				</span>
-				<span class="<% post.username %>-f addIndicator" ng-show="<% post.following %> && <% post.editable %> == 0">
-					<img height='16' width="16" src="{{asset('/imgs/added.png')}}">  
-				</span>
-			@endif
+		<div style = "display: inline-block; padding-left: 15px;">
+			{{ getPostedTime($created_at) }} <!-- days ago -->
 		</div>
-        <p compile="post.adText" class = "panel-body"><% post.adText %></p>
-			
-		<div style="padding-bottom:15px" ng-if="post.url" compile="post.url"> 
-			
-		</div>
-		<p ng-if="post.editable" style="float:right; margin-right:10px;"><a href="#" ng-click="deletePost(post.id)" class="text-muted">Delete</a></p>
 
-		<div><a href = "/posts" style = "float: right; padding-right: 10px;" class = "text-muted">Go back</a></div>
-       
-		<div class ="tags" >
-			<p style="padding-left:15px"> <small> Tags <span ng-repeat= "tags in post.getTags()"><a href="#" ng-click="GetTags(tags)" > <% tags %> </a></span></small></p>
+		<div class = "tags">
+			tags <a href = "/posts/{{ $text }}">{{$text}}</a>
 		</div>
-</div>
 
+		<hr>
+
+		<h3><a href = "/posts" class = "text-muted">Go back</a></h3>
+	</div>
+
+	<div class = "col-md-6 col-md-offset-1">
+		<img src = {{ $url }}>
+	</div>
+
+	<!--
+
+	<p class="text-center" ng-if="custom" ng-click="ActiveFunction()">Posts with Tag: <b> <% custom %> </b> showing. Click to go back</p>
+	<p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
+
+	<div class="panel panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation" ng-controller="UserController">
+	       @include("posts.postcontent");
+	</div>
+
+	-->
 @endsection
