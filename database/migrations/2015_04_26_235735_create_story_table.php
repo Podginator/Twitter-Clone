@@ -16,7 +16,15 @@ class CreateStoryTable extends Migration {
 	    {
 	        $table->increments('id');
 			$table->string('name');
-	        $table->timestamps();
+			$table->string('description');
+	        $table->integer('userId')->unsigned();
+			$table->timestamps();
+
+		});
+
+		Schema::table('story', function(Blueprint $table)
+	    {
+	        $table->foreign('userId')->references('id')->on('users');
 	    });
 	}
 

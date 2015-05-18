@@ -57,13 +57,13 @@ angular.module('postCtrl', [])
 	}
 	
 	//This creates Post Objects from the data we get
-	$scope.getAndObjectify = function(data)
+	$scope.getAndObjectify = function(data, isRelative)
 	{
 		$scope.custom=false;
 		$scope.posts = [];
 		for (var i in data) {
 			$scope.posts[i] = angular.extend(new PostObject, data[i]);
-			$scope.posts[i].initialize();
+			$scope.posts[i].initialize(isRelative);
 		};
 	}
 	
@@ -85,6 +85,19 @@ angular.module('postCtrl', [])
 		$scope.ActiveFunction = $scope.GetDefault;
 	}
 	
+	$scope.GetPostsFromStory = function(id){
+		$scope.animation = true;
+		//We do a Post.Get() (Check postService.js)
+		Post.GetStoryPosts(id)
+			.success(function(data){
+				//objectifies the success data that returns and finishes animations.
+				$scope.getAndObjectify(data, true);
+				$scope.animation = false;
+				$scope.custom = false;
+			});
+		
+		$scope.ActiveFunction = $scope.GetPostsFromStory;
+	}
 	
 	var ResetControls = function()
 	{
@@ -203,14 +216,15 @@ angular.module('postCtrl', [])
 	
 	
 	//We get posts with the specific tag
-	$scope.GetTags = function(id){
+	$scope.GetTags = function(id,isRelative){
 		$scope.animation = true;
 		//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
 		$scope.ActiveFunction = id ? $scope.ActiveFunction : $scope.GetTags;		
 		id = id ? id.replace("#", "") : $('.container').data('tag');
+		console.log(id,isRelative);
 		Post.GetTags(id)
 			.success(function(data){
-				$scope.getAndObjectify(data);
+				$scope.getAndObjectify(data, isRelative);
 				$scope.custom = id;
 				$scope.animation = false;
 			});

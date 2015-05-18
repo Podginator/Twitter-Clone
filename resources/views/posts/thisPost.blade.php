@@ -1,3 +1,14 @@
+@extends('template.nav')
+
+@section('title') 
+	Tag: post
+@endsection
+
+@section('angularApp')
+	<body ng-app="postApp" >
+@endsection
+
+@section('content')
 <h4>This post, ID: {{ $id }} </h4>
 <h3><a href = "/posts" class = "text-muted">Go back</a></h3>
 <hr>
@@ -47,4 +58,4 @@
 		</div>
 </div>
 
-<dir-pagination-controls template-url="{{asset('/js/dirPagination.tpl.htm')}}"></dir-pagination-controls>
+@endsection

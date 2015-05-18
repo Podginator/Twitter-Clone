@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="container" ng-controller="PostController" data-tag="{{ $tag }}" data-ng-init="GetTags()">
+<div class="container" ng-controller="PostController" data-tag="{{ $tag }}" ng-init="GetTags()">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default posts">

@@ -51,8 +51,12 @@ angular.module('postService', [])
 		// Get the post id from the API at PostController@getPost
 		GetPost: function(id) 	
 		{
-			console.log('postService, GetPost, ID: ' + id);
-			return $http.get('/api/posts/' + id);
+			return $http.get('/api/posts/id/' + id);
+		},
+		
+		GetStoryPosts: function(id)
+		{
+			return $http.get('/api/story/posts/'+id);
 		},
 		
 		GetUserPost: function(user)
@@ -116,7 +120,7 @@ angular.module('postService', [])
 	};
 	
 	//We create a tag out of these statements
-	Post.prototype.createLinks = function(){
+	Post.prototype.createLinks = function(isRelative){
 	  var tags = this.getTags();
 	
 	  //We need to escape the HTML, because we are trusting this as html. 
@@ -126,7 +130,11 @@ angular.module('postService', [])
 	  //We then go through tags and replace things with lings.
 	  for(var tag in tags){
 		  var str = tags[tag];
-		  text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
+		 if(isRelative){
+ 		  	text = text.replace(str, "<a href='/tag/"+str.replace("#", '') +"'>" + str + "</a>");
+		 }else {
+		  	text = text.replace(str, "<a href='#' ng-click='GetTags(\""+str+"\")'>" + str + "</a>");
+		 }
 		  this.adText = text;
 	  }
 	}
@@ -143,11 +151,11 @@ angular.module('postService', [])
 			if(extension == "mp4" || extension == "ogg")
 			{
 				this.url='<video width="100%" controls>\
-							  <source src="'+this.url+'" type="video/'+ extension +'">\
+							  <source src="http://'+window.location.hostname+"/"+this.url+'" type="video/'+ extension +'">\
 							Your browser does not support the video tag.\
 							</video>'
 			} else {
-				this.url = "<img class='img-responsive center-block' src='"+this.url+"')}}'>";
+				this.url = "<img class='img-responsive center-block' src='http://"+window.location.hostname+"/"+this.url+"')}}'>";
 			}
 	}
 	
@@ -167,8 +175,9 @@ angular.module('postService', [])
 			this.url  = '<div class="videoContainer"><iframe class="video" src="http://www.youtube.com/embed/' + yt[1] + '" frameborder="0" allowfullscreen></div>';
 		}
 	}
-	Post.prototype.initialize = function(){
-		this.createLinks();
+	Post.prototype.initialize = function(isRelative){
+		
+		this.createLinks(isRelative);
 		this.GetMediaHTML();
 		this.hasYouTube();
 	}
