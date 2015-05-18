@@ -2,6 +2,20 @@
 <h3><a href = "/posts" class = "text-muted">Go back</a></h3>
 <hr>
 
+<!--@extends('template.nav')
+
+
+
+@section('angularApp')
+	<body ng-app="postApp" >
+@endsection
+
+@section('content')
+	<h1>
+		Hellu this is the content section.
+	</h1>
+@endsection -->
+
 <p class="text-center" ng-if="custom" ng-click="ActiveFunction()">Posts with Tag: <b> <% custom %> </b> showing. Click to go back</p>
 <p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
 

@@ -16,6 +16,10 @@ Route::bind('user', function($value, $route){
 	return App\Model\User::where('username', $value)->first();
 });
 
+ /* Route::bind('postid', function($value, $route){
+	return App\Model\Post::where('id', $value)->first();
+}); */
+
 
 //Gets
 Route::get('/', 'HomeController@index');
