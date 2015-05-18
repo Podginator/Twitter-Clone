@@ -91,6 +91,18 @@ class Posts extends Model {
 			return $posts->select(self::GetSelect())->get();
 	}
 	
+	
+	public static function getPostsFromStory($id)
+	{
+		$posts = self::DefaultQuery()
+			->leftJoin('storypost', function($join){
+				$join->on('storypost.postid', '=', 'posts.id');
+			})
+			->where('storypost.storyid', $id);
+			
+		return $posts->select(self::GetSelect())->get();
+	}
+	
 	public static function getPost($id)
 	{
 		// Get this posts from a user (id):
