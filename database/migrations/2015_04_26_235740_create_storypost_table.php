@@ -21,8 +21,8 @@ class CreateStorypostTable extends Migration {
 	    
 	    Schema::table('storypost', function($table)
 	    {
-	        $table->foreign('storyid')->references('id')->on('story');
-	        $table->foreign('postid')->references('id')->on('posts');
+	        $table->foreign('storyid')->references('id')->on('story')->onDelete('cascade');;
+	        $table->foreign('postid')->references('id')->on('posts')->onDelete('cascade');;
 	    });
 	}
 

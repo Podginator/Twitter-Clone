@@ -5,7 +5,7 @@ use DB;
 
 class Story extends Model {
 
-	protected $fillable = ['name', 'description', "userId"];
+	protected $fillable = ['name', 'description', "userId", "hashtag"];
 	protected $table = "story";
 
 	public function posts()

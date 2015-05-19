@@ -1,7 +1,7 @@
 @extends('template.nav')
 
 @section('title') 
-	{{$story->name . ' by '. $story->users->username}}
+	Create a Story
 @endsection
 
 @section('angularApp')
@@ -9,14 +9,39 @@
 @endsection
 
 @section('content')	
-<div class="container" data-tag="{{ $story->name }}" ng-controller="StoryController">
+<div class="container" ng-controller="StoryController" ng-init="storyData.title = Test">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default postcontainer">
-				<div class="panel-heading">Story: {{$story->name}}</div>	
+				<div class="panel-heading">Create a story</div>	
 					
-				   <form name="storyForm" ng-submit="editStory({{$story->id}})" enctype="multipart/form-data">
 					<div class="panel-body">
-					    <input 
+						<div class="alert alert-danger" ng-if="errors.length > 0">
+							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<ul>
+								<li ng-repeat= "error in errors"><% error %></li>
+							</ul>
+						</div>
+					</div>
+						
+				   <form name="storyForm" ng-submit="submitStory()" enctype="multipart/form-data">
+					<div class="panel-body" ng-controller="PostController">
+						  <input 
+							type="text" 
+							class="form-control input-lg postInput"
+							ng-model="storyData.title" 
+							placeholder="Story Title."
+						>
+						
+						<input 
+							type="text" 
+							class="form-control input-lg postInput"
+							ng-model="storyData.hashtag" 
+							placeholder="Topic (Enter Hashtag without #)"
+							ng-model-options="{ updateOn: 'blur' }" 
+							ng-change="GetTags(storyData.hashtag, true); ResetPosts();"
+						>
+						
+						<input 
 							type="text" 
 							class="form-control input-lg postInput"
 						 	name="desc" 
@@ -24,16 +49,17 @@
 							placeholder="Story Description."
 						>
 					
-					<div class="panel panel-default" style="margin:15px">
-						<div class="panel-heading"> Select Posts </div>
-						<div class="panel-body" ng-controller="PostController" ng-init="GetTags({{$story->name}}, true)">
-							<div class="panel panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation">
-								<div class="storypost-<%post.id%>" ng-click="ModifyStoryPosts(post.id)">
-									@include("story.postcontent")
+						<div class="panel panel-default" style="margin:15px">
+							<div class="panel-heading"> Select Posts </div>
+							<div class="panel-body">
+								<div class="panel-body" ng-if="posts.length == 0"> No Posts for this topic </div>
+								<div class="panel panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation">
+									<div class="storypost-<%post.id%>" ng-click="ModifyStoryPosts(post.id)">
+										@include("story.postcontent")
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 						
 						<button type="submit" class="btn btn-primary btn-lg" ng-disabled="postForm.$invalid">Submit</button>
 					</div>

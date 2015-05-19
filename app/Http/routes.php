@@ -52,8 +52,8 @@ Route::get('/posts/{id}', function($postID){
 
 Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
 Route::get('/api/story/posts/{id}', "StoryController@GetStoryPosts");
+Route::get('/story/create', 'StoryController@CreateStory');
 Route::get('/story/{storyid}', 'StoryController@ViewStory');
-Route::get('/story/edit/{storyid}', 'StoryController@EditStory');
 Route::post('/api/story/edit/{id}', 'StoryController@edit');
 
 //This is where the API stuff happens

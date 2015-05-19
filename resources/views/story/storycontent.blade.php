@@ -1,5 +1,5 @@
  <div class="panel-heading text-muted" >
-	 	<span><a href = "{{ url( 'story/<% story.id %>') }}" class = "text-muted"> #<% story.name %></a> </span>
+	 	<span><a href = "{{ url( 'story/<% story.id %>') }}" class = "text-muted"> <% story.name %> (#<% story.hashtag %>) </a> </span>
 		<a style="float:right" class="text-muted" href="{{url('/<% story.username %>') }}">
 			by: <% story.username %>
 		</a> 

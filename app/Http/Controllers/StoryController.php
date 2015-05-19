@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use App\Model\Posts;
 use App\Model\Story;
@@ -23,13 +22,12 @@ class StoryController extends Controller {
 		return View::make('story.viewstory')->with($data);
 	}
 
-	public function EditStory(Story $story)
+	public function CreateStory()
 	{
-		$storyPosts = Posts::getPostsFromStory($story->id);
-		$data['story'] = $story;
-		$data['posts'] = $storyPosts;
-		return View::make('story.createstory')->with($data);
+		$title= isset($_GET["title"]) ? $_GET["title"] : "";
+		return View::make('story.createstory')->with('title', $title);
 	}
+	
 
 	/**
 	 * Display a listing of the resource.
@@ -48,14 +46,27 @@ class StoryController extends Controller {
 
 	public function store(StoryAddRequest $req)
 	{
+		
+		
 		//To Do : Validation
 		$newPost = Story::create(array(
 					"name"=>Input::get('title'),
-					"userId" => Auth::user()->id
+					"userId" => Auth::user()->id,
+					"description" => Input::get('description'),
+					"hashtag" => Input::get("hashtag")
 				));
-
+		$id = $newPost->id;
+		
+		$posts = Input::get('posts');
+		if($posts)
+		{
+			foreach($posts as $value)
+			{
+				StoryPost::create(array('storyid' => $id, 'postid' => $value));
+			}
+		}
 		//here we check if the newpost entered the db, if it did then the newPost will have an id, otherwise it will not.
-		return $newPost->id ? Response::json(array("success"=>true, "id" => $newPost->id)) : "Fail";
+		return $newPost->id ? Response::json(array("success"=>true, "id" => $newPost->id)) : Response::json(array("fail"=>true, "id" => $newPost->id));
 	}
 
 
@@ -81,23 +92,5 @@ class StoryController extends Controller {
 	public function GetStoryPosts($id)
 	{
 		return Response::json(Posts::getPostsFromStory($id));
-	}
-	
-	public function edit($id)
-	{
-		$story = Story::where('id','=' ,$id)->first();
-		$story->description = Input::get('description');
-		$story->save();
-		$posts = Input::get('posts');
-
-		if($posts)
-		{
-			foreach($posts as $value)
-			{
-				StoryPost::create(array('storyid' => $id, 'postid' => $value));
-			}
-		}
-		
-		
 	}
 }

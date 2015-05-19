@@ -21,7 +21,7 @@
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script> <!-- load angular -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script> <!-- load angular -->
 	<!-- AngularJS Loading (Production builds we'd probably .min this and put it in one file) !-->
 	<script src="{{ asset('/js/main.js') }} "></script> <!-- load our controller -->
 	<script src="{{ asset('/js/controllers/controller.js') }} "></script> <!-- load our controller -->

@@ -25,7 +25,6 @@ angular.module('storyCtrl', [])
 	
 	$scope.ModifyStoryPosts = function(id)
 	{
-		console.log(id);
 		var index = $scope.postsToAdd.indexOf(id);
 		if(index == -1)
 		{
@@ -41,12 +40,12 @@ angular.module('storyCtrl', [])
 	$scope.submitStory = function()
 	{
 		$scope.errors = [];
-		
+		$scope.storyData.posts = $scope.postsToAdd;
 		Story.save($scope.storyData)
 			.success(function (data){	
 				console.log(data);
 				if(data.success){
-					window.location.replace("/story/edit/" + data.id);
+					window.location.replace("/story/" + data.id);
 				}else{
 					alert("Unsuccessful Story.");
 				}
@@ -60,6 +59,15 @@ angular.module('storyCtrl', [])
 			});
 	}
 	
+	$scope.SetName = function(val)
+	{
+		$scope.storyData.title=val;
+	}
+	
+	$scope.ResetPosts = function()
+	{
+		$scope.posts = [];
+	}
 	$scope.editStory = function(id)
 	{
 		$scope.storyData.posts = $scope.postsToAdd;

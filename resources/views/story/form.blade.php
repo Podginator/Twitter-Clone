@@ -7,17 +7,9 @@
 	</div>
 </div>
 
-<form name="storyForm" ng-submit="submitStory()" enctype="multipart/form-data">
-	<div class="input-group panel-body">
-	    <input 
-			type="text" 
-			class="form-control input-lg postInput"
-		 	name="text" 
-			ng-model="storyData.title" 
-			placeholder="Story Title."
-		>
-		<span class="input-group-btn">
-			<button type="submit" class="btn btn-primary btn-lg" ng-disabled="postForm.$invalid">Create a story.</button>
+<form name="storyForm" ng-submit="SetName(storyData.title)" action="/story/create" method="get">
+		<span class="input-group-btn center-text">
+			<button type="submit" class="btn btn-primary btn-lg" style="width:100%" ng-disabled="postForm.$invalid">Create a story.</button>
 		</span>
 		
 	</div>

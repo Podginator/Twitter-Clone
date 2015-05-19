@@ -16,7 +16,8 @@ class CreateStoryTable extends Migration {
 	    {
 	        $table->increments('id');
 			$table->string('name');
-			$table->string('description');
+			$table->string('hashtag');
+			$table->string('description')->nullable();
 	        $table->integer('userId')->unsigned();
 			$table->timestamps();
 
