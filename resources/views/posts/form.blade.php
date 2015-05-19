@@ -10,7 +10,7 @@
 <form name="postForm" ng-submit="submitPost()" enctype="multipart/form-data">
 	<div class="input-group panel-body">
 	   <span class="input-group-btn btn btn-default btn-file">
-			<input type="file" name="image" onchange="PreviewImage(); angular.element(this).scope().FileChange()"  id="imageUploaded" style="padding-right:50px">
+			<input type="file" name="image" onchange="ChangeFile(this)"  id="imageUploaded" style="padding-right:50px">
 		</span>
 	    <input 
 			type="text" 

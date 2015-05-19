@@ -56,6 +56,8 @@ angular.module('postCtrl', [])
 		}
 		$scope.$digest();
 		
+		return valid.indexOf(extension) != -1;
+		
 	}
 	
 	//This creates Post Objects from the data we get
