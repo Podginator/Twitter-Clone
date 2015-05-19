@@ -1,37 +1,4 @@
 angular.module('postCtrl', [])
-//This is the counter for new posts
-.controller('PostCountCtrl', function($scope, Post, PostCounter){
-	$scope.postCounter = 0;
-	var prevCounter = 0;
-	var checkFirst = true;
-	//We use the PostCounter object, which fires an $interval every 15 seconds
-	PostCounter.then(
-		//Success(Or Finish)
-		function(val){
-			console.log(val);
-		},
-
-		function(err){
-			console.log(err);
-		},
-		//Every 'tick' it sends a notify request which we then use to update the post counter.
-		function(notify){
-			if(!checkFirst){
-				$scope.postCounter = notify.data.length - prevCounter;
-			}else{
-				prevCounter = notify.data.length;
-				checkFirst = false;
-			}
-		}
-	)
-	
-	//This FN resets the post counter.
-	$scope.ResetCounter = function(){
-		$scope.postCounter = 0;
-		checkFirst = true;
-	}
-})
-
 //Here is the logic for the Post Controller
 .controller('PostController', function($scope,$http, Post, PostObject, Images){
 	//We have Form Objects in the form of Post and Image Data

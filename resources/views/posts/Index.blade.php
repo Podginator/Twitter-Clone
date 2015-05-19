@@ -28,8 +28,7 @@
 					@include('posts.form')
 				@endif
 				
-				
-				<div class="panel panel-default" ng-controller="PostCountCtrl" ng-click="GetDefault(); ResetCounter()" ng-show="postCounter > 0"> New Posts <% postCounter %> </div>
+
 				
 				<div class="posts">
 					@include('posts.post')
