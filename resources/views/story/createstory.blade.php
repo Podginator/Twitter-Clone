@@ -38,7 +38,7 @@
 							ng-model="storyData.hashtag" 
 							placeholder="Topic (Enter Hashtag without #)"
 							ng-model-options="{ updateOn: 'blur' }" 
-							ng-change="GetTags(storyData.hashtag, true); ResetPosts();"
+							ng-change="GetTags(storyData.hashtag, true);ResetPosts()"
 						>
 						
 						<input 
