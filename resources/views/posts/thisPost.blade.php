@@ -44,17 +44,22 @@
 
 		<h4 style = "display: inline-block;">{{ $username }}</h4>
 
-		<div style = "display: inline-block; padding-left: 15px;">
-			{{ getPostedTime($created_at) }} <!-- days ago -->
+		<div style = "display: inline-block; padding-left: 30px; color: #aaa;">
+			{{ getPostedTime($created_at) }}									 <!-- days ago -->
+			<span style = "font-size: 10px;" class="glyphicon glyphicon-time" aria-hidden="true"></span>   
 		</div>
 
 		<div class = "tags">
-			tags <a href = "/posts/{{ $text }}">{{$text}}</a>
+			<span style = " color: #aaa">#</span>
+			tags: <a href = "/posts/{{ $text }}">{{$text}}</a>
 		</div>
 
 		<hr>
 
-		<h3><a href = "/posts" class = "text-muted">Go back</a></h3>
+		<h4><a href = "/posts" class = "goBack">
+			<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+			Go back
+		</a></h4>
 	</div>
 
 	<div class = "col-md-6 col-md-offset-1">

@@ -150,3 +150,22 @@ a > .panel-heading .accordion-toggle.collapsed:after {
 .selected{
   background-color:rgba(0,255,0,0.3)
 }
+
+/*---------------------------------------------------------------------------*/
+/*                             V I E W   P O S T                             */
+/*---------------------------------------------------------------------------*/
+
+.goBack
+{
+  color: #666;
+  padding: 0px;
+  margin: 0px;
+  font-weight: 500;  
+  text-decoration: none;
+}
+  .goBack:hover
+  {
+    text-decoration: none;
+    text-underline: none;
+    color: #0ad;
+  }
