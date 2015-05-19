@@ -16,7 +16,7 @@
 					
 					<div class="panel-body">
 						<div class="alert alert-danger" ng-if="errors.length > 0">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
+							<strong>Sorry, there were some problems with your input..</strong><br><br>
 							<ul>
 								<li ng-repeat= "error in errors"><% error %></li>
 							</ul>
