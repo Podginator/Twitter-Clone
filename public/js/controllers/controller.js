@@ -54,6 +54,8 @@ angular.module('postCtrl', [])
 		{
 			$scope.errors.push("The file you've chosen ("+file.name+") doesn't have the right extension (" + valid.join(" ") + ")");
 		}
+		$scope.$digest();
+		
 	}
 	
 	//This creates Post Objects from the data we get
@@ -146,8 +148,7 @@ angular.module('postCtrl', [])
 		var image = new FormData();
 		image.append("image", postForm.image.files[0]);
 		
-		//Check if it's saved
-		if($scope.imageData.image)
+		if(postForm.image.files[0])
 		{
 			//Since these functions run asynchrnously we need to 
 			//Make sure that we only run PostToServer after we have a success
