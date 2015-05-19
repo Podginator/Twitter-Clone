@@ -89,7 +89,7 @@ class PostsController extends Controller {
 		
 		$data = json_decode( $jsonData, true );				// Decode json data to assoc array.
 		$data = $data[0];									// Remove outer array.		
-		print_r($data);	
+		print_r($data['text']);	
 		
 		return View::make('posts.thisPost')->with($data);	// Return the data to the view.
 	} 

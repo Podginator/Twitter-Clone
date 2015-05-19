@@ -9,7 +9,7 @@ angular.module('storyCtrl', [])
 	//Where all the posts are formed
 	$scope.stories = [];
 	$scope.errors = [];
-	$scope.postsToAdd = []
+	$scope.postsToAdd = [];
 	
 	$scope.GetDefault = function(){
 		$scope.animation = true;
@@ -66,7 +66,8 @@ angular.module('storyCtrl', [])
 	
 	$scope.ResetPosts = function()
 	{
-		$scope.posts = [];
+		$scope.postsToAdd = [];
+		alert($scope.postsToAdd);
 	}
 	$scope.editStory = function(id)
 	{
