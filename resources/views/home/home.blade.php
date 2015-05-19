@@ -9,12 +9,12 @@
 
 		<div class="row">
 		  	<div class="col-xs-5"></div>
-		    <div class="col-xs-2 title">Stories!</div>
+		    <div class="col-xs-2 title"></div>
 		    <div class="col-xs-5"></div>
 		</div>
 
 		<div class="row">
-			<div class="col-md-4 col-md-offset-7 homelogin">
+			<div class="col-md-4 col-md-offset-1 homelogin">
 		  		@include('auth.loginform')
 			</div>
 		</div>
