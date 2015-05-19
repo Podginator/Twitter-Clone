@@ -39,6 +39,18 @@
 			return "$m months, $d day(s) ago";
 	}
 
+	function splitByHashtag($Alltags)
+	{
+		$tags = explode('#', $Alltags);
+		
+
+
+		foreach($tags as $tag )
+		{
+			echo "<a href = '/tag/$tag'>$tag</a> ";
+		}
+	}
+
 	?>
 	<div class = "col-md-2 col-md-offset-2">
 
@@ -51,7 +63,7 @@
 
 		<div class = "tags">
 			<span style = " color: #aaa">#</span>
-			tags: <a href = "/posts/{{ $text }}">{{$text}}</a>
+			tags: {{ splitByHashTag($text) }}
 		</div>
 
 		<hr>
