@@ -15,18 +15,11 @@ angular.module('storyService', [])
 					headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
 					data: $.param(data)
 			});
-		},
-		edit: function(id,data){
-			return $http({
-					method: 'POST',
-					url: '/api/story/edit/'+id,
-					headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-					data: $.param(data)
-			});
 		}
 	}
 })
 //This is where we define the story object for use in scope with Angular
+//Unused.
 .factory('StoryObject', function(Post, PostObject){
 	function Story(name, created_at, username, id, editable, updated_at, postAmount) {
 	    this.name = name;

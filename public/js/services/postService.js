@@ -45,21 +45,21 @@ angular.module('postService', [])
 			return $http.delete('/api/posts/'+id);
 		},
 		//We get the tag from the api at PostController@getTags
-		GetTags: function(tag){
+		getTags: function(tag){
 			return $http.get('/api/posts/'+tag);
 		},
 		// Get the post id from the API at PostController@getPost
-		GetPost: function(id) 	
+		getPost: function(id) 	
 		{
 			return $http.get('/api/posts/id/' + id);
 		},
 		
-		GetStoryPosts: function(id)
+		getStoryPosts: function(id)
 		{
 			return $http.get('/api/story/posts/'+id);
 		},
 		
-		GetUserPost: function(user)
+		getUserPost: function(user)
 		{
 			return $http.get('/api/posts/user/' + user);
 		}
@@ -122,7 +122,6 @@ angular.module('postService', [])
 	}
 	
 	Post.prototype.GetMediaHTML = function(){
-			
 			if(this.url == null)
 			{
 				return;
@@ -135,7 +134,7 @@ angular.module('postService', [])
 				this.url='<video width="100%" controls>\
 							  <source src="http://'+window.location.hostname+"/"+this.url+'" type="video/'+ extension +'">\
 							Your browser does not support the video tag.\
-							</video>'
+							</video>';
 			} else {
 				this.url = "<img class='img-responsive center-block' src='http://"+window.location.hostname+"/"+this.url+"')}}'>";
 			}
@@ -158,13 +157,11 @@ angular.module('postService', [])
 		}
 	}
 	Post.prototype.initialize = function(isRelative){
-		
 		this.createLinks(isRelative);
 		this.GetMediaHTML();
 		this.hasYouTube();
+		//Should maybe be called in a ctor.
 	}
-
-
 		
  	return Post;
 });

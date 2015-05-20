@@ -21,7 +21,7 @@ angular.module('postCtrl', [])
 		Post.get()
 			.success(function(data){
 				//objectifies the success data that returns and finishes animations.
-				$scope.getAndObjectify(data);
+				$scope.GetAndObjectify(data);
 				$scope.animation = false;
 				$scope.custom = false;
 			});
@@ -31,21 +31,21 @@ angular.module('postCtrl', [])
 	{
 		$scope.animation = true;
 		
-		Post.GetPost(id).success(function(data)
+		Post.getPost(id).success(function(data)
 		{
 			console.log('controller, success: ' + data);
 			$scope.GetDefault();
 		});
 	};
 	
-	$scope.GetUserPost = function(user){
+	$scope.getUserPost = function(user){
 		user = user ? user : $('.container').data('user');
 		$scope.animation = true;
 		Post.GetUserPost(user)
             .success(function(data)
 			{
 
-				$scope.getAndObjectify(data);
+				$scope.GetAndObjectify(data);
 				$scope.animation = false;
             });
 	}
@@ -56,9 +56,9 @@ angular.module('postCtrl', [])
 		//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
 		id = id ? id.replace("#", "") : $('.container').data('tag');
 		console.log(id,isRelative);
-		Post.GetTags(id)
+		Post.getTags(id)
 			.success(function(data){
-				$scope.getAndObjectify(data, isRelative);
+				$scope.GetAndObjectify(data, isRelative);
 				$scope.custom = id;
 				$scope.animation = false;
 			});
@@ -67,10 +67,10 @@ angular.module('postCtrl', [])
 	$scope.GetPostsFromStory = function(id){
 		$scope.animation = true;
 		//We do a Post.Get() (Check postService.js)
-		Post.GetStoryPosts(id)
+		Post.getStoryPosts(id)
 			.success(function(data){
 				//objectifies the success data that returns and finishes animations.
-				$scope.getAndObjectify(data, true);
+				$scope.GetAndObjectify(data, true);
 				$scope.animation = false;
 				$scope.custom = false;
 			});
@@ -202,7 +202,7 @@ angular.module('postCtrl', [])
 	}
 	
 	//This creates Post Objects from the data we get
-	$scope.getAndObjectify = function(data, isRelative)
+	$scope.GetAndObjectify = function(data, isRelative)
 	{
 		$scope.custom=false;
 		$scope.posts = [];

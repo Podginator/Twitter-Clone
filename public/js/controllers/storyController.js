@@ -11,6 +11,10 @@ angular.module('storyCtrl', [])
 	$scope.errors = [];
 	$scope.postsToAdd = [];
 	
+	
+/*---------------------------------------------------------------------------*/
+/*								Get Story Behaviour		  					 */
+/*---------------------------------------------------------------------------*/
 	$scope.GetDefault = function(){
 		$scope.animation = true;
 		//We do a Post.Get() (Check postService.js)
@@ -22,21 +26,11 @@ angular.module('storyCtrl', [])
 				$scope.custom = false;
 			});
 	}
-	
-	$scope.ModifyStoryPosts = function(id)
-	{
-		var index = $scope.postsToAdd.indexOf(id);
-		if(index == -1)
-		{
-			$('.storypost-'+id).addClass('selected');
-			$scope.postsToAdd.push(id);
-		}
-		else{
-			$('.storypost-'+id).removeClass('selected');
-			$scope.postsToAdd.splice(index,1);
-		}
-	}
-	
+
+/*---------------------------------------------------------------------------*/
+/*								Create Story Behaviour		  					 */
+/*---------------------------------------------------------------------------*/
+	//submit the story.
 	$scope.submitStory = function()
 	{
 		$scope.errors = [];
@@ -57,38 +51,29 @@ angular.module('storyCtrl', [])
 				
 				
 			});
-	}
+	};
 	
-	$scope.SetName = function(val)
+	//This is where the click on posts happen. It merely uploads postIds.
+	$scope.ModifyStoryPosts = function(id)
 	{
-		$scope.storyData.title=val;
-	}
+		var index = $scope.postsToAdd.indexOf(id);
+		if(index == -1)
+		{
+			$('.storypost-'+id).addClass('selected');
+			$scope.postsToAdd.push(id);
+		}
+		else{
+			$('.storypost-'+id).removeClass('selected');
+			$scope.postsToAdd.splice(index,1);
+		}
+	};
 	
+	//Reset to postsToAdd on onBlur change.
 	$scope.ResetPosts = function()
 	{
 		$scope.postsToAdd = [];
-		alert($scope.postsToAdd);
 	}
-	$scope.editStory = function(id)
-	{
-		$scope.storyData.posts = $scope.postsToAdd;
-		console.log($scope.storyData);
-		Story.edit(id, $scope.storyData)
-			.success(function (data){	
-				console.log(data);
-				if(data.success){
-					console.log(data);
-					//window.location.replace("/story/edit/" + data.id);
-				}else{
-					alert("Unsuccessful Story.");
-				}
-			})
-			.error(function(data){
-				for(var key in data){
-				   $scope.errors.push(data[key][0]);
-			    }	
-			});
-	}
+	
 	
 });
 
