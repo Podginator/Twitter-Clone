@@ -182,7 +182,7 @@ angular.module('postCtrl', [])
 		var extension = file.name.split('.').pop();
 		if(validExt.indexOf(extension) == -1 )
 		{
-			$scope.errors.push("The file you've chosen ("+file.name+") doesn't have the right extension (" + valid.join(" ") + ")");
+			$scope.errors.push("The file you've chosen ("+file.name+") doesn't have the right extension (" + validExt.join(" ") + ")");
 			validUp = false;
 		}
 		if( file.size > validSize )
