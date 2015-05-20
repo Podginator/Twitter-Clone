@@ -45,21 +45,21 @@ angular.module('postService', [])
 			return $http.delete('/api/posts/'+id);
 		},
 		//We get the tag from the api at PostController@getTags
-		GetTags: function(tag){
+		getTags: function(tag){
 			return $http.get('/api/posts/'+tag);
 		},
 		// Get the post id from the API at PostController@getPost
-		GetPost: function(id) 	
+		getPost: function(id) 	
 		{
 			return $http.get('/api/posts/id/' + id);
 		},
 		
-		GetStoryPosts: function(id)
+		getStoryPosts: function(id)
 		{
 			return $http.get('/api/story/posts/'+id);
 		},
 		
-		GetUserPost: function(user)
+		getUserPost: function(user)
 		{
 			return $http.get('/api/posts/user/' + user);
 		}
@@ -67,24 +67,6 @@ angular.module('postService', [])
 	}
 })
 
-//A simple factory that sends a request every 15seconds to inform the client
-//as to whether there are any new posts.
-.factory('PostCounter', function($http, $interval, $q, Post){
-	var deferred = $q.defer();
-	
-	//Set an interval every 5 minutes. 
-	//Defer this (so that it's not Asynchronous data anymore.)
-	$interval(function(){
-		Post.get()
-			.then(function(data){
-				deferred.notify(data);
-			});
-	}, 15000);
-	
-	//Return the promise each time.
-	return deferred.promise;
-	
-})
 
 .factory('Images', function($http){
 	//Where we post the image.
@@ -140,7 +122,6 @@ angular.module('postService', [])
 	}
 	
 	Post.prototype.GetMediaHTML = function(){
-			
 			if(this.url == null)
 			{
 				return;
@@ -153,7 +134,7 @@ angular.module('postService', [])
 				this.url='<video width="100%" controls>\
 							  <source src="http://'+window.location.hostname+"/"+this.url+'" type="video/'+ extension +'">\
 							Your browser does not support the video tag.\
-							</video>'
+							</video>';
 			} else {
 				this.url = "<img class='img-responsive center-block' src='http://"+window.location.hostname+"/"+this.url+"')}}'>";
 			}
@@ -176,13 +157,11 @@ angular.module('postService', [])
 		}
 	}
 	Post.prototype.initialize = function(isRelative){
-		
 		this.createLinks(isRelative);
 		this.GetMediaHTML();
 		this.hasYouTube();
+		//Should maybe be called in a ctor.
 	}
-
-
 		
  	return Post;
 });

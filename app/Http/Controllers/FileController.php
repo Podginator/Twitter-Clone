@@ -22,6 +22,10 @@ class FileController extends Controller {
 			//We get where the post is on the server ( to store in an image object.)
 			$serverDir =  "uploaded_images/".Auth::user()->username;
 			$dir = public_path($serverDir);
+ 
+			$Mb = 2;											// Valid Mega bytes. 
+			$validExt = array('mp4', 'png', 'jpg', 'gif');			// Valid file extensions.
+			$validSize = $Mb * pow(pow(2, 10), 2 );      	 	// Valid image size in Mb.
 			
 			if( File::exists($dir) or File::makeDirectory($dir) )
 			{
@@ -30,19 +34,30 @@ class FileController extends Controller {
 				//We get the extensions (ie:.ping)
 				//TODO: Add check to make sure object is image, both client and server side.
 				$extension = Input::file('image')->getClientOriginalExtension();
-				//Get Random Generated Number + Amount of File to avoid users being able to go /userimages/img/whatever
-      			$filename = rand(11111,99999).iterator_count($fi).'.'.$extension;
-				  //Get Path.
-			    $path = $dir."/".$filename;
-				//Get Move the file to the directory.
-				Input::file('image')->move($dir,$filename);
-				//Create an image with a url
-				$newImage = Files::create(array(
-						"url"=> ''.$serverDir.'/'.$filename
-					));
-					
-				//REturn the ID to use on the post.
-				return Response::json(array('success' => true, 'id' =>$newImage->id));
+				$fileSize = Input::file('image')->getSize();
+
+				if( in_array($extension, $validExt) && $fileSize <= $validSize ) // Checks if the file extension is valid AND
+																					// if the image size doesn't exceeds the limit.											
+				{
+					//Get Random Generated Number + Amount of File to avoid users being able to go /userimages/img/whatever
+	      			$filename = rand(11111,99999).iterator_count($fi).'.'.$extension;
+					  //Get Path.
+				    $path = $dir."/".$filename;
+					//Get Move the file to the directory.
+					Input::file('image')->move($dir,$filename);
+					//Create an image with a url
+					$newImage = Files::create(array(
+							"url"=> ''.$serverDir.'/'.$filename
+						));
+						
+					//Return the ID to use on the post.
+					return Response::json(array('success' => true, 'id' =>$newImage->id));
+				}
+				else
+				{
+					//break;
+					return Response::json(array('success' => false, 'id' =>null));
+				}
 			}
 		}
 		

@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div class="container" ng-controller="PostController"  ng-init="GetDefault()">
+<div class="container" ng-controller="PostController"  ng-init="ChangeDefault(GetDefault)">
 	<div class="row">
 		@if(Auth::user())
 			<div class="col-md-4">
@@ -28,8 +28,7 @@
 					@include('posts.form')
 				@endif
 				
-				
-				<div class="panel panel-default" ng-controller="PostCountCtrl" ng-click="GetDefault(); ResetCounter()" ng-show="postCounter > 0"> New Posts <% postCounter %> </div>
+
 				
 				<div class="posts">
 					@include('posts.post')

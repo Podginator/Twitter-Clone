@@ -12,17 +12,18 @@
 	
 	<?php
 
-	function getPostedTime($created)
-	{
-		$createdDate = date_create(date('Y-m-d', strtotime($created)) );
-		$currentDate = date_create(date('Y-m-d'));
+	function getPostedTime($created) 				// Show dynamic post time: 
+	{	
+		$createdDate = date_create(date('Y-m-d', 		// Create date var. from the post. 
+		strtotime($created)) );
+		$currentDate = date_create(date('Y-m-d'));		// Create date var. of the current date.
 		
-		$diff=date_diff($createdDate,$currentDate);
+		$diff=date_diff($createdDate,$currentDate); 	// Get the time difference.
 
-		$d = $diff->format('%a');	// nr of days.
-		$m = $diff->format('%m');	// nr of months.
+		$d = $diff->format('%a');						// Number of days.
+		$m = $diff->format('%m');						// Number of months.
 
-		if ($d <= 31)
+		if ($d <= 31) 									// Posted the past 31 days:					
 		{
 			switch($d)
 			{
@@ -35,8 +36,20 @@
 				case ($d >= 28):  			return '4 weeks ago'; 	break;
 			}
 		}
-		else if( $m > 0 )
-			return "$m months, $d day(s) ago";
+		else if( $m > 0 ) 								// Posted over a month ago:
+			return "$m month(s), $d day(s) ago";
+	}
+
+	function splitByHashtag($Alltags) 				// Create link for each tag.
+	{
+		$tags = explode('#', $Alltags);					// Create array element on split hashtag(#)
+
+		array_shift($tags);								// Since hashtag(#) is the first char in the string,
+															// it will create a new empty element. Remove this.
+		foreach($tags as $tag )							// Loop Through all tags and create a link.
+		{
+			echo "<a href = '/tag/$tag'>#$tag</a> ";
+		}
 	}
 
 	?>
@@ -51,7 +64,7 @@
 
 		<div class = "tags">
 			<span style = " color: #aaa">#</span>
-			tags: <a href = "/posts/{{ $text }}">{{$text}}</a>
+			tags: {{ splitByHashTag($text) }} 		<!-- Get all tags with separated link. -->
 		</div>
 
 		<hr>
@@ -65,15 +78,4 @@
 	<div class = "col-md-6 col-md-offset-1">
 		<img src = {{ $url }}>
 	</div>
-
-	<!--
-
-	<p class="text-center" ng-if="custom" ng-click="ActiveFunction()">Posts with Tag: <b> <% custom %> </b> showing. Click to go back</p>
-	<p class="text-center" ng-if="animation"><img src="imgs/loader.gif" height="50" width="50" ></p>
-
-	<div class="panel panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation" ng-controller="UserController">
-	       @include("posts.postcontent");
-	</div>
-
-	-->
 @endsection
