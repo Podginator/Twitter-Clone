@@ -7,7 +7,8 @@ class Files extends Model {
 	protected $fillable = ['url'];
 	protected $table = "files";
 	
-	 public function user()
+	//Define relationship.
+	public function user()
     {
         return $this->belongsTo('App\Model\User', 'profileId');
     }

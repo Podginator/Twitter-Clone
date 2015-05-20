@@ -6,7 +6,8 @@ use Response, Auth, Input;
 
 class ImageRequest extends FormRequest
 {
-    
+    //All the rules are defined in the Validator, as they're more complicated'
+    //Than the rules function allows.
 	public function rules()
     {
         return [

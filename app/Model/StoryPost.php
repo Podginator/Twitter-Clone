@@ -7,11 +7,9 @@ class StoryPost extends Model {
 	protected $fillable = ['postid', 'storyid'];
 	protected $table = "storypost";
 	
+	//Relationships.
 	public function users()
 	{
 		$this->belongsTo('App\Model\Story', 'storyid');
 	}
-	
-	
-	
 }

@@ -31,7 +31,7 @@ class StoryAddRequest extends FormRequest
                 foreach(Input::get('posts') as $value)
                 {
                     $post = Post::where("id", '=', $value)->first();
-                    if(!strpost($post->text,Input::get('title')) === FALSE){
+                    if(!strpost($post->text,Input::get('hashtag')) === FALSE){
                         $validator->errors()->add('A post', 'A post does not contain your hashtag');
                     }
                 }

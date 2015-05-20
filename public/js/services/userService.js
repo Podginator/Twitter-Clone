@@ -1,6 +1,6 @@
 angular.module('userService', [])
   
-  //This is the Post Factor, where the http and ajax requests happen
+  //This is the User Factor, where the http and ajax requests happen
 .factory('User', function($http){
 	return {
 		save: function(data){

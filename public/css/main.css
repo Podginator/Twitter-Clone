@@ -71,6 +71,7 @@ body
 .postcontainer{
   border:none;
   box-shadow:none;
+  background:none;
 }
 
 .postData{
@@ -206,6 +207,8 @@ left:30px;
     text-decoration:  none;
     color:            #0ad;
   }
+  
+  
 /*---------------------------------------------------------------------------*/
 /*                               S E A R C H                                 */
 /*---------------------------------------------------------------------------*/

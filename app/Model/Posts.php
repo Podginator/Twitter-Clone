@@ -6,10 +6,15 @@ class Posts extends Model {
 
 	protected $fillable = ['userId', 'text', 'imgId'];
 	protected $table = "posts";
-	public static $rules = [
-		//setup rules here
-	];
 	
+	//Define the relationships.
+	public function users()
+	{
+		$this->belongsTo('App\Model\User', 'userId');
+	}
+	
+	
+	//This is the Query most 
 	public static function DefaultQuery()
 	{
 		return Posts::join('users', function($join){
@@ -39,12 +44,8 @@ class Posts extends Model {
 		return $arr;
 	}
 	
-	public function users()
-	{
-		$this->belongsTo('App\Model\User', 'userId');
-	}
 	
-	//Override of All.
+	//Override of All, we need to ensure we get the username.
 	public static function all($columns = array('*'))
 	{
 		return self::DefaultQuery()
@@ -56,7 +57,7 @@ class Posts extends Model {
 			->get();
 	}
 	
-	
+	//This is where all the home posts are gotten. 
 	public static function getAllHome(User $user)
 	{
 		//Get homepage posts. 
@@ -82,12 +83,12 @@ class Posts extends Model {
 		return $posts->select(self::GetSelect())->get();
 	}
 	
+	
 	public static function getUserPosts($user)
 	{	
 			$posts = self::DefaultQuery() 
 				->where('users.username', $user);
-				
-					
+						
 			return $posts->select(self::GetSelect())->get();
 	}
 	

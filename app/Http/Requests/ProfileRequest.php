@@ -19,6 +19,7 @@ class ProfileRequest extends FormRequest
         return Auth::check();
     }
     
+    //Check if the Biography has illegal characters in it. 
     public function getValidatorInstance() {
         $validator = parent::getValidatorInstance();
 

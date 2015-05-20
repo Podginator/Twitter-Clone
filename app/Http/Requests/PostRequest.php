@@ -8,6 +8,7 @@ class PostRequest extends FormRequest
 {
 	public function rules()
     {
+        //Regex here checks if there is one ore more instance of #Hashtags.
         return [
             'text' => array('max:140', 'required', 'regex:/\S*#(?:\[[^\]]+\]|\S+)/')
         ];
@@ -16,11 +17,6 @@ class PostRequest extends FormRequest
     public function authorize()
     {
         return Auth::check();
-    }
-    
-    public function getValidatorInstance() {
-        $validator = parent::getValidatorInstance();
-        return $validator;
     }
     
 }

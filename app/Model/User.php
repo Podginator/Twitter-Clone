@@ -31,6 +31,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+
+	//Get all the relationships.
 	public function followingevent()
 	{
 		return $this->hasMany('App\Model\FollowingEvent', 'userid');

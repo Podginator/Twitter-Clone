@@ -8,6 +8,7 @@ class Story extends Model {
 	protected $fillable = ['name', 'description', "userId", "hashtag"];
 	protected $table = "story";
 
+	//Relationships.
 	public function posts()
 	{
 		return $this->hasMany('App\Model\StoryPost', 'postid');
@@ -52,8 +53,11 @@ class Story extends Model {
 			->get();
 		
 		
-		
 		return $stories;
 	}
+	
+	//TODO: 
+		//User Stories.
+		//Tagged Stories.
 	
 }
