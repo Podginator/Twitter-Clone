@@ -192,6 +192,9 @@ angular.module('postCtrl', [])
 		}
 		$scope.$digest();
 		
+		if(!validUp)
+			ResetControls();
+		
 		return validUp;
 	}
 	
