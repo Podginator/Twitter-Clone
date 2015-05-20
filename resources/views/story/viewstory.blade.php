@@ -11,7 +11,7 @@
 @section('content')	
 <div class="container">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default postcontainer" ng-controller="PostController" ng-init="GetPostsFromStory({{$story->id}})">
+			<div class="panel panel-default" ng-controller="PostController" ng-init="GetPostsFromStory({{$story->id}})">
 				<div class="panel-heading">Story: {{$story->name}}({{$story->hashtag}})</div>	
 				    <p class="panel-body">{{$story->description}}</p>
 					

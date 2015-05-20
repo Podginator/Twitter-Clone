@@ -1,5 +1,5 @@
-<div class="panel-body">
-	<div class="alert alert-danger" ng-if="errors.length > 0">
+<div class="panel-body" ng-if="errors.length > 0">
+	<div class="alert alert-danger" >
 		<strong>Sorry, there were some problems with your input..</strong><br><br>
 		<ul>
 			<li ng-repeat= "error in errors"><% error %></li>

@@ -52,7 +52,10 @@ Route::get('/posts/{id}', function($postID){
 
 Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
 Route::get('/api/story/posts/{id}', "StoryController@GetStoryPosts");
-Route::get('/story/create', 'StoryController@CreateStory');
+Route::get('/story/create', [
+    'middleware' => 'auth',
+    'uses' => 'StoryController@CreateStory'
+]);
 Route::get('/story/{storyid}', 'StoryController@ViewStory');
 Route::post('/api/story/edit/{id}', 'StoryController@edit');
 
@@ -79,7 +82,9 @@ Route::get('/api/user/follow/{user}', 'UserController@SubscribePerson');
 Route::get('/posts/{id}', 'PostsController@ViewPost');	// Route to specific post:
 
 
-Route::get('/api/posts/user/{username}', 'PostsController@GetUserPosts');Route::controllers([
+Route::get('/api/posts/user/{username}', 'PostsController@GetUserPosts');
+
+Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
