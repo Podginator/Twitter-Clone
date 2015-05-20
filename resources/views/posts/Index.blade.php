@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div class="container" ng-controller="PostController"  ng-init="GetDefault()">
+<div class="container" ng-controller="PostController"  ng-init="ChangeDefault(GetDefault)">
 	<div class="row">
 		@if(Auth::user())
 			<div class="col-md-4">

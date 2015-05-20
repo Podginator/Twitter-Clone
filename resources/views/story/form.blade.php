@@ -11,6 +11,4 @@
 		<span class="input-group-btn center-text">
 			<button type="submit" class="btn btn-primary btn-lg" style="width:100%" ng-disabled="postForm.$invalid">Create a story.</button>
 		</span>
-		
-	</div>
 </form>

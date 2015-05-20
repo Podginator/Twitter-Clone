@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div class="container" ng-controller="PostController"  data-user="{{ $user->username }}"  ng-init="GetUserPost()">
+<div class="container" ng-controller="PostController"  data-user="{{ $user->username }}"  ng-init="ChangeDefault(GetUserPost)">
 	<div class="row">
 		@if($user)
 			<div class="col-md-4">
@@ -23,9 +23,6 @@
 
 			<div class="panel panel-default postcontainer">
 				<div class="panel-heading">{{$user->username}}s Posts</div>
-				
-				
-				<div class="panel panel-default" ng-controller="PostCountCtrl" ng-click="GetDefault(); ResetCounter()" ng-show="postCounter > 0"> New Posts <% postCounter %> </div>
 				
 				<div class="posts">
 					@include('posts.post')
