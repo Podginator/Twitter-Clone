@@ -24,7 +24,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script> <!-- load angular -->
 	<!-- AngularJS Loading (Production builds we'd probably .min this and put it in one file) !-->
 	<script src="{{ asset('/js/main.js') }} "></script> <!-- load our controller -->
-	<script src="{{ asset('/js/controllers/controller.js') }} "></script> <!-- load our controller -->
+	<script src="{{ asset('/js/controllers/postcontroller.js') }} "></script> <!-- load our controller -->
 	<script src="{{ asset('/js/controllers/userController.js') }} "></script> <!-- load our controller -->
 	<script src="{{ asset('/js/controllers/storyController.js') }} "></script> <!-- load our controller -->
     <script src="{{ asset('/js/services/postService.js') }}"></script> <!-- load our service -->

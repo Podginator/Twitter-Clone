@@ -38,10 +38,10 @@ angular.module('postCtrl', [])
 		});
 	};
 	
-	$scope.getUserPost = function(user){
+	$scope.GetUserPost = function(user){
 		user = user ? user : $('.container').data('user');
 		$scope.animation = true;
-		Post.GetUserPost(user)
+		Post.getUserPost(user)
             .success(function(data)
 			{
 
