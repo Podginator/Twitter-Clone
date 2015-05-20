@@ -36,8 +36,8 @@ class FileController extends Controller {
 				$extension = Input::file('image')->getClientOriginalExtension();
 				$fileSize = Input::file('image')->getSize();
 
-				if( in_array($extension, $validExt) && $fileSize <= $validSize ) 		// Checks if the file extension is valid AND
-																							// if the image size doesn't exceeds the limit.											
+				if( in_array($extension, $validExt) && $fileSize <= $validSize ) // Checks if the file extension is valid AND
+																					// if the image size doesn't exceeds the limit.											
 				{
 					//Get Random Generated Number + Amount of File to avoid users being able to go /userimages/img/whatever
 	      			$filename = rand(11111,99999).iterator_count($fi).'.'.$extension;

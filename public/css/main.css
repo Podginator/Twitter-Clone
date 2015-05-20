@@ -153,7 +153,7 @@ a > .panel-heading .accordion-toggle.collapsed:after {
 }
 
 .selected{
-  background-color:rgba(0,255,0,0.3)
+  background-color:rgba(0,255,0,0.3);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -162,15 +162,57 @@ a > .panel-heading .accordion-toggle.collapsed:after {
 
 .goBack
 {
-  color: #666;
-  padding: 0px;
-  margin: 0px;
-  font-weight: 500;  
-  text-decoration: none;
+  color:            #666;
+  padding:          0px;
+  margin:           0px;
+  font-weight:      500;  
+  text-decoration:  none;
 }
   .goBack:hover
   {
-    text-decoration: none;
-    text-underline: none;
-    color: #0ad;
+    text-decoration:  none;
+    color:            #0ad;
   }
+/*---------------------------------------------------------------------------*/
+/*                               S E A R C H                                 */
+/*---------------------------------------------------------------------------*/
+
+#searchBar
+{
+  margin-top:       10px;
+  margin-right:     20px;
+
+}
+
+  .searchField
+  {
+    background:       #fff;
+    border-radius:    10px 0px 0px 10px;
+    border:           1px solid #ddd;
+    padding:          5px;
+    padding-left:     15px;
+    outline:          none;
+    color:            #333;
+  }
+
+  .searchButton
+  {
+    background:       #fff;
+    border-radius:    0px 10px 10px 0px;
+    border:           1px solid #ddd;
+    border-left:      none;
+    padding:          5px 10px;
+    outline:          none;
+    margin-left:      -4px;
+    color:            #0ad;
+    -webkit-transition: background .4s, color .4s;
+  }
+    .searchButton:hover
+    {
+      background:   #0ad;
+      color:        #fff;
+    }
+
+/*---------------------------------------------------------------------------*/
+/*                 * E N T E R   N E W   S E C T I O N *                     */
+/*---------------------------------------------------------------------------*/

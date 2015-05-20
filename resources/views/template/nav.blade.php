@@ -32,6 +32,7 @@
 	<script src="{{ asset('/js/services/userService.js') }}"></script> <!-- load our service -->
 	<script src="{{ asset('/js/dirPagination.js') }}"></script> <!-- load our application -->
     <script src="{{ asset('/js/app.js') }}"></script> <!-- load our application -->
+    <script src="{{ asset('/js/search.js') }}"></script> <!-- load our SearchBar -->
 
     
 </head>
@@ -53,6 +54,10 @@
 					<li><a href="{{ url('/') }}">Home</a></li>
 					<li><a href="{{ url('/posts') }}">Posts</a></li>
 					<li><a href="{{ url('/story') }}">Stories</a></li>
+					<li id = "searchBar">
+						<input class = "searchField" placeholder = "search" type = "text"/>
+						<button class = "searchButton" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					</li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
