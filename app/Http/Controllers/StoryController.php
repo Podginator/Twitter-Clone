@@ -13,7 +13,7 @@ use Auth, View, Response, Input;
 class StoryController extends Controller {
 
 
-	//This is our VIEW commands.
+	//This is our VIEW commands. 
 	public function ViewStory(Story $story)
 	{
 		$storyPosts = Posts::getPostsFromStory($story->id);
@@ -34,7 +34,7 @@ class StoryController extends Controller {
 	 * GET request
 	 * @return Response
 	 */
-	 //These are our API commands.
+	 //These are our API commands. Restful and CRUD
 	public function index()
 	{
 		if(Auth::user())
