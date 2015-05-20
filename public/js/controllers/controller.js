@@ -15,22 +15,25 @@ angular.module('postCtrl', [])
 	{
 		$scope.errors = [];
 		var file =  postForm.image.files[0]
-		var valid = ['mp4', 'jpg', 'png','gif'];
+		var validExt = ['mp4', 'jpg', 'png','gif'];
 		var Mb = 2; 												// Change this value to assign nr of Mega bytes.
 		var validSize = Mb * Math.pow( Math.pow(2,10), 2 );        	// Get value in Mb. 
-
+		var validUp = true;
+		
 		var extension = file.name.split('.').pop();
-		if(valid.indexOf(extension) == -1 )
+		if(validExt.indexOf(extension) == -1 )
 		{
 			$scope.errors.push("The file you've chosen ("+file.name+") doesn't have the right extension (" + valid.join(" ") + ")");
+			validUp = false;
 		}
 		if( file.size > validSize )
 		{
 			$scope.errors.push("The file you've chosen ("+file.name+") exceeds the limit of " + Mb + " Mb.");
+			validUp = false;
 		}
 		$scope.$digest();
 		
-		return valid.indexOf(extension) != -1;
+		return validUp;
 		
 	}
 	
