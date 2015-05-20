@@ -151,11 +151,29 @@ a > .panel-heading .accordion-toggle.collapsed:after {
      background-color:rgba(255,255,255,0.75);
      
 }
-
 .selected{
   background-color:rgba(0,255,0,0.3)
 }
 
+
+/*---------------------------------------------------------------------------*/
+/*                             S T O R Y  I N P U T                          */
+/*---------------------------------------------------------------------------*/
+.storyInput{
+margin:0 auto;
+margin-bottom:5px;
+width:97%;
+}
+.storyButton{
+position:relative;
+left:30px;
+}
+.storySelect{
+  -webkit-transition: background-color 0.3s; /* Safari */
+}
+.storySelect:hover{
+  background-color:rgba(0,255,0,0.35);
+}
 /*---------------------------------------------------------------------------*/
 /*                             V I E W   P O S T                             */
 /*---------------------------------------------------------------------------*/

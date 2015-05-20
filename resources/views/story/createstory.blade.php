@@ -27,14 +27,14 @@
 					<div class="panel-body" ng-controller="PostController">
 						  <input 
 							type="text" 
-							class="form-control input-lg postInput"
+							class="form-control input-lg postInput storyInput"
 							ng-model="storyData.title" 
 							placeholder="Story Title."
 						>
 						
 						<input 
 							type="text" 
-							class="form-control input-lg postInput"
+							class="form-control input-lg postInput storyInput"
 							ng-model="storyData.hashtag" 
 							placeholder="Topic (Enter Hashtag without #)"
 							ng-model-options="{ updateOn: 'blur' }" 
@@ -43,7 +43,7 @@
 						
 						<input 
 							type="text" 
-							class="form-control input-lg postInput"
+							class="form-control input-lg postInput storyInput"
 						 	name="desc" 
 							ng-model="storyData.description" 
 							placeholder="Story Description."
@@ -61,7 +61,7 @@
 							</div>
 						</div>
 						
-						<button type="submit" class="btn btn-primary btn-lg" ng-disabled="postForm.$invalid">Submit</button>
+						<button type="submit" class="btn btn-primary btn-lg storyButton" ng-disabled="postForm.$invalid">Submit</button>
 					</div>
 				</form>
 			</div>
