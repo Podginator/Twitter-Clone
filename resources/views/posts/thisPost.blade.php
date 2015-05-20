@@ -71,13 +71,11 @@
 
 		<hr>
 
+		<img src = {{ $url }}>
+
 		<h4><a href = "/posts" class = "goBack">
 			<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
 			Go back
 		</a></h4>
-	</div>
-
-	<div class = "col-md-6 col-md-offset-3">
-		<img src = {{ $url }}>
 	</div>
 @endsection
