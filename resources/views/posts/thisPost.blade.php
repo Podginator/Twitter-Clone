@@ -53,18 +53,20 @@
 	}
 
 	?>
-	<div class = "col-md-2 col-md-offset-2">
+	<div class = "col-md-6 col-md-offset-3" style = "background: #fff; padding: 2%;">
 
 		<h4 style = "display: inline-block;">{{ $username }}</h4>
 
 		<div style = "display: inline-block; padding-left: 30px; color: #aaa;">
-			{{ getPostedTime($created_at) }}									 <!-- days ago -->
+			{{ getPostedTime($created_at) }}									<!-- days ago -->
 			<span style = "font-size: 10px;" class="glyphicon glyphicon-time" aria-hidden="true"></span>   
 		</div>
-
-		<div class = "tags">
+		<div> 												<!-- Display text -->
+			{{$text}}
+		</div>	
+		<div class = "tags" style = "padding-top: 10px;">
 			<span style = " color: #aaa">#</span>
-			tags: {{ splitByHashTag($text) }} 		<!-- Get all tags with separated link. -->
+			tags: {{ splitByHashTag($text) }} 				<!-- Get all tags with separated link. -->
 		</div>
 
 		<hr>
@@ -75,7 +77,7 @@
 		</a></h4>
 	</div>
 
-	<div class = "col-md-6 col-md-offset-1">
+	<div class = "col-md-6 col-md-offset-3">
 		<img src = {{ $url }}>
 	</div>
 @endsection

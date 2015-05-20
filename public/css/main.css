@@ -1,7 +1,9 @@
 body
 {
 
-  background-image: url('../imgs/seamless_paper_texture.png');
+  background-image: url('../imgs/twitterBg.png');
+  background-color: #c0deed;
+  background-repeat: repeat-x;
 }
 
 .row
