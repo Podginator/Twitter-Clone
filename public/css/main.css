@@ -1,3 +1,9 @@
+body
+{
+
+  background-image: url('../imgs/seamless_paper_texture.png');
+}
+
 .row
 {
   margin: 0px;
