@@ -107,19 +107,65 @@ class UserController extends Controller {
 
 			if( in_array($extension, $validExt) && $fileSize <= $validSize ) // Checks if the file extension is valid AND
 																					// if the image size doesn't exceeds the limit.											
-			{
+			{	
+			/*----------------------------------------*/
 
-	  			$filename = 'profile.'.$extension;
+				// Crop image:
+
+				$imageProps = getimagesize( $file );
+	
+				$imageW = $imageProps[0];
+				$imageH = $imageProps[1];
+
+				switch( $extension )
+				{
+					case 'jpg':  $oldImage = imagecreatefromjpeg( $file );  break; // The current file is a JPG extension.
+					case 'png':  $oldImage = imagecreatefrompng(  $file );  break; // The current file is a PNG extension.
+					case 'gif':  $oldImage = imagecreatefromgif(  $file );  break; // The current file is a GIF extension.
+				}
+
+				$croppedImage = imagecreatetruecolor(140,140); 		// Create a new cropped image as the new profile image.
+	
+				$cropH = 0;
+				$cropW = 0;
+				
+				
+				if($imageW > $imageH)         						// The original image has an aspect greater than 1.
+				{
+					$cropW = ($imageW - $imageH) / 2;
+					$cropH = 0;
+					$imageW = $imageH;
+				}
+				else 												// The original image has an aspect less than 1.
+				{
+					$cropW = 0;
+					$cropH = ($imageH - $imageW) /2;
+					$imageH = $imageW;
+				} 
+				
+				imagecopyresampled($croppedImage, $oldImage, 0, 0, $cropW, $cropH,  140, 140, $imageW, $imageH);
+
+				$filename = 'profile.'.$extension;
 			    $path = $dir."/".$filename;
+
+				switch( $extension )
+				{
+					case 'jpg':  imagejpeg($croppedImage, $dir."/".$filename, 100);   break; // The current file is a JPG extension.
+					case 'png':  imagepng($croppedImage, $dir."/".$filename, 0); 	 break; // The current file is a PNG extension.
+					case 'gif':  imagegif($croppedImage, $dir."/".$filename);		 break; // The current file is a GIF extension.
+				}
+
+			/*----------------------------------------*/
+	  			
 				//Get Move the file to the directory.
-				$file->move($dir,$filename);
+				$file->move($dir,$croppedImage);
 				//Create an image with a url
 				$newImage = Files::create(array(
 						"url"=> ''.$serverDir.'/'.$filename
 				));	
 			
 				return $newImage->id;
-			}echo "exceeds the maximum limit of $mb Mb";
+			}
 			return null;
 			
 		}
