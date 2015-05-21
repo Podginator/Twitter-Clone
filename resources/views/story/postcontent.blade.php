@@ -1,7 +1,7 @@
  <div class="storySelect">
 	 <div class="panel-heading text-muted">
 			<a class="text-muted" href="{{url('/<% post.username %>') }}">
-				<% post.username %>
+				<% post.username %> <span style="float:right;"> <% post.relativeTime %> </span>
 			</a> 
 		</div>
 	    <p compile="post.adText" class = "panel-body"><% post.adText %></p>

@@ -94,6 +94,7 @@ angular.module('postService', [])
 		this.url = url;
 		this.following = null;
 		this.ytEmbed = null;
+		this.relativeTime = null;
   	}
 
 	//We get the tags here, by matching the tags against a regex statement.

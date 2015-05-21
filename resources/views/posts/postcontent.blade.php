@@ -10,6 +10,9 @@
 				<img height='16' width="16" src="{{asset('/imgs/added.png')}}">  
 			</span>
 		@endif
+		
+		  <span style="float:right;"><% post.relativeTime %> </span>
+		
 	</div>
     <p compile="post.adText" class = "panel-body"><% post.adText %></p>
 		

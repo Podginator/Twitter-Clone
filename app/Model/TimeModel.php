@@ -4,6 +4,15 @@ use Illuminate\Database\Eloquent\Model;
 
 //Cannot initialize a TimeModel, it exists as an abstact class.
 abstract class TimeModel extends Model {
+	
+	protected $appends =array("relativeTime");
+	
+	//Append Function; Amazing.
+	public function getRelativeTimeAttribute()
+	{
+		return $this->getRelativeTime();
+	}
+	
 	//Here we want to implement a Method that tells you the relative time 
 	//since Object Creation.
 	public function getRelativeTime() 				// Show dynamic post time: 

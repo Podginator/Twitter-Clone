@@ -88,7 +88,8 @@ class Posts extends TimeModel {
 	{	
 			$posts = self::DefaultQuery() 
 				->where('users.username', $user);
-						
+				
+					
 			return $posts->select(self::GetSelect())->get();
 	}
 	
