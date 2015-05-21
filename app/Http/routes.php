@@ -18,12 +18,10 @@ Route::bind('user', function($value, $route){
 Route::bind('storyid', function($value, $route){
 	return App\Model\Story::where('id', $value)->first();
 });
-
-
-/*
 Route::bind('postid', function($value, $route){
-	return App\Model\Post::where('id', $value)->first();
-}); */
+	return App\Model\Posts::where('id', $value)->first();
+});
+
 
 
 //Gets
@@ -79,7 +77,7 @@ Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 
 Route::get('/api/user/follow/{user}', 'UserController@SubscribePerson');
 
-Route::get('/posts/{id}', 'PostsController@ViewPost');	// Route to specific post:
+Route::get('/posts/{postid}', 'PostsController@ViewPost');	// Route to specific post:
 
 
 Route::get('/api/posts/user/{username}', 'PostsController@GetUserPosts');

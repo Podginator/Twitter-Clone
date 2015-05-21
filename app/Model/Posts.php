@@ -10,7 +10,7 @@ class Posts extends Model {
 	//Define the relationships.
 	public function users()
 	{
-		$this->belongsTo('App\Model\User', 'userId');
+		return $this->belongsTo('App\Model\User', 'userId');
 	}
 	
 	
