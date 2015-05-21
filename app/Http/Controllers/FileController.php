@@ -23,9 +23,9 @@ class FileController extends Controller {
 			$serverDir =  "uploaded_images/".Auth::user()->username;
 			$dir = public_path($serverDir);
  
-			$Mb = 2;											// Valid Mega bytes. 
-			$validExt = array('mp4', 'png', 'jpg', 'gif');			// Valid file extensions.
-			$validSize = $Mb * pow(pow(2, 10), 2 );      	 	// Valid image size in Mb.
+			$mb = 2;											// Valid Mega bytes. 
+			$validExt = array('mp4', 'png', 'jpg', 'gif');		// Valid file extensions.
+			$validSize = $mb * pow(pow(2, 10), 2 );      	 	// Valid image size in Mb.
 			
 			if( File::exists($dir) or File::makeDirectory($dir) )
 			{

@@ -19,9 +19,9 @@ $(document).ready(function()
 		var input = searchField.val();
 		if( input != "" )
 		{
-   			loginUrl = window.location.origin+"/tag/" + input;
+   			url = window.location.origin+"/tag/" + input;
 
-			window.location.href = loginUrl;
+			window.location.href = url;
 		}
 	}
 

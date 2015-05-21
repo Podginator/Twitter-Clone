@@ -95,19 +95,33 @@ class UserController extends Controller {
 	{
 		$serverDir =  "uploaded_images/".Auth::user()->username;
 		$dir = public_path($serverDir);
+
+		$mb = 1;											// Valid Mega bytes. 
+		$validExt = array('mp4', 'png', 'jpg', 'gif');		// Valid file extensions.
+		$validSize = $mb * pow(pow(2, 10), 2 );      	 	// Valid image size in Mb.
+
 		if( File::exists($dir) or File::makeDirectory($dir) )
 		{
 			$extension = $file->getClientOriginalExtension();
-  			$filename = 'profile.'.$extension;
-		    $path = $dir."/".$filename;
-			//Get Move the file to the directory.
-			$file->move($dir,$filename);
-			//Create an image with a url
-			$newImage = Files::create(array(
-					"url"=> ''.$serverDir.'/'.$filename
-			));
+			$fileSize = $file->getSize();
+
+			if( in_array($extension, $validExt) && $fileSize <= $validSize ) // Checks if the file extension is valid AND
+																					// if the image size doesn't exceeds the limit.											
+			{
+
+	  			$filename = 'profile.'.$extension;
+			    $path = $dir."/".$filename;
+				//Get Move the file to the directory.
+				$file->move($dir,$filename);
+				//Create an image with a url
+				$newImage = Files::create(array(
+						"url"=> ''.$serverDir.'/'.$filename
+				));	
 			
-			return $newImage->id;
+				return $newImage->id;
+			}echo "exceeds the maximum limit of $mb Mb";
+			return null;
+			
 		}
 		
 		return null;
