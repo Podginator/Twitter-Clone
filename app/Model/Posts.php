@@ -1,8 +1,8 @@
 <?php namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model\TimeModel;
 use DB, Auth;
-class Posts extends Model {
+class Posts extends TimeModel {
 
 	protected $fillable = ['userId', 'text', 'imgId'];
 	protected $table = "posts";
@@ -120,6 +120,11 @@ class Posts extends Model {
 			->where('text', 'RLIKE', '(#'.$id.')[[:>:]]');
 			
 		return $posts->select(self::GetSelect())->get();
+	}
+	
+	public function GetPostTags() 				// Create link for each tag.
+	{
+		return preg_grep("/#(\[[\w\s]+\])|#(\w+)/", explode(' ', $this->text));
 	}
 
 }

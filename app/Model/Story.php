@@ -1,9 +1,9 @@
 <?php namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model\TimeModel;
 use DB;
 
-class Story extends Model {
+class Story extends TimeModel {
 
 	protected $fillable = ['name', 'description', "userId", "hashtag"];
 	protected $table = "story";

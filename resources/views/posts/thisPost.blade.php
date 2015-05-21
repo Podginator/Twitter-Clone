@@ -24,14 +24,15 @@
 			<span style = " color: #aaa">#</span>
 			tags: 
 			@foreach ($tags as $tag)
-     		 	<a href="/tag/{{ $tag }}"> #{{$tag}} </a>
+     		 	<a href="/tag/{{ str_replace('#', '', $tag) }}"> {{$tag}} </a>
     		@endforeach			<!-- Get all tags with separated link. -->
 		</div>
 
 		<hr>
-
-		<img src = {{ $post->url }}>
-
+		
+		@if ($post->url)
+			<img src = "/{{ $post->url }}">
+		@endif
 		<h4><a href = "/posts" class = "goBack">
 			<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
 			Go back
