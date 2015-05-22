@@ -22,12 +22,12 @@
 		@endif
 
 			<div class="panel panel-default postcontainer">
-				<div class="panel-heading">Your Posts</div>
 				
 				@if (Auth::user())
 					@include('posts.form')
 				@endif
 				
+				<div class="panel-heading">Your Posts</div>
 
 				
 				<div class="posts">

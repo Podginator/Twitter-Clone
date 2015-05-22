@@ -11,12 +11,12 @@
 @section('content')	
 <div class="container">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default" ng-controller="PostController" ng-init="GetPostsFromStory({{$story->id}})">
-				<div class="panel-heading">Story: {{$story->name}}({{$story->hashtag}})</div>	
-				    <p class="panel-body">{{$story->description}}</p>
+			<div class="panel-default" ng-controller="PostController" ng-init="GetPostsFromStory({{$story->id}})">
+				<div class="panel-heading">Story: {{$story->name}} (#{{$story->hashtag}})</div>	
+				    <div class="panel panel-body">{{$story->description}}</div>
 					
 					<div class="panel-body">
-						<div class="panel panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation">
+						<div class="panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation">
 									@include("story.postcontent")
 						</div>
 					</div>

@@ -1,14 +1,7 @@
-<div class="panel-body">
-	<div class="alert alert-danger" ng-if="errors.length > 0">
-		<strong>Sorry, there were some problems with your sheet..</strong><br><br>
-		<ul>
-			<li ng-repeat= "error in errors"><% error %></li>
-		</ul>
-	</div>
-</div>
+
 
 <form name="postForm" ng-submit="submitPost()" enctype="multipart/form-data">
-	<div class="input-group panel-body">
+	<div class="input-group panel-header">
 	   <span class="input-group-btn btn btn-default btn-file">
 			<input type="file" name="image" onchange="ChangeFile(this)"  id="imageUploaded" style="padding-right:50px">
 		</span>
@@ -39,3 +32,12 @@
 	
 	
 </form>
+
+<div class="panel-body">
+	<div class="alert alert-danger" ng-if="errors.length > 0">
+		<strong>Sorry, there were some problems with your sheet..</strong><br><br>
+		<ul>
+			<li ng-repeat= "error in errors"><% error %></li>
+		</ul>
+	</div>
+</div>

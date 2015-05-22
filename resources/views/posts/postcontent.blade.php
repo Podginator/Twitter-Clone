@@ -14,6 +14,7 @@
 		  <span style="float:right;"><% post.relativeTime %> </span>
 		
 	</div>
+
     <p compile="post.adText" class = "panel-body"><% post.adText %></p>
 		
 	<div style="padding-bottom:15px" ng-if="post.url" compile="post.url"> 

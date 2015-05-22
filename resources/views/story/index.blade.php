@@ -22,12 +22,13 @@
 		@endif
 
 			<div class="panel panel-default postcontainer">
-				<div class="panel-heading">Your Stories</div>
+
 				
 				@if (Auth::user())
 					@include('story.form')
 				@endif
 				
+				<div class="panel-heading">Your Stories</div>		
 				
 				<div class="posts">
 					@include('story.story')

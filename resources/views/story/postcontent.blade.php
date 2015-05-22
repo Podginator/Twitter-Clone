@@ -1,4 +1,4 @@
- <div class="storySelect">
+ <div class="storySelect well">
 	 <div class="panel-heading text-muted">
 			<a class="text-muted" href="{{url('/<% post.username %>') }}">
 				<% post.username %> <span style="float:right;"> <% post.relativeTime %> </span>
