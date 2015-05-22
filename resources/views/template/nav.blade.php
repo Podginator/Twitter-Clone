@@ -57,6 +57,7 @@
 					<li id = "searchBar">
 						<input class = "searchField" placeholder = "search" type = "text"/>
 						<button class = "searchButton" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+						<ul class = "searchResults"></ul>
 					</li>
 				</ul>
 

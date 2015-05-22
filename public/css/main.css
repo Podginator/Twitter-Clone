@@ -217,6 +217,7 @@ left:30px;
 
 #searchBar
 {
+  position:         relative;
   margin-top:       10px;
   margin-right:     20px;
 
@@ -250,6 +251,33 @@ left:30px;
       background:   #0ad;
       color:        #fff;
     }
+
+    .searchResults 
+    {
+      position:     absolute;
+      top:          30px;
+      border:       1px solid #ddd;
+      border-top:   1px solid #eee;
+      z-index:      100;
+      box-shadow:   0px 2px 2px #888;
+      background:   #F8F8f8;
+      padding-left: 0px;
+    }
+
+      .searchResults li
+      {
+        border-bottom:  1px solid #eee;
+        padding:        10px 0px;
+        padding-left:   10px;
+        list-style:     none;
+        background:     #F8f8f8;
+        min-width:      167px;
+      }
+        .searchResults li:hover
+        {
+          background: #0ad;
+          color:      #fff;
+        }
 
 /*---------------------------------------------------------------------------*/
 /*                 * E N T E R   N E W   S E C T I O N *                     */
