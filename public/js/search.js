@@ -35,12 +35,15 @@ $(document).ready(function()
 			{
 				var patt = /(#\w+)/;
 	   		 	var res = patt.exec(post.text);
-
 	   		 	res = res.slice(0);	// Remove hashtag.
 
 				var tags = res.toString().split(",");
-
-				tagsList.push(tags[0]);		// temporarily code. 
+				$.each(tags, function(i, eleme){
+					if($.inArray(elem, tagsList)==-1){
+						tagsList.push(elem)
+					}
+				})
+				//tagsList.push(tags[0]);		// temporarily code. 
 				console.log(tagsList);
 			});
 		}

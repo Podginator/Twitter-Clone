@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 //Cannot initialize a TimeModel, it exists as an abstact class.
 abstract class TimeModel extends Model {
 	
-	protected $appends =array("relativeTime");
+	protected $appends = array("relativeTime");
 	
 	//Append Function; Amazing.
 	public function getRelativeTimeAttribute()
