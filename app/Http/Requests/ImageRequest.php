@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Http\FormRequest;
 use Response, Auth, Input;
-
+use Log;
 
 class ImageRequest extends FormRequest
 {
@@ -23,13 +23,13 @@ class ImageRequest extends FormRequest
         $validator = parent::getValidatorInstance();
         $mb = 5;
         $sizeLim = $mb * pow(pow(10,2),2);
-
-         $validator->after(function() use ($validator) {
-            if(!in_array(Input::file('image')->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
+        $file = Input::file('image');
+         $validator->after(function() use ($validator, $sizeLim, $file) {
+            if(!in_array($file->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
             {
                 $validator->errors()->add('Bio', 'Incorrect File Type used.');
             }
-            if(Input::file('image').getSize() > $sizeLim)
+            if($file->getSize() > $sizeLim)
             {
                 $validator->error()->add('Size', 'File exceeds upload limit of '.$mb.' mb');
             }
