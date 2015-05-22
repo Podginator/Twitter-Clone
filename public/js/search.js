@@ -39,7 +39,7 @@ $(document).ready(function()
 				var tags = res.toString().split(",");
 				$.each(tags, function(i, elem){
 					if($.inArray(elem, tagsList)==-1){
-						tagsList.push(elem)
+						tagsList.push(elem);
 					}
 				})
 			});
