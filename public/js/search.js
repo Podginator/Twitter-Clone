@@ -35,7 +35,6 @@ $(document).ready(function()
 			{
 				var patt = /(#\w+)/;
 	   		 	var res = patt.exec(post.text);
-	   		 	res = res.slice(0);	// Remove hashtag.
 
 				var tags = res.toString().split(",");
 				$.each(tags, function(i, elem){
@@ -43,22 +42,9 @@ $(document).ready(function()
 						tagsList.push(elem)
 					}
 				})
-				//tagsList.push(tags[0]);		// temporarily code. 
-				console.log(tagsList);
 			});
 		}
 	});
-
-	
-
-	/*for (i = 0; i< tags.length; i++)
-	{
-		for(j = 0; j < tags.length; j++)
-		{
-			if(tags[j] == tags[i])
-				
-		}
-	} */
 
 /*---------------------------------------------------------------------------*/
 /*								F u n c t i o n s		  					 */
@@ -70,7 +56,6 @@ $(document).ready(function()
 		{
    			url = window.location.origin+"/tag/" + searchInput;
 			window.location.href = url;
-
 		}
 	}
 
