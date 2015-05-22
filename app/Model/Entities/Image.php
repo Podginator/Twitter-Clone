@@ -56,7 +56,7 @@ class Image
                 break; // The current file is a GIF extension.
 		}
 
-		$this->image = imagecreatetruecolor(140,140); 		// Create a new cropped image as the new profile image.
+		$this->image = imagecreatetruecolor($size,$size); 		// Create a new cropped image as the new profile image.
 
 		$cropH = 0;
 		$cropW = 0;
