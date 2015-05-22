@@ -38,7 +38,7 @@ $(document).ready(function()
 	   		 	res = res.slice(0);	// Remove hashtag.
 
 				var tags = res.toString().split(",");
-				$.each(tags, function(i, eleme){
+				$.each(tags, function(i, elem){
 					if($.inArray(elem, tagsList)==-1){
 						tagsList.push(elem)
 					}
