@@ -32,7 +32,7 @@ class Story extends TimeModel {
 			->orWhere(function($query) use ($followingEv, $following){
 				foreach($followingEv as $follow)
 				{
-					$query->orWhere('story.name', 'RLIKE', '('.$follow.')[[:>:]]');
+					$query->orWhere('story.hashtag', '=',$follow);
 				}
 				foreach($following as $follow)
 				{
