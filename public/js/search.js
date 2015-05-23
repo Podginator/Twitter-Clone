@@ -3,7 +3,7 @@
 $(document).ready(function()
 {
 		
-	$('.searchResults').undelegate('click');				// My saviour. THIS!!!	
+	$('.searchResults').undelegate('click');	
 
 /*---------------------------------------------------------------------------*/
 /*								   A r r a y s			  					 */
