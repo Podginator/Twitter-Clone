@@ -42,7 +42,7 @@ class Image
 		$imageW = $imageProps[0];
 		$imageH = $imageProps[1];
         $extension = $this->uploadedFile->getClientOriginalExtension();
-		switch( $this->uploadedFile->getClientOriginalExtension())
+		switch($extension)
 		{
 			case 'jpg':
             case 'jpeg': 

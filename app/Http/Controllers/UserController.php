@@ -10,28 +10,6 @@ use App\Model\Entities\Image;
 use ValidationService;
 use Log;
 class UserController extends Controller {
-
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		//$this->middleware('auth');
-	}
-
-	/**
-	 * Show the application dashboard to the user.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-        //STUB
-		//return view("home.home");
-	}
-	
 	public function store()
 	{
 		//First we need to check if the user is logged in, if so, he can post.
@@ -100,21 +78,15 @@ class UserController extends Controller {
 		$mb = 1;											// Valid Mega bytes. 
 		$validExt = array('mp4', 'png', 'jpg', 'gif');		// Valid file extensions.
 		$validSize = $mb * pow(pow(2, 10), 2 );      	 	// Valid image size in Mb.
-		
-		
+			
 		if( File::exists($dir) or File::makeDirectory($dir) )
 		{
-			
 			$extension = $file->getClientOriginalExtension();
-			echo $extension;
 			$fileSize = $file->getSize();
-			
-			echo print_r($file);
-			//Log::info($file->getClientOriginalExtension(), "Two");
-			if( in_array($extension, $validExt) && $fileSize <= $validSize ) // Checks if the file extension is valid AND
-																					// if the image size doesn't exceeds the limit.											
+			// Checks if the file extension is valid AND
+			// if the image size doesn't exceeds the limit.
+			if( in_array($extension, $validExt) && $fileSize <= $validSize ) 											
 			{	
-				
 				$filename = 'profile.'.$extension;
 			    $path = $dir."/".$filename;
 				
@@ -128,10 +100,7 @@ class UserController extends Controller {
 			
 				return $newImage->id;
 			}
-			return null;
-			
 		}
-		
 		return null;
 	}
 	
@@ -161,7 +130,5 @@ class UserController extends Controller {
 		
 		abort(404);
 		return false;
-		
 	}
-	
 }

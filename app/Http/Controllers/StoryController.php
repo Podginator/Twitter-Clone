@@ -12,7 +12,6 @@ use Auth, View, Response, Input;
 
 class StoryController extends Controller {
 
-
 	//This is our VIEW commands. 
 	public function ViewStory(Story $story)
 	{
@@ -28,7 +27,6 @@ class StoryController extends Controller {
 		return View::make('story.createstory')->with('title', $title);
 	}
 	
-
 	/**
 	 * Display a listing of the resource.
 	 * GET request
@@ -46,9 +44,6 @@ class StoryController extends Controller {
 
 	public function store(StoryAddRequest $req)
 	{
-		
-		
-		//To Do : Validation
 		$newPost = Story::create(array(
 					"name"=>Input::get('title'),
 					"userId" => Auth::user()->id,
@@ -68,7 +63,6 @@ class StoryController extends Controller {
 		//here we check if the newpost entered the db, if it did then the newPost will have an id, otherwise it will not.
 		return $newPost->id ? Response::json(array("success"=>true, "id" => $newPost->id)) : Response::json(array("fail"=>true, "id" => $newPost->id));
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
