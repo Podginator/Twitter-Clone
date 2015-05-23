@@ -19,19 +19,36 @@ class ProfileRequest extends FormRequest
         return Auth::check();
     }
     
-    //Check if the Biography has illegal characters in it. 
+    //Check if the Biography has illegal characters in it And if the image doesn't exceeds the limit. 
     public function getValidatorInstance() {
         $validator = parent::getValidatorInstance();
 
-         $validator->after(function() use ($validator) {
-            $illegal = "#%^&[]/{}|:<>";
+        $mb = 2;
+        $sizeLim = $mb * pow(pow(10,2),2);
+        $file = Input::file('image');
+        $illegal = "#%^&[]/{}|:<>";
+
+       // (!) Error: seems like the file returns NULL.
+
+         $validator->after(function() use ($validator, $sizeLim, $file, $illegal) {
+            
             if(strpbrk(Input::get('bio'), $illegal))
             {
                 $validator->errors()->add('Bio', 'Cannot contain illegal characters');
             }
 
+        // (!) If you found the error with the file, uncomment the code below:
+
+           /* if(!in_array($file->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
+            {
+                $validator->errors()->add('Bio', 'Incorrect File Type used.');
+            }
+            if($file->getSize() > $sizeLim)
+            {
+                $validator->error()->add('Size', 'File exceeds upload limit of '.$mb.' mb');
+            } */
+
         });
         return $validator;
     }
-    
 }
