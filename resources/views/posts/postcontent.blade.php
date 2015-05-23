@@ -1,5 +1,6 @@
  <div class="panel-heading text-muted" >
 		<a class="text-muted" href="{{url('/<% post.username %>') }}">
+			<!-- <img class = "thumbProPic" src = ""/> -->
 			<% post.username %>
 		</a> 
 		@if (Auth::user())

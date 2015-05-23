@@ -82,21 +82,12 @@ class PostsController extends Controller {
 	
 	
 	//Get Specific Post.
-	public function ViewPost(Posts $post) 						// Get Specific Post:
+	public function ViewPost(Posts $post) 					// Get Specific Post:
 	{
 		$data["post"] = $post;
 		$data["tags"] = $post->GetPostTags();
 		$data["time"] = $post->getRelativeTime();
-		//$jsonData = Response::json(Posts::getPost($id)); 	// Get this post data from json.
-		//$jsonData = substr($jsonData, 123); 				// Remove header data. 
-																// (!) Change this to regex, seriously..
 		
-		//$data = json_decode( $jsonData, true );				// Decode json data to assoc array.
-		//$data = $data[0];									// Remove outer array.		
-		
-		
-		//print_r($id)
-;		
 		return View::make('posts.thisPost')->with($data);	// Return the data to the view.
 	} 
 	

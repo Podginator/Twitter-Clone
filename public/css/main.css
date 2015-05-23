@@ -209,6 +209,13 @@ left:30px;
     text-decoration:  none;
     color:            #0ad;
   }
+
+.thumbnailProPic
+{
+  width: 75px;
+  height: 75px;
+  border: 1px solid #aaa;
+}    
   
   
 /*---------------------------------------------------------------------------*/

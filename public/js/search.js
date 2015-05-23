@@ -29,18 +29,18 @@ $(document).ready(function()
 
 	url = window.location.origin; 						// Get root path.
 	
-	$.ajax											// Get all tags and store them in tagsList.
+	$.ajax												// Get all tags and store them in tagsList.
 	({
 		url: url + '/api/posts',						// Get all posts from json.
 		success: function(posts) 						// Success callback:
 		{
-			$.each(posts, function (i, post)		// Find all hashtags and store unambiguously:
+			$.each(posts, function (i, post)			// Find all hashtags and store unambiguously:
 			{
 				var patt = /(#\w+)/; 					// Regular expression to find all tags (!) not working properly..
 	   		 	var res = patt.exec(post.text);			// Get result of regular expression.
 				var tags = res.toString().split(","); 	// Split string to array on ','.	
 
-				$.each(tags, function(i, elem) 		// Filter ambigious tags:
+				$.each(tags, function(i, elem) 			// Filter ambigious tags:
 				{
 					if($.inArray(elem, tagsList)==-1){
 						tagsList.push(elem);
@@ -54,7 +54,7 @@ $(document).ready(function()
 /*								F u n c t i o n s		  					 */
 /*---------------------------------------------------------------------------*/
 
-	function search( searchInput ) 					// Search after this input. 
+	function search( searchInput ) 						// Search after this input. 
 	{
 		if( searchInput != "" ) 						// The input must have a value.	
 		{
@@ -67,14 +67,14 @@ $(document).ready(function()
 /*								K e y   E v e n t s		  					 */
 /*---------------------------------------------------------------------------*/
 
-	searchField.bind('keyup change', function(e) 		// When the user presses a key.
+	searchField.bind('keyup change', function(e) 			// When the user presses a key.
 	{
 		var input = searchField.val(); 						// Get input value.
 
 		searchList = []; 									// Reset search array.
 		searchResults.html(''); 							// Reset the search output.
 
-		if( input == "" ) 								// The user backspaced the input value:
+		if( input == "" ) 									// The user backspaced the input value:
 		{
 			searchResults.slideUp();
 			searchField.css({'border-radius':'10px 0px 0px 10px'});
@@ -82,7 +82,7 @@ $(document).ready(function()
 			searchList = [];
 		}
 
-		if (e.which == 13 || e.keyCode == 13) 			// Pressed Enter:
+		if (e.which == 13 || e.keyCode == 13) 				// Pressed Enter:
 			search(input);									// Perform a search.
 
 		var result = false; 								// Boolean to check if there was any results.
@@ -126,9 +126,9 @@ $(document).ready(function()
 /*							  C l i c k   E v e n t s		  				 */
 /*---------------------------------------------------------------------------*/
 
-	searchButton.click( function() 					// Clicked on the search button:	
+	searchButton.click( function() 							// Clicked on the search button:	
 	{	
-		search( searchField.val() );				// Search with the current input.
+		search( searchField.val() );						// Search with the current input.
 	});
 
 	$('.searchResults').delegate('li', 'click',function() 	// Clicked on a search reuslt from the list:

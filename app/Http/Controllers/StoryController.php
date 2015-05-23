@@ -71,12 +71,12 @@ class StoryController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		$post = Posts::where('id', $id)->first();
+		$story = Story::where('id', $id)->first();
 
 		//For later:: Auth::user()->admin
-		if(Auth::user()->id == $post->userId)
+		if(Auth::user()->id == $story->userId)
 		{
-			Posts::destroy($id);	
+			Story::destroy($id);	
 			return Response::json(array('success'=>true));
 		}
 		

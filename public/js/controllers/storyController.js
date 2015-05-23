@@ -73,7 +73,18 @@ angular.module('storyCtrl', [])
 	{
 		$scope.postsToAdd = [];
 	}
+
+/*---------------------------------------------------------------------------*/
+/*								Delete  Behaviour		  					 */
+/*---------------------------------------------------------------------------*/	
 	
+	$scope.deleteStory = function(id) {
+		$scope.animation = true;
+		 Story.destroy(id)
+            .success(function(data) {
+               	$scope.GetDefault();
+            });
+    };	
 	
 });
 

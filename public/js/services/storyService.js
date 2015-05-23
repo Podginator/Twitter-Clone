@@ -15,6 +15,10 @@ angular.module('storyService', [])
 					headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
 					data: $.param(data)
 			});
-		}
+		},
+		//Fires the destroy even and gets story id.
+		destroy: function(id){
+			return $http.delete('/api/story/'+id);
+		},
 	}
 });
