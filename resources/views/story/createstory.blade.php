@@ -11,7 +11,7 @@
 @section('content')	
 <div class="container" ng-controller="StoryController" ng-init="storyData.title = Test">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default">
+			<div class="panel panel-default" style = "padding-bottom: 20px;">
 				<div class="panel-heading">Create a story</div>	
 					
 					<div class="panel-body">
