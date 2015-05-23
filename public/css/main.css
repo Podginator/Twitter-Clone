@@ -164,6 +164,25 @@ a > .panel-heading .accordion-toggle.collapsed:after {
   background-color:rgba(0,255,0,0.3);
 }
 
+.valTextLengthPost
+{
+  position: relative;
+  top:            10px;
+  margin:         0px;
+  padding:        10px;
+  background:     #0ad;
+  color:          #fff;
+  border-radius:  10px;
+  display:        inline;
+}
+
+.valHashtagPost
+{
+  color:          #fff;
+  padding:        10px;
+  border-radius:  10px;
+  background:     #dd5454;
+}
 
 /*---------------------------------------------------------------------------*/
 /*                             S T O R Y  I N P U T                          */

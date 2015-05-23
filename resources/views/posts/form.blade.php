@@ -21,8 +21,8 @@
 		
 	</div>
 	<div class="panel-body postData">
-		<p ng-show="!postForm.text.$invalid"><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</span></p>
-		<p class="text-center" ng-show="postForm.text.$dirty && postForm.text.$invalid" style="color:red;">Sheets need a HashTag!</p>
+		<p class = "valTextLengthPost" ng-show="!postForm.text.$invalid"><% postData.text.length != undefined ? postData.text.length : 0 %> of 140</p>
+		<p class="text-center valHashtagPost" ng-show="postForm.text.$dirty && postForm.text.$invalid">Sheets need a HashTag (#) !</p>
 	</div>
 	
 	<div class="img-responsive"">
