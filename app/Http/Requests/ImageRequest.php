@@ -22,9 +22,9 @@ class ImageRequest extends FormRequest
      public function getValidatorInstance() {
         $validator = parent::getValidatorInstance();
         $mb = 5;
-        $sizeLim = $mb * pow(pow(10,2),2);
+        $sizeLim = $mb * pow(1024,2);
         $file = Input::file('image');
-         $validator->after(function() use ($validator, $sizeLim, $file) {
+         $validator->after(function() use ($validator, $sizeLim, $file, $mb) {
             if(!in_array($file->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
             {
                 $validator->errors()->add('Bio', 'Incorrect File Type used.');

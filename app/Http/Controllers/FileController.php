@@ -9,8 +9,18 @@ use App\Model\Files;
 use Auth, View, Response, Input, Image, File, FilesystemIterator;
 
 class FileController extends Controller {
-
-
+	
+	/*
+	|--------------------------------------------------------------------------
+	| File Controller
+	|--------------------------------------------------------------------------
+	|
+	| This controller handles the request of file uploads if the users
+	| are authenticated. 
+	| 
+	|
+	*/
+	
     // now save your image to your $path
 	//All we need. This will return an id for an Image Item when uploaded. 
 	public function store(ImageRequest $request)

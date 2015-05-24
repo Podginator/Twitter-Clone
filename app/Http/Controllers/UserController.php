@@ -8,8 +8,17 @@ use App\Model\Files;
 use App\Http\Requests\ProfileRequest;
 use App\Model\Entities\Image;
 use ValidationService;
-use Log;
+
 class UserController extends Controller {
+	/*
+	|--------------------------------------------------------------------------
+	| User Controller
+	|--------------------------------------------------------------------------
+	|
+	| This controller handles the restful for user and makes the profile pages
+	| It also handles profile uploads.
+	|
+	*/
 	public function store()
 	{
 		//First we need to check if the user is logged in, if so, he can post.
@@ -49,7 +58,7 @@ class UserController extends Controller {
 		return View::make('users.fullprofile');
 	}
 	
-	public function GetCurrentUser()
+	public function getCurrentUser()
 	{
 		 return Response::json(Auth::user());
 	}
@@ -104,7 +113,7 @@ class UserController extends Controller {
 		return null;
 	}
 	
-	public function SubscribePerson(User $user)
+	public function subscribePerson(User $user)
 	{
 		$success =  Response::json(array('success' => true));
 		$fail =  Response::json(array('success' => false));

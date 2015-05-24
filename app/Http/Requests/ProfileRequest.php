@@ -38,12 +38,11 @@ class ProfileRequest extends FormRequest
             
             
             
-           if(!in_array($file->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
+           if(!in_array($file->getClientOriginalExtension(), array('png', 'jpg', 'gif')))
             {
                 $validator->errors()->add('Bio', 'Incorrect File Type used.');
             }
             
-            echo $file->getSize(), ": " , $sizeLim;
             
             if($file->getSize() > $sizeLim)
             {

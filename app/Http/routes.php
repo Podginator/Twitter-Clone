@@ -22,8 +22,6 @@ Route::bind('postid', function($value, $route){
 	return App\Model\Posts::where('id', $value)->first();
 });
 
-
-
 //Gets
 Route::get('/', 'HomeController@index');
 //We just make the View inside the routes, no logic needs to be done as that is handled in angulars
@@ -50,12 +48,12 @@ Route::get('/posts/{id}', function($postID){
 }); */
 
 Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
-Route::get('/api/story/posts/{id}', "StoryController@GetStoryPosts");
+Route::get('/api/story/posts/{id}', "StoryController@getStoryPosts");
 Route::get('/story/create', [
     'middleware' => 'auth',
     'uses' => 'StoryController@CreateStory'
 ]);
-Route::get('/story/{storyid}', 'StoryController@ViewStory');
+Route::get('/story/{storyid}', 'StoryController@viewStory');
 Route::post('/api/story/edit/{id}', 'StoryController@edit');
 
 //This is where the API stuff happens
@@ -74,14 +72,11 @@ Route::group(array('prefix' => 'api'), function(){
 		array('only'=>array('store'))	
 	);
 });
-Route::get('/api/posts/{tag}', 'PostsController@GetTag');
 
-Route::get('/api/user/follow/{user}', 'UserController@SubscribePerson');
-
-Route::get('/posts/{postid}', 'PostsController@ViewPost');	// Route to specific post:
-
-
-Route::get('/api/posts/user/{username}', 'PostsController@GetUserPosts');
+Route::get('/api/posts/{tag}', 'PostsController@getTag');
+Route::get('/api/user/follow/{user}', 'UserController@subscribePerson');
+Route::get('/posts/{postid}', 'PostsController@viewPost');	// Route to specific post:
+Route::get('/api/posts/user/{username}', 'PostsController@getUserPosts');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -12,8 +12,16 @@ use Auth, View, Response, Input;
 
 class StoryController extends Controller {
 
+	/*
+	|--------------------------------------------------------------------------
+	| Story Controller
+	|--------------------------------------------------------------------------
+	|
+	| This Story Controller handles the RESTful api and creates views.
+	|
+	*/
 	//This is our VIEW commands. 
-	public function ViewStory(Story $story)
+	public function viewStory(Story $story)
 	{
 		$storyPosts = Posts::getPostsFromStory($story->id);
 		$data['story'] = $story;
@@ -21,7 +29,7 @@ class StoryController extends Controller {
 		return View::make('story.viewstory')->with($data);
 	}
 
-	public function CreateStory()
+	public function createStory()
 	{
 		$title= isset($_GET["title"]) ? $_GET["title"] : "";
 		return View::make('story.createstory')->with('title', $title);
@@ -83,7 +91,7 @@ class StoryController extends Controller {
 		return Response::json(array('success'=>false));
 	}
 	
-	public function GetStoryPosts($id)
+	public function getStoryPosts($id)
 	{
 		return Response::json(Posts::getPostsFromStory($id));
 	}

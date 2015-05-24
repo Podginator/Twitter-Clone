@@ -10,7 +10,16 @@ use Auth, View, Response, Input;
 
 class PostsController extends Controller {
 
-
+	/*
+	|--------------------------------------------------------------------------
+	| Posts Controller
+	|--------------------------------------------------------------------------
+	|
+	| This controller handles the RESTful side of the posts.
+	| 
+	| 
+	|
+	*/
 	/**
 	 * Display a listing of the resource.
 	 * GET request
@@ -70,19 +79,19 @@ class PostsController extends Controller {
 		return Response::json(array('success'=>false));
 	}
 	
-	public function GetTag($id)
+	public function getTag($id)
 	{
 		return Response::json(Posts::GetTagged($id));
 	}
 	
-	public function GetUserPosts($user)
+	public function getUserPosts($user)
 	{
 		return Response::json(Posts::getUserPosts($user));
 	}
 	
 	
 	//Get Specific Post.
-	public function ViewPost(Posts $post) 					// Get Specific Post:
+	public function viewPost(Posts $post) 					// Get Specific Post:
 	{
 		$data["post"] = $post;
 		$data["tags"] = $post->GetPostTags();
