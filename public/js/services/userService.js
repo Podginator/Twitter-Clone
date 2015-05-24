@@ -14,6 +14,9 @@ angular.module('userService', [])
 		saveUser: function(id){
 			console.log(id);
 			return $http.get('/api/user/follow/'+id);
+		},
+		isFollowing: function(username){
+			return $http.get('/api/user/following/'+username);
 		}
 	}
 });

@@ -117,6 +117,10 @@ class UserController extends Controller {
 		return $follow->id ? $success : $fail;
 	}
 	
+	public function isFollowing(User $user)
+	{
+		return Response::json(array('following'=> in_array($user->id, Auth::user()->getFollowing())));
+	}
 	public function removeUserTag($id)
 	{
 		$tag = FollowingEvent::where('id', '=', $id)->first();
