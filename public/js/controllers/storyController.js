@@ -60,6 +60,7 @@ angular.module('storyCtrl', [])
 		if(index == -1)
 		{
 			$('.storypost-'+id).addClass('selected');
+			$('.storypost-'+id).css({'background': '#333', 'z-index': '100'});
 			$scope.postsToAdd.push(id);
 		}
 		else{

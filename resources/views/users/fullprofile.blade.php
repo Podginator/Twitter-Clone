@@ -36,7 +36,7 @@
 							<div class="col-md-10 col-md-offset-1 text-center">
 									
 									@if (Auth::user()->files)
-										<img alt="Profile Image" width="140" height="140" src="{{asset(Auth::user()->files->url)}}">
+										<img alt="Profile Image" src="{{asset(Auth::user()->files->url)}}">
 									@else
 										<img alt="Profile Image" width="140" height="140" src="{{asset('/imgs/default-avatar.png')}}">
 									@endif

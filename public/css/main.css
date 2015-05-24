@@ -200,15 +200,15 @@ left:30px;
   -webkit-transition: background-color 0.3s; /* Safari */
 }
 .storySelect:hover{
-  background-color:rgba(0,255,0,0.35);
+  background-color:rgba(0, 170, 221,.2);  /* Blue: select */
 }
 
 .selected > .storySelect:hover{
-  background-color:rgba(255,0,0,0.35);
+  background-color:rgba(255,0,0,.2);    /* Red: remove */
 }
 
 .selected:hover{
-    background-color:rgba(255,0,0,0.35);
+    background-color:rgba(255,0,0,.2);  /* Green: Is selected */
 }
 
 /*---------------------------------------------------------------------------*/
@@ -305,6 +305,52 @@ left:30px;
           color:      #fff;
           cursor:     pointer;
         }
+
+/*---------------------------------------------------------------------------*/
+/*                          P R O F I L E   P A G E                          */
+/*---------------------------------------------------------------------------*/
+
+.profileSidebar
+{
+  height: 150px;
+  background: hsla(0,0%,100%,.8);
+  padding: 0px;
+}
+
+  .profileSidebar li
+  {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: none;
+    list-style: none;
+  }
+    .profileSidebar li img
+    {
+      margin: 25px 0px 0px 25px;
+      border-radius: 15px;
+      width: 100px;
+    }
+
+    .profileSidebarText
+    {
+      color: #555;
+      padding: 20px;
+    }
+
+.followThisUser
+{
+  background: #0ad;
+  color: #fff;
+  text-align: center;
+  font-size: 125%;
+  padding: 10px 0px;
+  font-weight: 500;
+}
+
+  .followThisUser:hover
+  {
+    cursor: pointer;
+  }
 
 /*---------------------------------------------------------------------------*/
 /*                 * E N T E R   N E W   S E C T I O N *                     */
