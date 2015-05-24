@@ -15,7 +15,7 @@ class Posts extends TimeModel {
 	
 	
 	//This is the Query most 
-	public static function DefaultQuery()
+	public static function defaultQuery()
 	{
 		return Posts::join('users', function($join){
 				$join->on('users.id', '=', 'posts.userId');
@@ -30,7 +30,7 @@ class Posts extends TimeModel {
 			->orderBy('posts.created_at', 'desc');
 	}
 	
-	public static function GetSelect()
+	public static function getSelect()
 	{
 		$arr = array('posts.*',
 						'users.username',
@@ -48,7 +48,7 @@ class Posts extends TimeModel {
 	//Override of All, we need to ensure we get the username.
 	public static function all($columns = array('*'))
 	{
-		return self::DefaultQuery()
+		return self::defaultQuery()
 			->select(array(
 					'posts.*',
 					'users.username',
@@ -65,7 +65,7 @@ class Posts extends TimeModel {
 		//of the events they're following.
 		$followingEv = $user->getFollowingEvents();
 		$following = $user->getFollowing();
-		$posts = self::DefaultQuery() 
+		$posts = self::defaultQuery() 
 			->where('posts.userId', $user->id)
 			->orWhere(function($query) use ($followingEv, $following){
 				foreach($followingEv as $follow)
@@ -80,50 +80,50 @@ class Posts extends TimeModel {
 			});
 			
 			
-		return $posts->select(self::GetSelect())->get();
+		return $posts->select(self::getSelect())->get();
 	}
 	
 	
 	public static function getUserPosts($user)
 	{	
-			$posts = self::DefaultQuery() 
+			$posts = self::defaultQuery() 
 				->where('users.username', $user);
 				
 					
-			return $posts->select(self::GetSelect())->get();
+			return $posts->select(self::getSelect())->get();
 	}
 	
 	
 	public static function getPostsFromStory($id)
 	{
-		$posts = self::DefaultQuery()
+		$posts = self::defaultQuery()
 			->leftJoin('storypost', function($join){
 				$join->on('storypost.postid', '=', 'posts.id');
 			})
 			->where('storypost.storyid', $id);
 			
-		return $posts->select(self::GetSelect())->get();
+		return $posts->select(self::getSelect())->get();
 	}
 	
 	public static function getPost($id)
 	{
 
-		$posts = self::DefaultQuery() 
+		$posts = self::defaultQuery() 
 				->where('posts.id', $id);
 					
-		return $posts->select(self::GetSelect())->get();
+		return $posts->select(self::getSelect())->get();
 
 	} 
 	
-	public static function GetTagged($id)
+	public static function getTagged($id)
 	{
-		$posts = self::DefaultQuery() 
+		$posts = self::defaultQuery() 
 			->where('text', 'RLIKE', '(#'.$id.')[[:>:]]');
 			
-		return $posts->select(self::GetSelect())->get();
+		return $posts->select(self::getSelect())->get();
 	}
 	
-	public function GetPostTags() 				// Create link for each tag.
+	public function getPostTags() 				// Create link for each tag.
 	{
 		return preg_grep("/#(\[[\w\s]+\])|#(\w+)/", explode(' ', $this->text));
 	}
