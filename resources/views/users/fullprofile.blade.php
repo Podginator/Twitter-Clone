@@ -41,7 +41,7 @@
 										<img alt="Profile Image" width="140" height="140" src="{{asset('/imgs/default-avatar.png')}}">
 									@endif
 									<p class="">Profile Picture </p>
-							    	<input type="file" name="Image" id="ImageUpload" style="padding-left:50px; display:inline;">
+							    	<input type="file" name="profile" id="ImageUpload" style="padding-left:50px; display:inline;">
 							</div>
 						</div>
 

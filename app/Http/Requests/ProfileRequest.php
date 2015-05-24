@@ -25,10 +25,8 @@ class ProfileRequest extends FormRequest
 
         $mb = 2;
         $sizeLim = $mb * pow(pow(10,2),2);
-        $file = Input::file('image');
+        $file = Input::file('profile');
         $illegal = "#%^&[]/{}|:<>";
-
-       // (!) Error: seems like the file returns NULL.
 
          $validator->after(function() use ($validator, $sizeLim, $file, $illegal) {
             
@@ -36,17 +34,16 @@ class ProfileRequest extends FormRequest
             {
                 $validator->errors()->add('Bio', 'Cannot contain illegal characters');
             }
-
-        // (!) If you found the error with the file, uncomment the code below:
-
-           /* if(!in_array($file->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
+            
+            
+           if(!in_array($file->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
             {
                 $validator->errors()->add('Bio', 'Incorrect File Type used.');
             }
             if($file->getSize() > $sizeLim)
             {
                 $validator->error()->add('Size', 'File exceeds upload limit of '.$mb.' mb');
-            } */
+            } 
 
         });
         return $validator;
