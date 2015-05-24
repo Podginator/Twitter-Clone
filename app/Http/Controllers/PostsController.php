@@ -81,7 +81,7 @@ class PostsController extends Controller {
 	
 	public function getTag($id)
 	{
-		return Response::json(Posts::GetTagged($id));
+		return Response::json(Posts::getTagged($id));
 	}
 	
 	public function getUserPosts($user)
@@ -94,7 +94,7 @@ class PostsController extends Controller {
 	public function viewPost(Posts $post) 					// Get Specific Post:
 	{
 		$data["post"] = $post;
-		$data["tags"] = $post->GetPostTags();
+		$data["tags"] = $post->getPostTags();
 		$data["time"] = $post->getRelativeTime();
 		
 		return View::make('posts.thisPost')->with($data);	// Return the data to the view.
