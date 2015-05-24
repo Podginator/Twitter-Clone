@@ -59,7 +59,7 @@ class UserController extends Controller {
 		$user = Auth::user();
 		if($user)
 		{
-			$id = Input::file('Image') ?  $this->uploadImage(Input::file('Image')) : $user->files->id;
+			$id = Input::file('profile') ?  $this->uploadImage(Input::file('profile')) : $user->files->id;
 			$user->fill(array(
 				"profileId" => $id,
 				"biography" => Input::get('bio')
@@ -75,9 +75,9 @@ class UserController extends Controller {
 		$serverDir =  "uploaded_images/".Auth::user()->username;
 		$dir = public_path($serverDir);
 
-		$mb = 1;											// Valid Mega bytes. 
+		$mb = 5;											// Valid Mega bytes. 
 		$validExt = array('mp4', 'png', 'jpg', 'gif');		// Valid file extensions.
-		$validSize = $mb * pow(pow(2, 10), 2 );      	 	// Valid image size in Mb.
+		$validSize = $mb * pow(1024, 2 );      	 	// Valid image size in Mb.
 			
 		if( File::exists($dir) or File::makeDirectory($dir) )
 		{

@@ -24,7 +24,7 @@ class ProfileRequest extends FormRequest
         $validator = parent::getValidatorInstance();
 
         $mb = 2;
-        $sizeLim = $mb * pow(pow(10,2),2);
+        $sizeLim = $mb * pow(1024,2);
         $file = Input::file('profile');
         $illegal = "#%^&[]/{}|:<>";
 
@@ -36,10 +36,15 @@ class ProfileRequest extends FormRequest
             }
             
             
+            
+            
            if(!in_array($file->getClientOriginalExtension(), array('mp4', 'png', 'jpg', 'gif')))
             {
                 $validator->errors()->add('Bio', 'Incorrect File Type used.');
             }
+            
+            echo $file->getSize(), ": " , $sizeLim;
+            
             if($file->getSize() > $sizeLim)
             {
                 $validator->errors()->add('Size', 'File exceeds upload limit of '.$mb.' mb');
