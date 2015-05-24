@@ -42,7 +42,7 @@ class ProfileRequest extends FormRequest
             }
             if($file->getSize() > $sizeLim)
             {
-                $validator->error()->add('Size', 'File exceeds upload limit of '.$mb.' mb');
+                $validator->errors()->add('Size', 'File exceeds upload limit of '.$mb.' mb');
             } 
 
         });
