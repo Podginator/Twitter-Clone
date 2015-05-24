@@ -27,7 +27,7 @@ class PostSeeder extends Seeder {
 			'imgId' =>  null,
         ));
 		Posts::create(array(
-            'text' => '#test post4',
+            'text' => '#nepal hanging out in nepal',
             'userId' => 2,
 			'imgId' =>  null,
         ));

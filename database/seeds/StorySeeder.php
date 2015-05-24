@@ -16,5 +16,17 @@ class StorySeeder extends Seeder {
 			'description' =>  'Hanging out in Nepal',
 			'userId' => 2,
         ));
+        Story::create(array(
+        	'name' => 'Test story',
+        	'hashtag' => 'test',
+        	'description' => 'testing story',
+        	'userId' => 1,
+        ));
+        Story::create(array(
+        	'name' => 'test story 2',
+        	'hashtag' => 'test',
+        	'description' => 'test story 2',
+        	'userId' => 2,
+        ));
 	}
 }

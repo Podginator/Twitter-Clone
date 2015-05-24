@@ -14,5 +14,17 @@ class StoryPostSeeder extends Seeder {
             'storyid' => 1,
             'postid' => 5,
         ));
+        StoryPost::create(array(
+        	'storyid' => 2,
+        	'postid' =>1,
+        ));
+        StoryPost::create(array(
+        	'storyid' => 2,
+        	'postid' => 2,
+        ));
+        StoryPost::create(array(
+        	'storyid' => 3,
+        	'postid' => 3,
+        ));
 	}
 }
