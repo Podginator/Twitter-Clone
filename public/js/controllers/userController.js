@@ -1,7 +1,8 @@
 angular.module('userCtrl', [])
-//Here is the logic for the Post Controller
+//Here is the logic for the User Controller
 .controller('UserController', function($scope,$http,User,Images){
 	$scope.followData = {};
+	$scope.following = [];
 	$scope.userFollowing = false;
 	$scope.submitFollow = function(){
 		User.save($scope.followData)
@@ -18,19 +19,26 @@ angular.module('userCtrl', [])
 			})
 	};
 	
-	$scope.isFollowing= function(username){
-		User.isFollowing(username)
-			.success(function(data){
-				$scope.userFollowing = data.following;	
+	User.isFollowing()
+		.success(function(data){
+			if(data.success){
+				for(var user in data.users){
+					console.log(data.users[user]);
+				   $scope.following.push(data.users[user].username);
+			    }
 				$('.followThisUserContainer').removeClass('ng-hide');
-			});
-	}
+			}
+	});
+	
+	$scope.userFollows=function(username){
+		console.log($scope.following.indexOf(username));
+		return $scope.following.indexOf(username) != -1;
+	};
 	
 	$scope.submitUser = function(id){
 		User.saveUser(id)
 			.success(function(data){
 				if(data.success){
-					console.log("hey");
 					//Then we can unhide all the stuff.
 					$('.'+id+'-nf').addClass('ng-hide');
 					$('.'+id+'-f').removeClass( "ng-hide" );
