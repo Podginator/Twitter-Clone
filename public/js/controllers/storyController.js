@@ -26,7 +26,19 @@ angular.module('storyCtrl', [])
 				$scope.custom = false;
 			});
 	}
-
+	//-------------------Dette har jeg addet----------------//
+	$scope.GetUserStory = function(user){
+		user = user ? user : $('.container').data('user');
+		$scope.animation = true;
+		Story.getUserStory(user)
+            .success(function(data)
+			{
+				$scope.stories = data;
+				$scope.animation = false;
+				$scope.custom = false;
+            });
+	}
+	//-------------------------------------------------------//
 /*---------------------------------------------------------------------------*/
 /*								Create Story Behaviour		  				 aa*/
 /*---------------------------------------------------------------------------*/
@@ -59,12 +71,11 @@ angular.module('storyCtrl', [])
 		var index = $scope.postsToAdd.indexOf(id);
 		if(index == -1)
 		{
-			$('.storypost-'+id).addClass('selected');
-			$('.storypost-'+id).css({'background': '#333', 'z-index': '100'});
+			$('.storypost-'+id + ' > .well').addClass('selected');
 			$scope.postsToAdd.push(id);
 		}
 		else{
-			$('.storypost-'+id).removeClass('selected');
+			$('.storypost-'+id + '> .well').removeClass('selected');
 			$scope.postsToAdd.splice(index,1);
 		}
 	};

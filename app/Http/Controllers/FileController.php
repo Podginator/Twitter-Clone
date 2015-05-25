@@ -30,7 +30,7 @@ class FileController extends Controller {
 		if(Auth::user())
 		{
 			//We get where the post is on the server ( to store in an image object.)
-			$serverDir =  "uploaded_images/".Auth::user()->username;
+			$serverDir =  "/uploaded_images/".Auth::user()->username;
 			$dir = public_path($serverDir);
  
 			$mb = 2;											// Valid Mega bytes. 

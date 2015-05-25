@@ -32,7 +32,7 @@ $(document).ready(function()
 	
 	$.ajax												// Get all tags and store them in tagsList.
 	({
-		url: url + '/api/posts',						// Get all posts from json.
+		url: url + '/api/posts/all',						// Get all posts from json.
 		success: function(posts) 						// Success callback:
 		{
 			$.each(posts, function (i, post)			// Find all hashtags and store unambiguously:

@@ -95,4 +95,9 @@ class StoryController extends Controller {
 	{
 		return Response::json(Posts::getPostsFromStory($id));
 	}
+	// ----------------added by me --------------------//
+	public function getUserStories($user){
+		return Response::json(Story::getUserStories($user));
+	}
+	// ----------------------------------------------- //
 }

@@ -55,8 +55,32 @@ class Story extends TimeModel {
 		
 		return $stories;
 	}
-	
-	//TODO: 
+		//--------------- Dette har jeg addet-----------------//
+		public static function getUserStories(User $user)
+	{				
+			$stories = Story::join('users', function($join){
+				$join->on('users.id', '=', 'story.userId');
+			})
+			->where('story.userId', $user->id)
+			
+			->leftJoin('storypost', function($join){
+				$join->on('storypost.storyid', '=', 'story.id');
+			})
+			->groupBy('story.id')
+			->orderBy('story.created_at', 'desc')
+			->select( array('story.*',
+						'users.username',
+						DB::raw('CASE WHEN story.userId = '.$user->id.' THEN 1 ELSE 0 END AS editable'),
+						DB::raw('count(storypost.id) as PostAmount')
+						)
+					)
+			->get();
+		
+		
+		return $stories;
+	}
+	// -----------------------------------------------------------//
+		//To do
 		//User Stories.
 		//Tagged Stories.
 	

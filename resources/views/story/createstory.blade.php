@@ -53,7 +53,7 @@
 							<div class="panel-heading"> Select Posts </div>
 							<div class="panel-body">
 								<div class="panel-body" ng-if="posts.length == 0"> No Posts for this topic </div>
-								<div class="panel panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation">
+								<div class="" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation">
 									<div class="storypost-<%post.id%>" ng-click="ModifyStoryPosts(post.id)">
 										@include("story.postcontent")
 									</div>

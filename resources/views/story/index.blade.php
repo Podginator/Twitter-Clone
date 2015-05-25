@@ -28,7 +28,7 @@
 					@include('story.form')
 				@endif
 				
-				<div class="panel-heading">Your Stories</div>		
+				<div class="panel-heading">Stories feed</div>		
 				
 				<div class="posts">
 					@include('story.story')
