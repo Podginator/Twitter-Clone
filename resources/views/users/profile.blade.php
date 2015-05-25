@@ -23,11 +23,7 @@
 	
 	@if (Auth::user() && Auth::user()->username != $user->username)
 	<div class = "followThisUserContainer ng-hide">
-<<<<<<< HEAD
 		<!-- insert if: not followed: Follow --> 
-=======
-
->>>>>>> origin/master
 		<div class = "followThisUser {{$user->username}}-nf'" ng-click="submitUser('{{$user->username}}')" ng-show="!userFollows('{{$user->username}}')">
 			Follow <span class="glyphicon glyphicon-plus" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
 		</div>
