@@ -10,6 +10,7 @@ $(document).ready(function()
 /*---------------------------------------------------------------------------*/
 	 
 	var tagsList = []; 									// Store all tags.
+	var userList = [];									// Store all users.
 	var searchList = [];								// Store all tags that match the search value.
 
 /*---------------------------------------------------------------------------*/
@@ -50,16 +51,40 @@ $(document).ready(function()
 		}
 	});
 
+	$.ajax												// Get all users and store them in userlist.
+	({
+		url: url + '/api/allUsers',						// Get all users from json.
+		success: function(users) 						// Success callback:
+		{
+			$.each(users, function (i, user)			// Find all users
+			{
+				res = user.username;
+				res = res.toString();
+				userList.push(res);						// Store into the the userList array.
+			});
+		}
+	});
+
+
+
 /*---------------------------------------------------------------------------*/
 /*								F u n c t i o n s		  					 */
 /*---------------------------------------------------------------------------*/
 
-	function search( searchInput ) 						// Search after this input. 
+	function search( searchInput, type ) 						// Search after this input. 
 	{
 		if( searchInput != "" ) 						// The input must have a value.	
 		{
-   			url = window.location.origin+"/tag/" + searchInput;
-			window.location.href = url;
+			if (type == "tag")
+			{
+   				url = window.location.origin+"/tag/" + searchInput;
+				window.location.href = url;
+			}
+			else
+			{
+				url = window.location.origin+"/" + searchInput;
+				window.location.href = url;
+			}
 		}
 	}
 
@@ -106,9 +131,32 @@ $(document).ready(function()
 																// Add the tag into search results.
 				    searchList.push('<li name = '
 				    	+ tagsList[i] +'>' + tagsList[i] + '</li>');
+			} 
+			
+		}
+		for (var j = 0; j < userList.length; j++)
+		{
+			if(userList[j].indexOf(input) != -1 )
+			{
+				result = true;								// Found a tag, boolean is true.
+
+				if (searchList.length != 0)
+				{
+					if( searchResults.text() 				// The tag isn't a duplicate of the current search results:
+						.indexOf(userList[j]) == -1 )
+					{ 										// Add this tag to into search results.
+				    	searchList.push('<li name = '
+					    	+ userList[j] +'>' + userList[j] + '</li>');
+				    }
+				}
+				else
+				{
+					searchList.push('<li name = '
+					    	+ userList[j] +'>' + userList[j] + '</li>');
+				}
 			}
 
-			if ( i == tagsList.length-1 && input != '') 	// looped through all tags AND input is NOT empty.
+			if (j == userList.length-1 && input != '') 		// looped through all tags AND input is NOT empty.
 			{
 				searchResults.slideDown();					// Display the search results container.
 				searchField.css({'border-radius':'10px 0px 0px 0px'});
@@ -117,8 +165,12 @@ $(document).ready(function()
 					searchResults.append(searchList); 		// Display all search results.
 				else
 					searchResults.append('<li>Sorry no results for <br><i>"'+ input +'"</i></li>');
-			}
-		}	
+			}	
+		}
+
+		
+
+		
 
 	});
 
@@ -133,12 +185,18 @@ $(document).ready(function()
 
 	$('.searchResults').delegate('li', 'click',function() 	// Clicked on a search reuslt from the list:
 	{
+		var type = "user";
 		var searchValue = $(this).attr('name');				// Get this search value by attr name.
-		searchValue = searchValue.substring(1);				// Remove hashtag from search value.
+		if (searchValue[0] == '#')
+		{
+			searchValue = searchValue.substring(1);				// Remove hashtag from search value.
+			type = "tag";
+		}
 
-		console.log('clicked');
+		search(searchValue, type);								// Search with this input.
 
-		search( searchValue);								// Search with this input.
+
+
 	});
 
 	
