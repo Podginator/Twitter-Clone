@@ -19,30 +19,32 @@
 		@else
 			<div class="col-md-10 col-md-offset-1">
 		@endif
-
-			<div class="panel panel-default postcontainer">
-				<div class="tabSelecter"> 
-					<ul>
-						<li class="storyTab selector active"> Stories </li>
-						<li class="postTab selector inactive"> Posts </li>
-					</ul>
+		
 			
-					<div class="storyTab active">
-						<div class="panel-heading">{{$user->username}}s Stories</div>
-						
-						<div class="posts">
-							@include('story.story')
+			
+			<div class="panel panel-default postcontainer">
+				<dir-tab>
+					<tab-content title="Posts">
+						<div>
+							<div class="panel-heading">{{$user->username}}s Stories</div>
+							
+							<div class="posts">
+								@include('story.story')
+							</div>
 						</div>
-					</div>
+					</tab-content>
 					
-					<div class="postTab inactive" ng-controller="PostController"  ng-init="ChangeDefault(GetUserPost)">
-						<div class="panel-heading">{{$user->username}}s Posts</div>
-						
-						<div class="posts">
-							@include('posts.post')
+					
+					<tab-content title="Stories">
+						<div ng-controller="PostController"  ng-init="ChangeDefault(GetUserPost)">
+							<div class="panel-heading">{{$user->username}}s Posts</div>
+							
+							<div class="posts">
+								@include('posts.post')
+							</div>
 						</div>
-					</div>
-				</div>
+					</tab-content>
+				</dir-tab>
 						
 			</div>
 		</div>

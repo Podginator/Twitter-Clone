@@ -31,7 +31,8 @@
     <script src="{{ asset('/js/services/storyService.js') }}"></script> <!-- load our service -->
 	<script src="{{ asset('/js/services/userService.js') }}"></script> <!-- load our service -->
 	<script src="{{ asset('/js/dirPagination.js') }}"></script> <!-- load our application -->
-    <script src="{{ asset('/js/app.js') }}"></script> <!-- load our application -->
+	<script src="{{ asset('/js/directives/dirTabs.js') }}"></script> <!-- load our application -->
+	<script src="{{ asset('/js/app.js') }}"></script> <!-- load our application -->
     <script src="{{ asset('/js/search.js') }}"></script> <!-- load our SearchBar -->
 
     
