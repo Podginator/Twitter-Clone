@@ -133,11 +133,11 @@ angular.module('postService', [])
 			if(extension == "mp4" || extension == "ogg")
 			{
 				this.url='<video width="100%" controls>\
-							  <source src="http://'+window.location.hostname+"/"+this.url+'" type="video/'+ extension +'">\
+							  <source src="'+this.url+'" type="video/'+ extension +'">\
 							Your browser does not support the video tag.\
 							</video>';
 			} else {
-				this.url = "<img class='img-responsive center-block' src='http://"+window.location.hostname+"/"+this.url+"')}}'>";
+				this.url = "<img class='img-responsive center-block' src='"+this.url+"')}}'>";
 			}
 	}
 	
