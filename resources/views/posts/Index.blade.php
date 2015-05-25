@@ -27,7 +27,7 @@
 					@include('posts.form')
 				@endif
 				
-				<div class="panel-heading">Your Posts</div>
+				<div class="panel-heading">Posts feed</div>
 
 				
 				<div class="posts">
