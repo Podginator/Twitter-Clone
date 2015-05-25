@@ -21,15 +21,15 @@
 			<p><b>Bio:<br></b> {{$user->biography }} </p>
 	</div>
 	
-	@if (Auth::user()->username != $user->username)
-	<div class = "followThisUserContainer ng-hide" ng-init="isFollowing('{{$user->username}}')">
+	@if (Auth::user() && Auth::user()->username != $user->username)
+	<div class = "followThisUserContainer ng-hide">
 
 		<!-- insert if: not followed: Follow --> 
-		<div class = "followThisUser {{$user->username}}-nf'" ng-click="submitUser('{{$user->username}}')" ng-if="!userFollowing">
+		<div class = "followThisUser {{$user->username}}-nf'" ng-click="submitUser('{{$user->username}}')" ng-show="!userFollows('{{$user->username}}')">
 			Follow <span class="glyphicon glyphicon-plus" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
 		</div>
 		<!-- Insert else followed: Unfollow -->
-		<div class = "followThisUser {{$user->username}}-f'" style = "background: #dd5454;" ng-if="userFollowing">
+		<div class = "followThisUser {{$user->username}}-f'" style = "background: #dd5454;" ng-show="userFollows('{{$user->username}}')">
 			Unfollow <span class="glyphicon glyphicon-remove" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
 		</div>
 
