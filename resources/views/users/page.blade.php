@@ -21,32 +21,32 @@
 		@endif
 
 			<div class="panel panel-default postcontainer">
-				<div class="panel-heading">{{$user->username}}s Stories</div>
-				
-				<div class="posts">
-					@include('story.story')
-				</div>
+				<div class="tabSelecter"> 
+					<ul>
+						<li class="storyTab selector active"> Stories </li>
+						<li class="postTab selector inactive"> Posts </li>
+					</ul>
+			
+					<div class="storyTab active">
+						<div class="panel-heading">{{$user->username}}s Stories</div>
+						
+						<div class="posts">
+							@include('story.story')
+						</div>
+					</div>
 					
+					<div class="postTab inactive" ng-controller="PostController"  ng-init="ChangeDefault(GetUserPost)">
+						<div class="panel-heading">{{$user->username}}s Posts</div>
+						
+						<div class="posts">
+							@include('posts.post')
+						</div>
+					</div>
+				</div>
+						
 			</div>
 		</div>
 	</div>
 </div>
 
-
-<div class="container" ng-controller="PostController"  data-user="{{ $user->username }}"  ng-init="ChangeDefault(GetUserPost)">
-	<div class="row">
-			<div class="col-md-8 col-md-offset-4">
-
-
-			<div class="panel panel-default postcontainer">
-				<div class="panel-heading">{{$user->username}}s Posts</div>
-				
-				<div class="posts">
-					@include('posts.post')
-				</div>
-					
-			</div>
-		</div>
-	</div>
-</div>
 @endsection

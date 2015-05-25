@@ -17,7 +17,7 @@
 					
 					<div class="panel-body">
 						<div class="panel-default" dir-paginate="post in posts | itemsPerPage: 10" ng-hide="animation">
-									@include("story.postcontent")
+								@include("story.postcontent")
 						</div>
 					</div>
 			</div>

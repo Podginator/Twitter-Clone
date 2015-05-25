@@ -16,4 +16,3 @@
 	<div class ="tags" >
 		<p style="padding-left:15px"> <small> Posts in this Story: <span> <% story.PostAmount %> </span></small></p>
 	</div>
-</div>

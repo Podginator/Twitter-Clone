@@ -10,8 +10,8 @@
 		</li>
 		<li class = "profileSidebarText">
 			<span style = "color: #0ad; font-size: 125%;">{{$user->username}}</span><br>
-			<!-- Get nr of posts for this user -->  n posts<br>
-			<!-- Get nr of stories for this user -->  n stories
+			<!-- Get nr of posts for this user -->  {{count($user->post)}} posts<br>
+			<!-- Get nr of stories for this user -->  {{count($user->story)}} stories
 		</li>
 	</ul>	
 	
@@ -23,7 +23,6 @@
 	
 	@if (Auth::user() && Auth::user()->username != $user->username)
 	<div class = "followThisUserContainer ng-hide">
-
 		<!-- insert if: not followed: Follow --> 
 		<div class = "followThisUser {{$user->username}}-nf'" ng-click="submitUser('{{$user->username}}')" ng-show="!userFollows('{{$user->username}}')">
 			Follow <span class="glyphicon glyphicon-plus" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
