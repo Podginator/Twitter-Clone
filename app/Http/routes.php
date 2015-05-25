@@ -41,6 +41,7 @@ Route::get('/tag/{tags}', function($tag){
 });
 Route::get('/{user}', 'UserController@userPage');
 Route::get('/api/user/following', 'UserController@isFollowing');
+
 /*
 Route::get('/api/post/{postID}', 'PostsController@GetPost');
 Route::get('/posts/{id}', function($postID){

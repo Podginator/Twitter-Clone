@@ -47,4 +47,15 @@ angular.module('userCtrl', [])
 			});
 	}
 
+	$scope.unsubmitUser = function(id){
+		User.removeUser(id)
+			.success(function(data){
+				$('.'+id+'-nf').removeClass('ng-hide');	// hmm.. doesn't seem to work:
+				$('.'+id+'-f').addClass( "ng-hide" );
+				$scope.userFollowing=false;
+
+				alert('Unsubscribe user');	// testing.
+			});
+	}
+
 });

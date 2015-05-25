@@ -130,6 +130,16 @@ class UserController extends Controller {
 		
 		return $follow->id ? $success : $fail;
 	}
+
+	// Unsubscribe a user:
+	public function unsubscribePersone(User $user)
+	{
+		$success =  Response::json(array('success' => true));
+		$fail =  Response::json(array('success' => false));
+
+
+		
+	}
 	
 	public function isFollowing()
 	{

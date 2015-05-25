@@ -20,6 +20,7 @@ $(document).ready(function()
 	var searchField 	= $('.searchField');			// The search field.
 	var searchButton 	= $('.searchButton');			// The search button.
 	var searchResults 	= $('.searchResults'); 			// The unordered list.
+	var userIcon 		= '<span class="glyphicon glyphicon-user" aria-hidden="true"></span>';
 
 /*---------------------------------------------------------------------------*/
 /*							   I n i t i a l i z e		  					 */
@@ -71,11 +72,11 @@ $(document).ready(function()
 /*								F u n c t i o n s		  					 */
 /*---------------------------------------------------------------------------*/
 
-	function search( searchInput, type ) 						// Search after this input. 
+	function search( searchInput, type ) 				// Search after this input. 
 	{
 		if( searchInput != "" ) 						// The input must have a value.	
 		{
-			if (type == "tag")
+			if (type == "tag") 							// The input is a tag.
 			{
    				url = window.location.origin+"/tag/" + searchInput;
 				window.location.href = url;
@@ -114,7 +115,7 @@ $(document).ready(function()
 
 		for(var i = 0; i < tagsList.length; i++) 			// Loop through all tags:
 		{	
-			if( tagsList[i].indexOf(input) > 0 ) 			// Found a match with the stored tags.
+			if( tagsList[i].indexOf(input) != -1 ) 			// Found a match with the stored tags.
 			{
 				result = true;								// Found a tag, boolean is true.
 
@@ -146,13 +147,13 @@ $(document).ready(function()
 						.indexOf(userList[j]) == -1 )
 					{ 										// Add this tag to into search results.
 				    	searchList.push('<li name = '
-					    	+ userList[j] +'>' + userList[j] + '</li>');
+					    	+ userList[j] +'>' + userIcon + ' ' + userList[j] + '</li>');
 				    }
 				}
 				else
 				{
 					searchList.push('<li name = '
-					    	+ userList[j] +'>' + userList[j] + '</li>');
+					    	+ userList[j] +'>' + userIcon + ' ' + userList[j] + '</li>');
 				}
 			}
 
@@ -185,15 +186,17 @@ $(document).ready(function()
 
 	$('.searchResults').delegate('li', 'click',function() 	// Clicked on a search reuslt from the list:
 	{
-		var type = "user";
+		var type = "tag";									// Search type: defualt tag.
 		var searchValue = $(this).attr('name');				// Get this search value by attr name.
-		if (searchValue[0] == '#')
-		{
-			searchValue = searchValue.substring(1);				// Remove hashtag from search value.
-			type = "tag";
-		}
 
-		search(searchValue, type);								// Search with this input.
+		if (searchValue[0] != '#')							// There was no hastag in the search input.
+			type = "user";
+
+		else
+			searchValue = searchValue.substring(1);			// Remove hashtag from search value.
+
+
+		search(searchValue, type);							// Search with this input.
 
 
 

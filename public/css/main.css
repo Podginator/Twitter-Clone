@@ -15,7 +15,7 @@ body
     position: relative;
     overflow: hidden;
     background-color:#337ab7 !important;
-    background-image: url('../imgs/uploadfile.png') !important;
+    background-image: url('../imgs/imageUploader2.png') !important; 
     background-size: 30px 30px;
     background-repeat: no-repeat;
     background-position: center;
@@ -37,7 +37,9 @@ body
 }
 
 .btn-file:hover{
+  cursor: pointer;
   background-color: #286090 !important;
+
 }
 
 .panel-heading {
@@ -315,39 +317,39 @@ left:30px;
 
 .profileSidebar
 {
-  height: 150px;
+  height:     150px;
   background: hsla(0,0%,100%,.8);
-  padding: 0px;
+  padding:    0px;
 }
 
   .profileSidebar li
   {
-    display: inline-block;
-    vertical-align: middle;
-    text-decoration: none;
-    list-style: none;
+    display:          inline-block;
+    vertical-align:   middle;
+    text-decoration:  none;
+    list-style:       none;
   }
     .profileSidebar li img
     {
-      margin: 25px 0px 0px 25px;
-      border-radius: 15px;
-      width: 100px;
+      margin:         25px 0px 0px 25px;
+      border-radius:  15px;
+      width:          100px;
     }
 
     .profileSidebarText
     {
-      color: #555;
-      padding: 20px;
+      color:    #555;
+      padding:  20px;
     }
 
 .followThisUser
 {
-  background: #0ad;
-  color: #fff;
-  text-align: center;
-  font-size: 125%;
-  font-weight: 500;
-  padding: 10px 0px;
+  background:   #0ad;
+  color:        #fff;
+  text-align:   center;
+  font-size:    125%;
+  font-weight:  500;
+  padding:      10px 0px;
   
 }
 
@@ -358,7 +360,7 @@ left:30px;
   
   
 /*---------------------------------------------------------------------------*/
-/*                           Tab Page                                         */
+/*                           Tab Page                                        */
 /*---------------------------------------------------------------------------*/
 
 div.active{
@@ -409,6 +411,7 @@ li.active{
 
 li.inactive:hover{
   background:rgba(10,223,255,0.5);
+  cursor: pointer;
 }
 
 
