@@ -49,6 +49,7 @@ Route::get('/posts/{id}', function($postID){
 
 Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
 Route::get('/api/story/posts/{id}', "StoryController@getStoryPosts");
+Route::get('/api/posts/all', "PostsController@getAllPosts");
 
 Route::get('/story/create', [
     'middleware' => 'auth',
