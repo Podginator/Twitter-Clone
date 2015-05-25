@@ -71,12 +71,11 @@ angular.module('storyCtrl', [])
 		var index = $scope.postsToAdd.indexOf(id);
 		if(index == -1)
 		{
-			$('.storypost-'+id).addClass('selected');
-			$('.storypost-'+id).css({'background': '#333', 'z-index': '100'});
+			$('.storypost-'+id + ' > .well').addClass('selected');
 			$scope.postsToAdd.push(id);
 		}
 		else{
-			$('.storypost-'+id).removeClass('selected');
+			$('.storypost-'+id + '> .well').removeClass('selected');
 			$scope.postsToAdd.splice(index,1);
 		}
 	};
