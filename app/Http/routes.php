@@ -72,7 +72,9 @@ Route::group(array('prefix' => 'api'), function(){
 		array('only'=>array('store'))	
 	);
 });
-
+//-----------Dette har jeg addet -----------//
+Route::get('/api/story/user/{user}', 'StoryController@getUserStories');
+//-----------------------------------------//
 Route::get('/api/posts/{tag}', 'PostsController@getTag');
 Route::get('/api/user/follow/{user}', 'UserController@subscribePerson');
 Route::get('/posts/{postid}', 'PostsController@viewPost');	// Route to specific post:

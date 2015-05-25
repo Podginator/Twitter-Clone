@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="container"  ng-controller="StoryController"  data-user="{{ $user->username }}"  ng-init="GetDefault()">
+<div class="container"  ng-controller="StoryController"  data-user="{{ $user->username }}"  ng-init="GetUserStory('{{$user->username}}')">
 	<div class="row">
 		@if($user)
 			<div class="col-md-4">

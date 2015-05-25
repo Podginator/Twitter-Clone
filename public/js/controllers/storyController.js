@@ -26,7 +26,19 @@ angular.module('storyCtrl', [])
 				$scope.custom = false;
 			});
 	}
-
+	//-------------------Dette har jeg addet----------------//
+	$scope.GetUserStory = function(user){
+		user = user ? user : $('.container').data('user');
+		$scope.animation = true;
+		Story.getUserStory(user)
+            .success(function(data)
+			{
+				$scope.stories = data;
+				$scope.animation = false;
+				$scope.custom = false;
+            });
+	}
+	//-------------------------------------------------------//
 /*---------------------------------------------------------------------------*/
 /*								Create Story Behaviour		  				 aa*/
 /*---------------------------------------------------------------------------*/

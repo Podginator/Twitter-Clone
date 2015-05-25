@@ -20,5 +20,11 @@ angular.module('storyService', [])
 		destroy: function(id){
 			return $http.delete('/api/story/'+id);
 		},
+			//------------Dette har jeg addet ------------//
+			getUserStory: function(user)
+		{
+			return $http.get('/api/story/user/' + user);
+		}
+		//-----------------------------------------------//
 	}
 });
