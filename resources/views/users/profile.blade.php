@@ -5,7 +5,7 @@
 			@if ($user->files)
 				<img alt="Profile Image" src="{{asset($user->files->url)}}">
 			@else
-				<img alt="Profile Image" width="140" height="140" src="{{asset('/imgs/default-avatar.png')}}">
+				<img alt="Profile Image" src="{{asset('/imgs/default-avatar.png')}}">
 			@endif
 		</li>
 		<li class = "profileSidebarText">
