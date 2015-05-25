@@ -40,7 +40,7 @@ Route::get('/tag/{tags}', function($tag){
 	return View::make('posts.Tags')->with('tag', $tag);
 });
 Route::get('/{user}', 'UserController@userPage');
-Route::get('/api/user/following/{user}', 'UserController@isFollowing');
+Route::get('/api/user/following', 'UserController@isFollowing');
 /*
 Route::get('/api/post/{postID}', 'PostsController@GetPost');
 Route::get('/posts/{id}', function($postID){
@@ -49,6 +49,8 @@ Route::get('/posts/{id}', function($postID){
 
 Route::get('/api/tag/delete/{id}', "UserController@removeUserTag");
 Route::get('/api/story/posts/{id}', "StoryController@getStoryPosts");
+Route::get('/api/posts/all', "PostsController@getAllPosts");
+
 Route::get('/story/create', [
     'middleware' => 'auth',
     'uses' => 'StoryController@CreateStory'

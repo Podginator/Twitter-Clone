@@ -33,6 +33,11 @@ class PostsController extends Controller {
 		}
 		return Response::json(Posts::all());
 	}
+	
+	public function getAllPosts()
+	{
+		return Response::json(Posts::all());
+	}
 
 	public function store(PostRequest $req)
 	{
