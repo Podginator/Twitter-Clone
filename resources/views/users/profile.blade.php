@@ -18,16 +18,19 @@
 	
 			
 	<div class="panel-body" style = "background: #fff; margin-top: -10px;">
-			<p><b>Bio:<br></b> {{$user->biography }} </p>
+			<p><b>Bio:</b><br> {{$user->biography }} </p>
 	</div>
 	
 	@if (Auth::user() && Auth::user()->username != $user->username)
 	<div class = "followThisUserContainer ng-hide">
+<<<<<<< HEAD
 		<!-- insert if: not followed: Follow --> 
+=======
+
+>>>>>>> origin/master
 		<div class = "followThisUser {{$user->username}}-nf'" ng-click="submitUser('{{$user->username}}')" ng-show="!userFollows('{{$user->username}}')">
 			Follow <span class="glyphicon glyphicon-plus" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
 		</div>
-		<!-- Insert else followed: Unfollow -->
 		<div class = "followThisUser {{$user->username}}-f'" style = "background: #dd5454;" ng-show="userFollows('{{$user->username}}')">
 			Unfollow <span class="glyphicon glyphicon-remove" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
 		</div>

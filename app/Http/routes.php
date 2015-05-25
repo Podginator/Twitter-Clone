@@ -73,13 +73,17 @@ Route::group(array('prefix' => 'api'), function(){
 	Route::resource('user/follow', 'UserController',
 		array('only'=>array('store'))	
 	);
+	Route::resource('allUsers', 'UserController',
+		array('only'=>array('allUsers'))
+	);
 });
 //-----------Dette har jeg addet -----------//
 Route::get('/api/story/user/{user}', 'StoryController@getUserStories');
 //-----------------------------------------//
+Route::get('api/allUsers', 'UserController@getAllUsers');
 Route::get('/api/posts/{tag}', 'PostsController@getTag');
 Route::get('/api/user/follow/{user}', 'UserController@subscribePerson');
-Route::get('/posts/{postid}', 'PostsController@viewPost');	// Route to specific post:
+Route::get('/posts/{postid}', 'PostsController@viewPost');
 Route::get('/api/posts/user/{username}', 'PostsController@getUserPosts');
 
 Route::controllers([
