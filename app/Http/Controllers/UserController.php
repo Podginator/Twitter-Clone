@@ -28,6 +28,16 @@ class UserController extends Controller {
 		
 		if(Auth::user() && count(Input::get('text')) > 0 &&  preg_match('/^[a-zA-Z ]*$/', Input::get('text')))
 		{
+			
+			$alreadyFollowed = FollowingEvent::where("userid", '=', Auth::user()->id)
+									->where("hashtag",'=', Input::get('text'))
+									->first() != null;
+									
+			if($alreadyFollowed)
+			{
+				return Response::json(array('success'=>false, "error"=>"Already followed this event"));
+			}
+			
 			$newFollowingEvent = FollowingEvent::create(array(
 						"userid"=>Auth::user()->id,
 						"hashtag"=>Input::get('text'),
@@ -166,6 +176,7 @@ class UserController extends Controller {
 	{
 		return Response::json(array('success'=> true, 'users'=>User::find(Auth::user()->getFollowing())));
 	}
+						$scope.following.push(id);
 	public function removeUserTag($id)
 	{
 		$tag = FollowingEvent::where('id', '=', $id)->first();
