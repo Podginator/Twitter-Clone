@@ -95,6 +95,7 @@ $(document).ready(function()
 
 	searchField.bind('keyup change', function(e) 			// When the user presses a key.
 	{
+		var type = "tag";									// Defualt on search.
 		var input = searchField.val(); 						// Get input value.
 
 		searchList = []; 									// Reset search array.
@@ -109,7 +110,7 @@ $(document).ready(function()
 		}
 
 		if (e.which == 13 || e.keyCode == 13) 				// Pressed Enter:
-			search(input);									// Perform a search.
+			search(input, type );								// Perform a search.
 
 		var result = false; 								// Boolean to check if there was any results.
 
@@ -165,7 +166,7 @@ $(document).ready(function()
 				if (result)									// The search input resulted positive:
 					searchResults.append(searchList); 		// Display all search results.
 				else
-					searchResults.append('<li>Sorry no results for <br><i>"'+ input +'"</i></li>');
+					searchResults.append('<li>Sorry, no results for <br><i>"'+ input +'"</i></li>');
 			}	
 		}
 
