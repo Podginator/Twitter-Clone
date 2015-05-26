@@ -80,6 +80,7 @@ Route::group(array('prefix' => 'api'), function(){
 });
 //-----------Dette har jeg addet -----------//
 Route::get('/api/story/user/{user}', 'StoryController@getUserStories');
+Route::get('/api/story/{tag}', 'StoryController@getTag');
 //-----------------------------------------//
 Route::get('api/allUsers', 'UserController@getAllUsers');
 Route::get('/api/posts/{tag}', 'PostsController@getTag');

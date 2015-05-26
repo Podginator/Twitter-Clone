@@ -100,4 +100,8 @@ class StoryController extends Controller {
 		return Response::json(Story::getUserStories($user));
 	}
 	// ----------------------------------------------- //
+	public function getTag($id)
+	{
+		return Response::json(Story::getTagged($id));
+	}
 }

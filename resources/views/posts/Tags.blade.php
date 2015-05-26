@@ -8,14 +8,31 @@
 	<body ng-app="postApp" >
 @endsection
 
+
 @section('content')
-<div class="container" ng-controller="PostController" data-tag="{{ $tag }}" ng-init="ChangeDefault(GetTags)">
+<div class="container" data-tag="{{ $tag }}">
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
-			<div class="panel panel-default posts">
-				<div class="panel-heading">All posts with Tag: #{{$tag}}</div>
-			   		@include('posts.post');
-			</div>
+			<dir-tab>
+				<tab-content title="Posts">
+					<div ng-controller="PostController"  ng-init="ChangeDefault(GetTags)">
+						<div class="panel-heading">Posts</div>
+						
+						<div class="posts">
+							@include('posts.post')
+						</div>
+				</tab-content>
+			
+				<tab-content title="Stories">
+					<div ng-controller="StoryController" ng-init="GetStoryTags('{{ $tag }}')">
+						<div class="panel-heading">Stories</div>
+						
+						<div class="posts">
+							@include('story.story')
+						</div>
+					</div>
+				</tab-content>
+			</dir-tab>
 		</div>
 	</div>
 </div>

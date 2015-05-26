@@ -37,7 +37,18 @@ angular.module('storyCtrl', [])
 				$scope.animation = false;
 				$scope.custom = false;
             });
-	}
+	},
+	$scope.GetStoryTags = function(id){
+		$scope.animation = true;
+		//If we don't save an id to it then we make sure that the '.container' contains a databind (ie:/tag/hashtag)
+		id = id ? id.replace("#", "") : $('.container').data('tag');
+		Story.getTags(id)
+			.success(function(data){
+				$scope.stories = data;
+				console.log(data);
+				$scope.animation = false;
+			});
+	};
 	//-------------------------------------------------------//
 /*---------------------------------------------------------------------------*/
 /*								Create Story Behaviour		  				 aa*/

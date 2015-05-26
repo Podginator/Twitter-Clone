@@ -1,7 +1,7 @@
 <?php namespace App\Model;
 
 use App\Model\TimeModel;
-use DB;
+use DB, Auth;
 
 class Story extends TimeModel {
 
@@ -83,5 +83,27 @@ class Story extends TimeModel {
 		//To do
 		//User Stories.
 		//Tagged Stories.
+	
+	public static function getTagged($id)
+	{
+		$stories = Story::join('users', function($join){
+				$join->on('users.id', '=', 'story.userId');
+			})
+			->where('hashtag', '=', $id)
+			->leftJoin('storypost', function($join){
+				$join->on('storypost.storyid', '=', 'story.id');
+			})
+			->groupBy('story.id')
+			->orderBy('story.created_at', 'desc')
+			->select( array('story.*',
+						'users.username',
+						DB::raw('CASE WHEN story.userId = '.Auth::user()->id.' THEN 1 ELSE 0 END AS editable'),
+						DB::raw('count(storypost.id) as PostAmount')
+						)
+					)
+			->get();
+			
+		return $stories;
+	}
 	
 }

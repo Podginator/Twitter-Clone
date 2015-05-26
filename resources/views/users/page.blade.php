@@ -24,7 +24,7 @@
 			
 			<div class="panel panel-default postcontainer">
 				<dir-tab>
-					<tab-content title="Posts">
+					<tab-content title="Stories">
 						<div>
 							<div class="panel-heading">{{$user->username}}s Stories</div>
 							
@@ -35,7 +35,7 @@
 					</tab-content>
 					
 					
-					<tab-content title="Stories">
+					<tab-content title="Posts">
 						<div ng-controller="PostController"  ng-init="ChangeDefault(GetUserPost)">
 							<div class="panel-heading">{{$user->username}}s Posts</div>
 							

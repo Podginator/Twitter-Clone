@@ -21,10 +21,14 @@ angular.module('storyService', [])
 			return $http.delete('/api/story/'+id);
 		},
 			//------------Dette har jeg addet ------------//
-			getUserStory: function(user)
+		getUserStory: function(user)
 		{
 			return $http.get('/api/story/user/' + user);
-		}
+		},
+		getTags: function(tag){
+			return $http.get('/api/story/'+tag);
+		},
+		
 		//-----------------------------------------------//
 	}
 });
