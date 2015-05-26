@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Http\FormRequest;
 use Response, Auth, Input;
-use Auth\model\Post;
+use App\Model\Posts;
 
 
 class StoryAddRequest extends FormRequest
@@ -28,12 +28,12 @@ class StoryAddRequest extends FormRequest
             if(count(Input::get('posts')) == 0 )
             {
                 $validator->errors()->add('Posts', 'A story post should contain some posts.');
-                foreach(Input::get('posts') as $value)
-                {
-                    $post = Post::where("id", '=', $value)->first();
-                    if(!strpost($post->text,Input::get('hashtag')) === FALSE){
-                        $validator->errors()->add('A post', 'A post does not contain your hashtag');
-                    }
+            }
+            foreach(Input::get('posts') as $value)
+            {
+                $post = Posts::where("id", '=', $value)->first();
+                if(strpos($post->text,Input::get('hashtag')) === FALSE){
+                    $validator->errors()->add('A post', 'A post does not contain your hashtag');
                 }
             }
 
