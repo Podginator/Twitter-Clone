@@ -35,7 +35,7 @@
 
 	@if(Auth::user() == $user)
 	
-		<div class="panel-body">
+		<div class="followForm panel-body">
 			@include('users.forms')
 		</div>
 	@endif

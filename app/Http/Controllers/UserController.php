@@ -65,7 +65,7 @@ class UserController extends Controller {
 
 	public function getAllUsers()
 	{
-		return Response::json(User::all());
+		return Response::json(User::allUsernames());
 	}
 	
 	public function updateProfile(ProfileRequest $response)

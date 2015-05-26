@@ -432,5 +432,13 @@ li.inactive:hover{
 }
 
 /*---------------------------------------------------------------------------*/
-/*                 * E N T E R   N E W   S E C T I O N *                     */
+/*                 * Follow Stuff                                             */
 /*---------------------------------------------------------------------------*/
+
+ @media only screen and (max-width : 767px) {
+  .followForm{
+    background:white;
+  }
+ }
+
+
