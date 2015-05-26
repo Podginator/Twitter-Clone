@@ -176,7 +176,6 @@ class UserController extends Controller {
 	{
 		return Response::json(array('success'=> true, 'users'=>User::find(Auth::user()->getFollowing())));
 	}
-						$scope.following.push(id);
 	public function removeUserTag($id)
 	{
 		$tag = FollowingEvent::where('id', '=', $id)->first();

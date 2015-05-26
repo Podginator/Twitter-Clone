@@ -14,7 +14,7 @@ angular.module('userCtrl', [])
 				}
 				else
 				{
-					alert("Err");
+					alert(data.error);
 				}
 			})
 	};
