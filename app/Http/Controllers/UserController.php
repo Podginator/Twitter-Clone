@@ -135,8 +135,7 @@ class UserController extends Controller {
 		
 		$alreadyFollow = Following::where('userid', Auth::user())
 								->where('followingid', $user->id)
-								->get()
-								->id !=null;
+								->first() != null;
 		
 		if($alreadyFollow)
 		{
