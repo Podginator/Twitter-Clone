@@ -26,7 +26,7 @@
 		<div class = "followThisUser {{$user->username}}-nf'" ng-click="submitUser('{{$user->username}}')" ng-show="!userFollows('{{$user->username}}')">
 			Follow <span class="glyphicon glyphicon-plus" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
 		</div>
-		<div class = "followThisUser {{$user->username}}-f'" ng-click="unsubmitUser('{{$user->username}}')" style = "background: #dd5454;" ng-show="userFollows('{{$user->username}}')">
+		<div class = "followThisUser {{$user->username}}-f'" ng-click="unfollowUser('{{$user->username}}')" style = "background: #dd5454;" ng-show="userFollows('{{$user->username}}')">
 			Unfollow <span class="glyphicon glyphicon-remove" style = "font-size: 75%; padding-left: 2px;" aria-hidden="true"></span>
 		</div>
 

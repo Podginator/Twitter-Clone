@@ -22,6 +22,7 @@ angular.module('userCtrl', [])
 	User.isFollowing()
 		.success(function(data){
 			if(data.success){
+				$scope.follow = [];
 				for(var user in data.users){
 				   $scope.following.push(data.users[user].username);
 			    }
@@ -30,7 +31,6 @@ angular.module('userCtrl', [])
 	});
 	
 	$scope.userFollows=function(username){
-		console.log($scope.following.indexOf(username));
 		return $scope.following.indexOf(username) != -1;
 	};
 	
@@ -38,22 +38,16 @@ angular.module('userCtrl', [])
 		User.saveUser(id)
 			.success(function(data){
 				if(data.success){
-					//Then we can unhide all the stuff.
-					$('.'+id+'-nf').addClass('ng-hide');
-					$('.'+id+'-f').removeClass( "ng-hide" );
-					$scope.userFollowing=true;
+					$scope.following.push(id);
 				}
 			});
 	}
 
-	$scope.unsubmitUser = function(id){
+	$scope.unfollowUser = function(id){
 		User.removeUser(id)
 			.success(function(data){
-				$('.'+id+'-nf').removeClass('ng-hide');	// hmm.. doesn't seem to work:
-				$('.'+id+'-f').addClass( "ng-hide" );
-				$scope.userFollowing=false;
-
-				alert('Unsubscribe user');	// testing.
+				var index = $scope.following.indexOf(id);
+				$scope.following.splice(index,1);
 			});
 	}
 

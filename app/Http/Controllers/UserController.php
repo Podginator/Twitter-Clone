@@ -123,6 +123,16 @@ class UserController extends Controller {
 		$success =  Response::json(array('success' => true));
 		$fail =  Response::json(array('success' => false));
 		
+		$alreadyFollow = Following::where('userid', Auth::user())
+								->where('followingid', $user->id)
+								->get()
+								->id !=null;
+		
+		if($alreadyFollow)
+		{
+			return $fail;
+		}
+		
 		$follow = Following::create(array(
 			"userid" => Auth::user()->id,
 			"followingid" => $user->id
@@ -136,8 +146,19 @@ class UserController extends Controller {
 	{
 		$success =  Response::json(array('success' => true));
 		$fail =  Response::json(array('success' => false));
-
-
+		
+		$follow = Following::where('userid', '=',Auth::user()->id)
+						->where('followingid', '=', $user->id)
+						->first();
+		
+		//Valid record found
+		if($follow->id)
+		{
+			$follow->delete();
+			return $success;
+		}
+		
+		return $fail;
 		
 	}
 	

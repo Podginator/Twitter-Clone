@@ -85,6 +85,7 @@ Route::get('/api/story/{tag}', 'StoryController@getTag');
 Route::get('api/allUsers', 'UserController@getAllUsers');
 Route::get('/api/posts/{tag}', 'PostsController@getTag');
 Route::get('/api/user/follow/{user}', 'UserController@subscribePerson');
+Route::get('/api/user/delete/{user}', 'UserController@unsubscribePersone');
 Route::get('/posts/{postid}', 'PostsController@viewPost');
 Route::get('/api/posts/user/{username}', 'PostsController@getUserPosts');
 

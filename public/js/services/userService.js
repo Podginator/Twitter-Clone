@@ -18,7 +18,7 @@ angular.module('userService', [])
 		removeUser: function(id)
 		{
 			console.log(id);
-			return $http.get('/api/user/follow/' + id);
+			return $http.get('/api/user/delete/' + id);
 		},
 		isFollowing: function(){
 			return $http.get('/api/user/following/');
