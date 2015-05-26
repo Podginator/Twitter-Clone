@@ -29,7 +29,7 @@ class User extends TimeModel implements AuthenticatableContract, CanResetPasswor
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['password', 'remember_token'];
+	protected $hidden = ['password', 'remember_token', 'email'];
 
 
 	//Get all the relationships.

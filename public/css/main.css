@@ -21,6 +21,14 @@ body
     background-position: center;
     width:50px !important;
 }
+
+.btn-file:before{
+  content:"\2b";
+  font-family:"Glyphicons Halflings";
+  line-height:1;
+  margin:10px;
+  display:inline-block; 
+}
 .btn-file input[type=file] {
     position: absolute;
     top: 0;
@@ -385,8 +393,6 @@ li.active{
   width:100%;
   display:block;
 }
-
-
 
 .tabSelecter .select{
   background:rgba(100,100,100,0.5);

@@ -23,7 +23,6 @@ angular.module('userCtrl', [])
 		.success(function(data){
 			if(data.success){
 				for(var user in data.users){
-					console.log(data.users[user]);
 				   $scope.following.push(data.users[user].username);
 			    }
 				$('.followThisUserContainer').removeClass('ng-hide');
