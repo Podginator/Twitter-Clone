@@ -38,16 +38,24 @@ $(document).ready(function()
 		{
 			$.each(posts, function (i, post)			// Find all hashtags and store unambiguously:
 			{
-				var patt = /(#\w+)/; 					// Regular expression to find all tags (!) not working properly..
-	   		 	var res = patt.exec(post.text);			// Get result of regular expression.
-				var tags = res.toString().split(","); 	// Split string to array on ','.	
 
-				$.each(tags, function(i, elem) 			// Filter ambigious tags:
+				var string = post.text.toString();		// Store the post text.
+				var array = string.split(' ');			// Split to array on ' ' (space)
+				var tags = [];							// Array to store the tags from the text.
+
+				for(var i = 0; i < array.length; i++)	// Loop through all words in the text.
+				{
+					if (array[i].indexOf('#') !== -1) 	// The text contains a '#'
+					{
+						tags.push(array[i]); 			// Push the word to tags.
+					}
+				}
+				 $.each(tags, function(i, elem) 		// Filter ambigious tags:
 				{
 					if($.inArray(elem, tagsList)==-1){
 						tagsList.push(elem);
 					}
-				})
+				}) 
 			});
 		}
 	});
@@ -206,4 +214,3 @@ $(document).ready(function()
 	
 /*---------------------------------------------------------------------------*/
 });		// End document ready.
-
